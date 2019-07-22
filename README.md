@@ -38,14 +38,14 @@ Arguments in *italics* are optional in the particular processing sequence in whi
 *   __CTD-ENG processing only__          
     *   [MMP, *mmpMatFilename*] = Process_McLane_WFP_Deployment('metadata_WFP001.txt');  
         *   The output variable MMP is a structure containing binned processed CTD and auxiliary sensor data which can be plotted in pseudocolor plots against time and pressure.  
-        *   When an optional second output argument is used MMP and also data structure arrays indexed by profile for each instrument and 3 levels of processing are saved in a matfile.  
+        *   If the optional argument mmpMatFilename is used, it will contain the name of a saved matfile containing MMP and additional data products indexed by profile number and 3 levels of processing for each instrument.  
 
 *   __CTD-ENG and AD2CP processing__  
     *   [MMP, mmpMatFilename] = Process_McLane_WFP_Deployment('metadata_WFP001.txt');  
     *   [ACM, _acmMatFilename_] = Process_McLane_AD2CP_Deployment(__'import_and_process'__, mmpMatFilename);  
         *   In this and the following processing sequence the argument mmpMatFilename is required in both function calls as shown.
         *   ACM is a structure containing binned processed velocity data which can be plotted in pseudocolor plots against time and pressure.  
-        *   If the optional argument acmMatFilename is used, it will contain the name of a saved matfile containing ACM and also data structure arrays indexed by profile for 3 levels of processing.  
+        *   If the optional argument acmMatFilename is used, it will contain the name of a saved matfile containing ACM and data structure arrays indexed by profile number for 3 levels of processing.  
 
 *   __CTD-ENG with Re-entry AD2CP processing__  
     *   [MMP, mmpMatFilename] = Process_McLane_WFP_Deployment('metadata_WFP001.txt');  
