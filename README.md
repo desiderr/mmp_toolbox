@@ -20,7 +20,7 @@ In addition there is supplemental documentation at the beginning of each subrout
 
 The [TEOS-10 Gibbs Sea Water Oceanographic Toolbox](http://www.teos-10.org/software.htm) must be installed.
 
-The raw McLane Profiler data must first be unpacked by [McLane Unpacker version **3.10-3.12**](https://mclanelabs.com/profile-unpacker/); later versions use a currently unsupported format for the unpacked AD2CP text files. There are 3 McLane unpacking options provided to the user:  
+The raw McLane Profiler data must first be unpacked by [McLane Unpacker version **3.10-3.12**](https://mclanelabs.com/profile-unpacker/); __later__ version(s) use a currently unsupported format for the unpacked AD2CP text files. There are 3 McLane unpacking options provided to the user:  
 
 *   Format - Comma separated or Space padded:  
     *   **Either** choice is compatible with the code.  
@@ -58,6 +58,7 @@ Arguments in *italics* are optional in the particular processing sequence in whi
         *   Importing AD2CP files can take minutes. This processing sequence runs the AD2CP code first in 'import' mode which saves the imported unprocessed AD2CP data (structure array aqd) and the ctd and meta data required for AD2CP processing in the matfile designated by reentryMatFilename so that they can be later accessed when running the AD2CP code in 'process' mode without having to re-import the AD2CP data. The reentry format also allows the AD2CP processing parameters to be changed at will by including the name of a new suitably modified metadata text file as the (optional) 3rd calling argument.  
 
 For all processing sequences, the full suite of data products can be made available in the base workspace for plotting and user analysis by executing the following commands:  
+   :
         load(mmpMatFilename)  
         load(acmMatFilename)  
         who 
