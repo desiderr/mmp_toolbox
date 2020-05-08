@@ -2,6 +2,7 @@
 
 
 Version 2.11c differs from version 2.10c only in that the import_metadata function used in version 2.11c is the same as that in version 3.0, resulting in several enhancements:
+
 *   version 3.0 coastal metadata text files are compatible with version 2.11c but not 2.10c
 *   File paths synthesized by the toolbox now contain only forward slashes which may improve portability to Mac and Linux systems
 *   'Comments' appended to data line entries in metadata text files using a  midline '%' character (as if these files were actual executable m-files) are now supported  
@@ -20,6 +21,7 @@ Process_McLane_AD2CP_Deployment.m processes the Nortek Aquadopp II ACM data. Its
 The metadata text files contain and document all the processing parameters required for both of the functions above. The user can edit these for their own use. The AD2CP processing parameters are not required if only the CTD-ENG processing function is executed. 
 
 Version 2.11c supports both
+
 *   version 2.10c metadata text files (which do not include the " **profiler_type='coastal'** " entry) and 
 *   version 3.0 coastal metadata text files (which do).
 
