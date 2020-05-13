@@ -10,7 +10,8 @@ Process_OOI_McLane_CTDENG_Deployment.m processes CTD and ENG files. Its document
 
 The version 3.0 coastal and global metadata text files contain and document all the processing parameters required for processing coastal and global profiler data, respectively, using the function above. The user can edit these for their own use. The presence of ACM processing parameters in these files does not affect the processing (unless an entry is illegally formatted). 
 
-Version 3.0 coastal metadata text files differ from those used in version 2.10c in that they require one extra data line:  
+Version 3.0 coastal metadata text files differ from those used in version 2.10c in that they require one extra data line:
+  
 *   profiler_type = 'coastal' 
 
 Therefore metadata text files used in 2.10c processing, and those in 2.11c processing that do not have this line, cannot be used for version 3.0 processing **unless** this line is added.
