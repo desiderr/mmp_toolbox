@@ -1,3 +1,7 @@
+![Irm_toy.jpg](/version 3.0/toy_data/plots/Irm_WFP003_degC_toy.jpg "WFP Data")
+
+The toy_data folder contains unpacked data text files and the cal file needed to try the version 3.0 processing code out. The provided toy metadata text file will need to be modified by changing the foldernames to the locations of the downloaded unpacked files and cal file on the local machine.
+
 ## OOI mmp_toolbox ver 3.0 
 ### Documentation  
 Besides this readme file, there are 3 main sources of documentation for this version of the mmp_toolbox code (radMMP) written to process non-ACM McLane Moored Profiler data acquired at OOI coastal and global sites. They are located:  
@@ -48,5 +52,3 @@ Arguments in *italics* are optional in the particular processing sequence in whi
 ### Use  
 
 This code suite was written to provide tools and a framework to allow users to easily import and visualize McLane profiler data sets so that they can apply their own quality control. This will be particularly necessary in the validation of AD2CP data. Sample plotting programs are provided "as is" in the plotting_routines folder.
-
-It is suggested that the first time the code suite is run that the profiles_to_process variable in the metadata.txt file be set to 1:100. The resulting data products will be small enough so that there should be no long waits when saving them nor for scatter and pseudocolor plotting routines to execute. 
