@@ -1,6 +1,6 @@
 ![Irminger_WFP005_O2_pcolor.jpg](/Irminger_WFP005_O2_pcolor.jpg "WFP Data")
 
-A 1 month global toy dataset (unpacked text files, calfile, metadata file) is provided in the version 3.0 section for downloading.
+A 1 month global demo dataset (unpacked text files, calfile, metadata file) is provided in the version 3.0 section for downloading.
 
 ## OOI mmp_toolbox
 

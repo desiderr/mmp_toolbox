@@ -1,6 +1,6 @@
-![Irm_toy.jpg](/version%203.0/toy_data/plots/Irm_WFP003_degC_toy.jpg "WFP Data")
+![Irm_toy.jpg](/version%203.0/demo_data/plots/Irm_WFP003_degC_toy.jpg "WFP Data")
 
-The toy_data folder contains unpacked data text files and the cal file needed to try the version 3.0 processing code out. The provided toy metadata text file will need to be modified by changing the foldernames to the locations of the downloaded unpacked files and cal file on the local machine.
+The demo_data folder contains unpacked data text files, cal file, and demo metadata text file needed to try the version 3.0 processing code out.
 
 ## OOI mmp_toolbox ver 3.0 
 ### Documentation  

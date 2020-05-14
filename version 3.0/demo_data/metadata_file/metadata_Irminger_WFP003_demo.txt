@@ -48,8 +48,8 @@ longitude =  -39.4886
 
 % FOLDERS
 
-unpacked_data_folder = K:\Data\GI02HYPM\toy_data\unpacked
-calibration_folder   = K:\Data\GI02HYPM\toy_data\cals
+unpacked_data_folder = C:/local/machine/path/to/demo_data/unpacked
+calibration_folder   = C:/local/machine/path/to/demo_data/cals
 
 
 % CALFILENAMES
