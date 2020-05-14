@@ -1,3 +1,7 @@
+![Irm_toy.jpg](/version%203.0/demo_data/plots/Irm_WFP003_degC_toy.jpg "WFP Data")
+
+The demo_data folder contains unpacked data text files, cal file, and demo metadata text file needed to try the version 3.0 processing code out.
+
 ## OOI mmp_toolbox ver 3.0 
 ### Documentation  
 Besides this readme file, there are 3 main sources of documentation for this version of the mmp_toolbox code (radMMP) written to process non-ACM McLane Moored Profiler data acquired at OOI coastal and global sites. They are located:  
@@ -10,7 +14,8 @@ Process_OOI_McLane_CTDENG_Deployment.m processes CTD and ENG files. Its document
 
 The version 3.0 coastal and global metadata text files contain and document all the processing parameters required for processing coastal and global profiler data, respectively, using the function above. The user can edit these for their own use. The presence of ACM processing parameters in these files does not affect the processing (unless an entry is illegally formatted). 
 
-Version 3.0 coastal metadata text files differ from those used in version 2.10c in that they require one extra data line:  
+Version 3.0 coastal metadata text files differ from those used in version 2.10c in that they require one extra data line:
+  
 *   profiler_type = 'coastal' 
 
 Therefore metadata text files used in 2.10c processing, and those in 2.11c processing that do not have this line, cannot be used for version 3.0 processing **unless** this line is added.
@@ -47,5 +52,3 @@ Arguments in *italics* are optional in the particular processing sequence in whi
 ### Use  
 
 This code suite was written to provide tools and a framework to allow users to easily import and visualize McLane profiler data sets so that they can apply their own quality control. This will be particularly necessary in the validation of AD2CP data. Sample plotting programs are provided "as is" in the plotting_routines folder.
-
-It is suggested that the first time the code suite is run that the profiles_to_process variable in the metadata.txt file be set to 1:100. The resulting data products will be small enough so that there should be no long waits when saving them nor for scatter and pseudocolor plotting routines to execute. 
