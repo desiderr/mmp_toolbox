@@ -186,6 +186,11 @@ function [MMP, matfilename] = Process_McLane_WFP_Deployment(metadata_filename)
 %.. 2020-02-17: desiderio: radMMP version 2.10c (OOI coastal)
 %.. 2020-05-08: desiderio: radMMP version 2.11c (OOI coastal)
 %.. 2021-05-08: desiderio: changed how the date of profile values are determined
+%.. 2021-05-10: desiderio:
+%..             (a) removed profile_mask and sensor_field_indices fields 
+%..                 from final L2 structure arrays
+%..             (b) added radMMP version info to structure arrays
+%..             (c) added radMMP version info to structure of arrays data product
 %.. 2021-05-10: desiderio: radMMP version 2.20c (OOI coastal)
 %=========================================================================
 radMMPversion = '2.20c';
@@ -234,6 +239,7 @@ eng = initialize_unselected_profile_structures(eng, prof2proc);
 eng = void_short_profiles(eng, prof2proc, 'pressure', ...
     meta.eng_pressure_nptsMin, meta.eng_pressure_rangeMin_db);
 
+[eng.radMMP_version] = deal(radMMPversion);
 eng_L0 = eng;
 
 %% ************* FIND BACKTRACK SECTIONS ****************
@@ -302,7 +308,7 @@ disp('Begin adding ctd timestamps.');
 for ii = prof2proc
     ctd(ii) = add_ctd_timestamps(ctd(ii), eng(ii));
 end
-
+[ctd.radMMP_version] = deal(radMMPversion);
 ctd_L0 = ctd;
 
 %% **************** CLEAN CTD DATA ************************************
@@ -356,7 +362,6 @@ end
 eng_L1 = eng;
 par_L1 = par;
 flr_L1 = flr;
-
 %% **************** CREATE BINNED ARRAYS **************************
 %
 %.. In this code 'L2' denotes that the structure array contains binned data.
@@ -493,9 +498,13 @@ MMP = amalgamate_scalar_structures( {MP_aux, ...
     CV_raw_ctd_indices, CV_raw_ctd,            ...
     CV_raw_eng_indices, CV_raw_eng});
 %.. add the meta structure containing the metadata used in the processing
-%.. as the last field
+%.. as the next field
 MMP.META = meta;
+MMP.radMMP_version = radMMPversion;
 
+ctd_L2 = rmfield(ctd_L2, {'profile_mask' 'sensor_field_indices'});
+flr_L2 = rmfield(flr_L2, {'profile_mask' 'sensor_field_indices'});
+par_L2 = rmfield(par_L2, {'profile_mask' 'sensor_field_indices'});
 %% ******************** SAVE DATA PRODUCTS **************************
 if (createMatfile)
     fprintf('\nSaving final data products:\n');

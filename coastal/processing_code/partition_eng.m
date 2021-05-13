@@ -42,12 +42,13 @@ function [eng, flr, par] = partition_eng(eng)
 %.. 2021-05-10: desiderio: in previous coastal-only code versions, the par
 %..                        pressure offset was incorrectly used for the 
 %..                        flr offset. this is corrected in version 2.20c.
+%.. 2021-05-10: desiderio: keep last field for all strcts (radMMP version info)
 %.. 2021-05-10: desiderio: radMMP version 2.20c (OOI coastal)
 %=========================================================================
 
-fields_to_keep_for_flr = [1:6 8:9 12:15 18:22];
-fields_to_keep_for_par = [1:6 8:9 12 16 18:22];
-fields_to_keep_for_eng = [1:12 17 22:30];
+fields_to_keep_for_flr = [1:6 8:9 12:15 18:22 31];
+fields_to_keep_for_par = [1:6 8:9 12 16 18:22 31];
+fields_to_keep_for_eng = [1:12 17 22:31];
 
 n_struct = length(eng);
 %.. find the offsets from the eng fields. empty set entries are omitted 
