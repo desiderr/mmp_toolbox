@@ -39,6 +39,9 @@ function [eng, flr, par] = partition_eng(eng)
 %.. 2020-05-08: desiderio: radMMP version 2.11c (OOI coastal)
 %.. 2021-05-08: desiderio: updated fields_to_keep and sensor_field_indices
 %..                        because of addition of profile_date field
+%.. 2021-05-10: desiderio: in previous coastal-only code versions, the par
+%..                        pressure offset was incorrectly used for the 
+%..                        flr offset. this is corrected in version 2.20c.
 %.. 2021-05-10: desiderio: radMMP version 2.20c (OOI coastal)
 %=========================================================================
 
@@ -55,7 +58,7 @@ if isnan(par_depth_offset_m)
     disp('Warning: parsed par pressure offset = Nan; set to 0.');
     par_depth_offset_m = 0;
 end
-fluorometer_depth_offset_m = nanmedian([eng.par_depth_offset_m]);
+fluorometer_depth_offset_m = nanmedian([eng.fluorometer_depth_offset_m]);
 if isnan(fluorometer_depth_offset_m)
     disp('Warning: parsed fluorometer pressure offset = Nan; set to 0.');
     fluorometer_depth_offset_m = 0;
