@@ -53,9 +53,9 @@ calibration_folder   = K:\Data\CE09OSPM\D00006\cals
 %   must be located in calibration_folder.
 %   if instrument not deployed use ''
 
-fluorometer_calfilename = CGINS-FLORTK-01032__20160922.csv
-oxygen_calfilename      = CGINS-DOFSTK-02498__20160922.csv
-par_calfilename         = CGINS-PARADK-20448__20160922.csv
+fluorometer_calfilename = CGINS-FLORTK-01032__20160715.csv
+oxygen_calfilename      = CGINS-DOFSTK-02498__20160725.csv
+par_calfilename         = CGINS-PARADK-20448__20160711.csv
 
 
 % PROFILES
