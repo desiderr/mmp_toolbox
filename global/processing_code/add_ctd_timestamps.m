@@ -117,7 +117,9 @@ function [ctd] = add_ctd_timestamps(ctd, eng, gamma)
 %..                        commenting out 3 lines near program top
 %.. 2020-02-17: desiderio: radMMP version 2.10c (OOI coastal)
 %.. 2020-04-27: desiderio: formally added calling argument gamma
-%.. 2020-05-04: desiderio: radMMP version 3.0 (OOI coastal and global)
+%.. 2020-05-04: desiderio: radMMP version 3.00 (OOI coastal and global)
+%.. 2021-05-12: desiderio: trapped out eng.time = [] case.
+%.. 2021-05-14: desiderio: radMMP version 3.10 (OOI coastal and global)
 %=========================================================================
 
 %----------------------
@@ -134,6 +136,12 @@ if isempty(ctd.pressure)
 elseif isempty(eng.pressure)
     disp(['Warning, add_ctd_timestamps.m: structure eng(' ...
         num2str(eng.profile_number) ') has no pressure data.']);
+    ctd.time = nan(size(ctd.pressure));
+    ctd.data_status(end+1) = {'NaN TIMESTAMPS ADDED'};
+   return
+elseif isempty(eng.time)
+    disp(['Warning, add_ctd_timestamps.m: structure eng(' ...
+        num2str(eng.profile_number) ') has no time data.']);
     ctd.time = nan(size(ctd.pressure));
     ctd.data_status(end+1) = {'NaN TIMESTAMPS ADDED'};
    return

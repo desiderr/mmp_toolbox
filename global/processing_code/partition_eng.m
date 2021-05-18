@@ -44,23 +44,25 @@ function [eng, flr, sss] = partition_eng(eng, profilerType)
 %.. 2019-07-16: desiderio: radMMP version 2.00c (OOI coastal)
 %.. 2020-02-17: desiderio: radMMP version 2.10c (OOI coastal)
 %.. 2020-03-06: desiderio: updated to include global profiler processing
-%.. 2020-05-04: desiderio: radMMP version 3.0 (OOI coastal and global)
+%.. 2020-05-04: desiderio: radMMP version 3.00 (OOI coastal and global)
+%.. 2021-05-13: desiderio: keep last field for all strcts (radMMP version info)
+%.. 2021-05-14: desiderio: radMMP version 3.10 (OOI coastal and global)
 %=========================================================================
 
 if strcmp(profilerType, 'coastal')
     sensor                 = 'par';
-    fields_to_keep_for_eng = [1:11 16 21:29];
-    fields_to_keep_for_flr = [1:5 8 11:14 17:21];
-    fields_to_keep_for_sss = [1:5 8 11 15 17:21];
-    flr_sfi                = 6:10;
-    sss_sfi                = 6:8;
+    fields_to_keep_for_eng = [1:12 17 22:31];
+    fields_to_keep_for_flr = [1:6 8:9 12:15 18:22 31];
+    fields_to_keep_for_sss = [1:6 8:9 12 16 18:22 31];
+    flr_sfi                = 8:12;
+    sss_sfi                = 8:10;
 elseif strcmp(profilerType, 'global')
     sensor                 = 'optode';  % (Aanderaa oxygen)
-    fields_to_keep_for_eng = [1:11 17 22:30];
-    fields_to_keep_for_flr = [1:5 8 11 14:16 18:22];
-    fields_to_keep_for_sss = [1:5 8 11 12:13 18:22];
-    flr_sfi                = 6:10;
-    sss_sfi                = 6:9;
+    fields_to_keep_for_eng = [1:12 18 23:32];
+    fields_to_keep_for_flr = [1:6 8:9 12 15:17 19:23 32];
+    fields_to_keep_for_sss = [1:6 8:9 12 13:14 19:23 32];
+    flr_sfi                = 8:12;
+    sss_sfi                = 8:11;
 else
     error('Unrecognized or no profilerType.');
 end

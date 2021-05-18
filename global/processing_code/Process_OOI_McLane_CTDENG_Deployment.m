@@ -1,6 +1,6 @@
 function [MMP, matfilename] = Process_OOI_McLane_CTDENG_Deployment(metadata_filename)
-% radMMP version 3.0
-% RADesiderio, Oregon State University, 2020-05-04
+% radMMP version 3.10
+% RADesiderio, Oregon State University, 2021-05-14
 %=========================================================================
 % DESCRIPTION:
 %    Processes a full deployment of McLane Profiler (version 5.00) CTD and ENG data
@@ -225,9 +225,16 @@ function [MMP, matfilename] = Process_OOI_McLane_CTDENG_Deployment(metadata_file
 %.. 2020-03-04: desiderio: changed the coastal code to work on global data 
 %.. 2020-03-31: desiderio: combined coastal and global versions into one; renamed
 %..                        it to differentiate it from coastal versions
-%.. 2020-05-04: desiderio: radMMP version 3.0 (OOI coastal and global)
+%.. 2020-05-04: desiderio: radMMP version 3.00 (OOI coastal and global)
+%.. 2021-05-12: desiderio: changed how the date of profile values are determined
+%.. 2021-05-13: desiderio:
+%..             (a) removed profile_mask and sensor_field_indices fields 
+%..                 from final L2 structure arrays
+%..             (b) added radMMP version info to structure arrays
+%..             (c) added radMMP version info to structure of arrays data product
+%.. 2021-05-14: desiderio: radMMP version 3.10 (OOI coastal and global)
 %=========================================================================
-radMMPversion = '3.0';
+radMMPversion = '3.10';
 disp('#################################################');
 disp(['     ' mfilename ' ' radMMPversion]);
 disp('#################################################');
@@ -300,6 +307,7 @@ eng = initialize_unselected_profile_structures(eng, prof2proc);
 eng = void_short_profiles(eng, prof2proc, 'pressure', ...
     meta.eng_pressure_nptsMin, meta.eng_pressure_rangeMin_db);
 
+[eng.radMMP_version] = deal(radMMPversion);
 eng_L0 = eng;
 
 %% ************* FIND BACKTRACK SECTIONS ****************
@@ -383,7 +391,7 @@ disp('Begin adding ctd timestamps.');
 for ii = prof2proc
     ctd(ii) = add_ctd_timestamps(ctd(ii), eng(ii), gamma_for_ctd_timestamps);
 end
-
+[ctd.radMMP_version] = deal(radMMPversion);
 ctd_L0 = ctd;
 
 %% **************** CLEAN CTD DATA ************************************
@@ -571,18 +579,17 @@ MP_binned_aux = cat_sensorfields(aux_L2, 'horz', ['binned_' auxSensor '_']);
 MP_doc.Deployment_ID = depID;
 MP_doc.Date_of_Processing = datestr(now);
 %.. assign a time for each processed profile.
-%..   the time records in the arrays of structures are still intact.
-%..   use the median value found in each ctd profile. absent ctd 
-%..   profiles will have entries of nan.
-profile_datenumbers = cellfun(@nanmedian,{ctd_L2(prof2proc).time});
+%..   these are derived from the median of the eng record timestamps because 
+%..   the latter are present even when there are no valid pressure data and
+%..   were transferred to all of the structure arrays.
+profile_date = [ctd_L2(prof2proc).profile_date];
 %.. to help with deployment identification,
 %.. write out first processed profile's number and date and time.
 MP_doc.first_selected_profile_number = prof2proc(1);
-MP_doc.first_selected_profile_datetime = ... 
-    datetime(datevec(profile_datenumbers(1)));
+MP_doc.first_selected_profile_date   = datetime(datevec(profile_date(1)));
 %.. profiles selected for processing and their (median) datenumbers
 MP_doc.profiles_selected = prof2proc;
-MP_doc.datenum = profile_datenumbers;  % row vector
+MP_doc.profile_date = profile_date;  % row vector
 
 %.. add headings to separate the sections in MMP;
 %.. these lines depend upon the ordering of the calling arguments
@@ -601,13 +608,19 @@ MMP = amalgamate_scalar_structures( {MP_doc;          ...
     CV_raw_ctd_indices; CV_raw_ctd;                   ...
     CV_raw_eng_indices; CV_raw_eng});
 %.. add the meta structure containing the metadata used in the processing
-%.. as the last field
+%.. as the next field
 MMP.META = meta;
+MMP.radMMP_version = radMMPversion;
 
 %.. remove empty L0 fields (derived products)
 MMP = rmfield(MMP, {'rawvec_eng_dpdt' 'rawvec_ctd_dpdt' 'rawvec_ctd_theta' ...
     'rawvec_ctd_sigma_theta' 'rawvec_ctd_salinity'});
 
+ctd_L2 = rmfield(ctd_L2, {'profile_mask' 'sensor_field_indices'});
+flr_L2 = rmfield(flr_L2, {'profile_mask' 'sensor_field_indices'});
+aux_L2 = rmfield(aux_L2, {'profile_mask' 'sensor_field_indices'});  %#ok
+expression = [auxSensor '_L2 = aux_L2;'];
+eval(expression);
 %% ******************** SAVE DATA PRODUCTS **************************
 if (createMatfile)
     fprintf('\nSaving final data products:\n');

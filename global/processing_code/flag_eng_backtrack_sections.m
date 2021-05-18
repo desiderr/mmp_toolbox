@@ -13,6 +13,7 @@ function [eng] = flag_eng_backtrack_sections(eng, code)
 %            2 -> flag data good from 1st non-zero pressure up to about 1
 %                 minute before 1st backtrack signalled, then bad after that.
 %            3 -> flag as bad only pressure=0 sections.
+%      not 1:3 -> any other value, no flagging done at all.
 %
 %   OUTPUT
 %     eng  = a scalar structure with an updated profile mask
@@ -32,7 +33,13 @@ function [eng] = flag_eng_backtrack_sections(eng, code)
 % REVISION HISTORY
 %.. 2019-07-16: desiderio: radMMP version 2.00c (OOI coastal)
 %.. 2020-02-17: desiderio: radMMP version 2.10c (OOI coastal)
-%.. 2020-05-04: desiderio: radMMP version 3.0 (OOI coastal and global)
+%.. 2020-05-04: desiderio: radMMP version 3.00 (OOI coastal and global)
+%.. 2020-05-08: desiderio: radMMP version 2.11c (OOI coastal)
+%.. 2021-02-24: desiderio: fixed case when backtrack occurs within timeshift_sec
+%..                        of profile start to prevent negative array index.
+%.. 2021-04-29: desiderio: improved status messages. 
+%.. 2021-05-10: desiderio: radMMP version 2.20c (OOI coastal)
+%.. 2021-05-14: desiderio: radMMP version 3.10 (OOI coastal and global)
 %=========================================================================
 
 %.. for backtrack code 2 processing; minimum value would be 60 seconds
@@ -41,7 +48,7 @@ timeshift_sec = 75;
 eng.code_history(end+1) = {mfilename};
 
 if isempty(eng.pressure)
-    eng.data_status(end+1) = {'backtrack NOT FLAGGED'};
+    eng.data_status(end+1) = {'no pressure data'};
     return
 end
 
@@ -51,15 +58,18 @@ elseif code==2  % flag as bad after 1st backtrack detected
     idx = find(diff(eng.profile_mask)<0, 1) + 1;
     %.. this is the index where the eng pressure record went to 0,
     %.. signalling the occurrence of the 1st backtrack. this seems to occur
-    %.. 1 minute after the ctd pressure record has started to plateau.
+    %.. about 1 minute after the ctd pressure record has started to plateau.
     %.. therefore, shift the index to earlier time.
     idx = idx - ceil(eng.acquisition_rate_Hz_calculated * timeshift_sec);
+    %.. if the backtrack was signalled within timeshfit_sec seconds after
+    %.. the start of the profile, idx will be <=0, so:
+    idx = max(idx, 1);
     eng.profile_mask(idx:end) = false;
 elseif code==3  % flag as bad just backtrack portions
     %.. should have been done on import. no performance hit, though, so
     eng.profile_mask = ~eng.pressure==0;
 else
-    eng.data_status(end+1) = {'ILLEGAL backtrack code'};
+    eng.data_status(end+1) = {'backtrack NOT FLAGGED'};
     return
 end
 
