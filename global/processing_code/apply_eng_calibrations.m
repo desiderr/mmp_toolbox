@@ -43,7 +43,8 @@ function [eng] = apply_eng_calibrations(eng, meta, profiler_type)
 %.. 2020-03-06: desiderio: (a) updated to handle coastal and global cases
 %..                        (b) changed name from process_eng_sensors.m to
 %..                            apply_eng_calibrations.m
-%.. 2020-05-04: desiderio: radMMP version 3.0 (OOI coastal and global)
+%.. 2020-05-04: desiderio: radMMP version 3.00 (OOI coastal and global)
+%.. 2021-05-14: desiderio: radMMP version 3.10 (OOI coastal and global)
 %=========================================================================
 %.. for clarity, and in case sensor suites are changed in the future,
 %.. the code is split into coastal and global sections even though there
