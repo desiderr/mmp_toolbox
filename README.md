@@ -4,7 +4,7 @@ A 1 month global demo dataset (unpacked text files, calfile, metadata file) is p
 
 ## OOI mmp_toolbox
 
-There are currently two versions of Matlab code available to process McLane Moored Profiler (MMP) data acquired at OOI surface mooring sites. The **coastal** folder contains version 2.20c which processes data from all of the instruments mounted on 'coastal' MMPs including its acoustic current meter (ACM), the Nortek AD2CP. The **global** folder contains Version 3.0 which contains one main routine which can process both non-ACM coastal and non-ACM global data. A future release is planned which will integrate global ACM (Falmouth 3DMP) data processing with version 3.0.
+There are currently two versions of Matlab code available to process McLane Moored Profiler (MMP) data acquired at OOI surface mooring sites. The **coastal** folder contains version 2.20c which processes data from all of the instruments mounted on 'coastal' MMPs including its acoustic current meter (ACM), the Nortek AD2CP. The **global** folder contains version 3.10 which contains one main routine which can process both non-ACM coastal and non-ACM global data. A future release is planned which will integrate global ACM (Falmouth 3DMP) data processing with version 3.0.
  
 ### Coastal OOI MMP sites
 * CE09OSPM (**C**oastal **E**ndurance)
