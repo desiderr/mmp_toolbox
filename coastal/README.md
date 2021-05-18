@@ -7,6 +7,7 @@ Version 2.20c changes from version 2.11c:
 *   renamed datenum field in the data product structure of arrays to the more descriptive profile_date 
 *   added the profile_date field to the ctd, eng, and acm structure arrays containing individual profile data 
 *   added backtrack field to the ctd and acm structure arrays  
+*   added version field to data products
 *   renamed import_A_ad2cp.m to aqd_import_A_ad2cp.m so that all aqd functions start with aqd 
 *   renamed function aqd_wag_correction to aqd_wag_velocity
 *   updated plotting routines and added 2 mat-files containing plottable data 

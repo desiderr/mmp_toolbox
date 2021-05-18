@@ -45,6 +45,8 @@ function [Zmin, Zbin, Zmax] = determine_binning_parameters(xtruct, fieldname)
 %.. 2020-02-17: desiderio: radMMP version 2.10c (OOI coastal)
 %.. 2020-05-08: desiderio: radMMP version 2.11c (OOI coastal)
 %.. 2021-05-10: desiderio: radMMP version 2.20c (OOI coastal)
+%.. 2021-05-14: desiderio: trapped out no pressure data case
+%.. 2021-05-18: desiderio: radMMP version 2.20c (OOI coastal)
 %=========================================================================
 
 %.. it may be possible that a few of the profiles (a few elements of xstruct)
@@ -57,7 +59,11 @@ function [Zmin, Zbin, Zmax] = determine_binning_parameters(xtruct, fieldname)
 %.. .. deployment is to be processed.
 binParms = median(cell2mat({xtruct.binning_parameters}'), 1);
 
-if isscalar(binParms)  % only binsize was specified
+if isempty(binParms) || any(isnan(binParms(:)))
+    errmsg = ['Check to see if there are any pressure data in any of the imported ' ...
+        inputname(1) ' files.'];
+    error(errmsg);
+elseif isscalar(binParms)  % only binsize was specified
     Zbin = binParms;
     if isempty(Zbin) || isnan(Zbin) || Zbin <= 0
         disp(' ');
