@@ -1,4 +1,4 @@
-![Irm_toy.jpg](/version%203.0/demo_data/plots/Irm_WFP003_degC_toy.jpg "WFP Data")
+![Irm_toy.jpg](/global/demo_data/plots/Irm_WFP003_degC_toy.jpg "WFP Data")
 
 The demo_data folder contains unpacked data text files, cal file, and demo metadata text file needed to try the version 3.10 processing code out.
 
