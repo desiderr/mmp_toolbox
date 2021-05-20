@@ -37,7 +37,8 @@ function [sss] = process_bback(sss, ctd, meta)
 %.. 2019-07-16: desiderio: radMMP version 2.00c (OOI coastal)
 %.. 2020-02-17: desiderio: radMMP version 2.10c (OOI coastal)
 %.. 2020-03-05: desiderio: updated for use in both coastal and global profilers
-%.. 2020-05-04: desiderio: radMMP version 3.0 (OOI coastal and global)
+%.. 2020-05-04: desiderio: radMMP version 3.00 (OOI coastal and global)
+%.. 2021-05-14: desiderio: radMMP version 3.10 (OOI coastal and global)
 %=========================================================================
 
 sss.code_history(end+1) = {mfilename};

@@ -15,6 +15,8 @@ function [xsmooth] = sbefilter(x,acqrate,gamma)
 %
 % GAMMA is the scalar smoothing time constant in seconds.
 %
+%    IF GAMMA = 0 THE INPUT DATA ARE RETURNED WITH NO CHANGES.
+%
 % the output matrix XSMOOTH will have the same dimensions as 
 % the input matrix X. 
 %
@@ -23,14 +25,18 @@ function [xsmooth] = sbefilter(x,acqrate,gamma)
 % desiderio 05-jan-2005
 % 14-dec-2010 sbefilter enabled to work on row vectors.
 %
-%.. included as a part of:
+% REVISION HISTORY
 %.. 2019-07-16: desiderio: radMMP version 2.00c (OOI coastal)
 %.. 2020-02-17: desiderio: radMMP version 2.10c (OOI coastal)
-%.. 2020-05-04: desiderio: radMMP version 3.0 (OOI coastal and global)
+%.. 2020-05-04: desiderio: radMMP version 3.00 (OOI coastal and global)
+%.. 2020-05-08: desiderio: radMMP version 2.11c (OOI coastal)
+%.. 2020-12-10: desiderio: handles columns of nans and 2D empty set inputs.
+%.. 2021-05-10: desiderio: radMMP version 2.20c (OOI coastal)
+%.. 2021-05-14: desiderio: radMMP version 3.10 (OOI coastal and global)
 %=========================================================================
 
 % trivial case
-if gamma==0
+if isempty(x) || gamma==0
     xsmooth=x;
     return
 end
@@ -66,7 +72,9 @@ for jcol=1:ncx
     mask=~isnan(y);
     y=y(mask);
     if isempty(y)
-        error(' At least one column in input x is all NaN.');
+        %disp(' At least one column in input x is all NaN.');
+        xsmooth(:,jcol) = x(:,jcol);
+        continue  % enables each column to be processed separately
     end
 % apply filter in the forward direction
 % preallocate the size of yforward, and

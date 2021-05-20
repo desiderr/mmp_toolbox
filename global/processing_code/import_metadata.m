@@ -62,7 +62,10 @@ function meta = import_metadata(metadata_filename)
 %..                        added support for comments appended to data lines
 %.. 2020-04-30: desiderio: removed no-calling-argument option
 %..                        made it easier to add text entries to metadata file
-%.. 2020-05-04: desiderio: radMMP version 3.0 (OOI coastal and global)
+%.. 2020-05-04: desiderio: radMMP version 3.00 (OOI coastal and global)
+%.. 2020-05-08: desiderio: radMMP version 2.11c (OOI coastal)
+%.. 2021-05-10: desiderio: radMMP version 2.20c (OOI coastal)
+%.. 2021-05-14: desiderio: radMMP version 3.10 (OOI coastal and global)
 %=========================================================================
 %.. metadata file entries to be output as text to the meta structure
 textIndicators = {

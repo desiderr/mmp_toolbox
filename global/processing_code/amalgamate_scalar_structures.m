@@ -29,7 +29,10 @@ function struct_out = amalgamate_scalar_structures(CAoSS)
 % REVISION HISTORY
 %.. 2019-07-16: desiderio: radMMP version 2.00c (OOI coastal)
 %.. 2020-02-17: desiderio: radMMP version 2.10c (OOI coastal)
-%.. 2020-05-04: desiderio: radMMP version 3.0 (OOI coastal and global)
+%.. 2020-05-04: desiderio: radMMP version 3.00 (OOI coastal and global)
+%.. 2020-05-08: desiderio: radMMP version 2.11c (OOI coastal)
+%.. 2021-05-10: desiderio: radMMP version 2.20c (OOI coastal)
+%.. 2021-05-14: desiderio: radMMP version 3.10 (OOI coastal and global)
 %=========================================================================
 
 nstruct = length(CAoSS);

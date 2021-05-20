@@ -1,3 +1,4 @@
+
 function [ctd] = import_C_sbe52(filename)
 %=========================================================================
 % DESCRIPTION
@@ -53,7 +54,15 @@ function [ctd] = import_C_sbe52(filename)
 % REVISION HISTORY
 %.. 2019-07-16: desiderio: radMMP version 2.00c (OOI coastal)
 %.. 2020-02-17: desiderio: radMMP version 2.10c (OOI coastal)
-%.. 2020-05-04: desiderio: radMMP version 3.0 (OOI coastal and global)
+%.. 2020-05-08: desiderio: radMMP version 2.11c (OOI coastal)
+%.. 2021-04-29: desiderio: added detail to error message (# of data columns)
+%.. 2021-05-08: desiderio
+%..             (a) added profile_date and backtrack fields, therefore (b):
+%..             (b) added 2 to values of sensor_field_indices vector
+%.. 2021-05-10: desiderio: radMMP version 2.20c (OOI coastal)
+%.. 2021-05-12: desiderio: added ver 3.00 documentation re oxygen sensors;
+%..                        executable code here is identical to ver 2.20c.
+%.. 2021-05-14: desiderio: radMMP version 3.10 (OOI coastal and global)
 %=========================================================================
 
 %----------------------
@@ -75,10 +84,12 @@ number_of_hardcoded_data_columns = 4;
 
 ctd.deployment_ID        = '';
 ctd.profile_number       = [];  % scalar
+ctd.profile_date         = nan;  % will come from eng.profile_date
 ctd.profile_direction    = '';
 ctd.data_status        = {''};  % 'imported' or 'no data' or 'no datafile'
 ctd.code_history = {mfilename}; % the name of this program
 ctd.header               = '';  % populated if Unpacker header option is enabled
+ctd.backtrack            = '';
 ctd.time                 = [];  % to be determined later in processing 
 ctd.pressure             = [];  % [dbar]  
 ctd.temperature          = [];  % [Celsius]
@@ -89,7 +100,7 @@ ctd.sigma_theta          = [];  % to be calculated later in processing
 ctd.oxygen               = [];  % [Hz]; SBE43F oxygen frequency
 ctd.dpdt                 = [];  % to be calculated later in processing
 ctd.profile_mask         = [];  % true values denote good data
-ctd.sensor_field_indices = (7:15); % these fields will be binned on pressure
+ctd.sensor_field_indices = (9:17); % these fields will be binned on pressure
 ctd.pressure_bin_values  = [];  % later
 ctd.binning_parameters   = [];  % later: [pr_min binsize pr_max]
 ctd.acquisition_rate_Hz_calculated = nan;  % to be calculated later
@@ -200,8 +211,11 @@ cc(:, end+1) = ' ';
 [~, ncol] = sscanf(cc(1,:), '%f');
 %.. check
 if ncol~=number_of_hardcoded_data_columns
-    str = num2str(number_of_hardcoded_data_columns);
-    error(['This code expects files with ' str 'data columns.']);
+    xpctd = num2str(number_of_hardcoded_data_columns);
+    found = num2str(ncol);
+    msg = ['The function ' mfilename ' expects files with ' xpctd ' data ' ...
+           'columns; ' found ' were found.'];
+    error(msg);
 end
 
 %.. now all the data can be simply read in.

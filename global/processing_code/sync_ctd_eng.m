@@ -28,13 +28,25 @@ function [ctd, eng] = sync_ctd_eng(ctd, eng)
 % REVISION HISTORY
 %.. 2019-07-16: desiderio: radMMP version 2.00c (OOI coastal)
 %.. 2020-02-17: desiderio: radMMP version 2.10c (OOI coastal)
-%.. 2020-05-04: desiderio: radMMP version 3.0 (OOI coastal and global)
+%.. 2020-05-08: desiderio: radMMP version 2.11c (OOI coastal)
+%.. 2021-04-30: desiderio: improved ctd status messages when ctd.time=[] etc.
+%.. 2021-05-03: desiderio: added isempty(eng.time) check.
+%.. 2021-05-08: desiderio: transfers profile_date from eng to ctd
+%.. 2021-05-10: desiderio: radMMP version 2.20c (OOI coastal)
+%.. 2021-05-12: desiderio: added ver 3.00 documentation;
+%..                        executable code here is identical to ver 2.20c.
+%.. 2021-05-14: desiderio: radMMP version 3.10 (OOI coastal and global)
 %=========================================================================
 
 ctd.code_history(end+1) = {mfilename};
 eng.code_history(end+1) = {mfilename};
 
-if isempty(eng.pressure) || isempty(ctd.pressure)
+%.. do this for all cases; even when eng.time contains no data,
+%.. the eng.profile_date value can be real. 
+ctd.profile_date = eng.profile_date;
+ctd.backtrack    = eng.backtrack;
+
+if isempty(eng.pressure) || isempty(ctd.pressure) || isempty(eng.time)
     ctd.data_status(end+1) = {'NOT SYNC''ED'};
     eng.data_status(end+1) = {'NOT SYNC''ED'};
     return
@@ -45,10 +57,10 @@ eng.profile_direction = ctd.profile_direction;
 %.. when multiple backtracks are recorded within the engineering file,
 %.. the ctd and eng pressure records can be valid but not ctd time. 
 if isempty(ctd.time) || any(isnan(ctd.time(:))) 
-    disp('Warning: no timestamps found while sync''ing:');
-    disp(['        Profile flags set to false for profile ' ...
+    disp('Warning: no valid ctd timestamps found while sync''ing:');
+    disp(['        ctd profile mask set to all false for profile ' ...
         num2str(ctd.profile_number) '.']);
-    ctd.data_status(end+1) = {'ALL FLAGGED BAD'};
+    ctd.data_status(end+1) = {'MASK FLAGGED BAD'};
     ctd.profile_mask = false(size(ctd.pressure));
     ctd.time = nan(size(ctd.pressure));
     eng.data_status(end+1) = {'NOT SYNC''ED'};

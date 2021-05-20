@@ -40,12 +40,16 @@ function [eng] = find_eng_backtrack_sections(eng, pressureMinimum)
 % REVISION HISTORY
 %.. 2019-07-16: desiderio: radMMP version 2.00c (OOI coastal)
 %.. 2020-02-17: desiderio: radMMP version 2.10c (OOI coastal)
-%.. 2020-05-04: desiderio: radMMP version 3.0 (OOI coastal and global)
+%.. 2020-05-08: desiderio: radMMP version 2.11c (OOI coastal)
+%.. 2021-04-29: desiderio: added else branch because the backtrack field
+%..                        is now initialized to '' instead of 'no'.
+%.. 2021-05-10: desiderio: radMMP version 2.20c (OOI coastal)
+%.. 2021-05-14: desiderio: radMMP version 3.10 (OOI coastal and global)
 %=========================================================================
 
 eng.code_history(end+1) = {mfilename};
 if isempty(eng.pressure)
-    eng.data_status(end+1) = {'not processed'};
+    eng.data_status(end+1) = {'no pressure data'};
     return
 end
 
@@ -60,6 +64,8 @@ pr(pr<pressureMinimum) = 0;
 pr(pr>pressureMinimum) = 1;
 if any( diff(pr)<0 )
     eng.backtrack = 'yes';
+else
+    eng.backtrack = 'no';
 end
 eng.profile_mask = logical(pr);
 %.. calculate dpdt; it will be replaced by ctd values after the 
@@ -74,6 +80,6 @@ dPa = [dP(1); dP];
 dPb = [dP; dP(end)];
 eng.dpdt = (dPa+dPb) * eng.acquisition_rate_Hz_calculated / 2;  % [db/sec]
 
-eng.data_status(end+1) = {'pressure processed'};
+eng.data_status(end+1) = {'backtrack checked'};
 
 end

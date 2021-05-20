@@ -1,6 +1,17 @@
-![Irm_toy.jpg](/version%203.0/demo_data/plots/Irm_WFP003_degC_toy.jpg "WFP Data")
+![Irm_toy.jpg](/global/demo_data/plots/Irm_WFP003_degC_toy.jpg "WFP Data")
 
-The demo_data folder contains unpacked data text files, cal file, and demo metadata text file needed to try the version 3.0 processing code out.
+The demo_data folder contains unpacked data text files, cal file, and demo metadata text file needed to try the version 3.10 processing code out.
+
+## OOI mmp_toolbox ver 3.10  
+
+
+Version 3.10 changes from version 3.0:
+
+*   more robust processing of deployments with missing and compromised data files and data files with backtracking
+*   renamed datenum field in the data product structure of arrays to the more descriptive profile_date 
+*   added the profile_date field to the ctd, eng, and acm structure arrays containing individual profile data 
+*   added backtrack field to the ctd and acm structure arrays  
+*   added version field to data products
 
 ## OOI mmp_toolbox ver 3.0 
 ### Documentation  
@@ -18,7 +29,7 @@ Version 3.0 coastal metadata text files differ from those used in version 2.10c 
   
 *   profiler_type = 'coastal' 
 
-Therefore metadata text files used in 2.10c processing, and those in 2.11c processing that do not have this line, cannot be used for version 3.0 processing **unless** this line is added.
+Therefore metadata text files used in 2.10c processing, and those in 2.11c and 2.20c processing that do not have this line, cannot be used for version 3.0 processing **unless** this line is added.
 
 There is also supplemental documentation at the beginning of each subroutine.  
 

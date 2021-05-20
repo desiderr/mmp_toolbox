@@ -38,10 +38,15 @@ function [sss] = void_short_profiles(sss, profilesImported, fieldName, nptsMin, 
 %   the data acquisition rates are known, the nptsMin selection is 
 %   equivalent to putting a minimum time restriction on the profiles.
 %
+%   Using the profile mask (2021-02-24 modification) ensures that in the eng
+%   pressure record values that are 0 marking backtrack regions are not used
+%   (a) as part of the number of points count
+%   (b) as the lowest pressure value when determining pressure range.
+%
 %   In radMMP processing when the pressure field of a ctd or eng structure 
 %   array element encountered by a processing subroutine is empty, that element
-%   is skipped (not processed). For ad2cp data the heading field is used for 
-%   the same purpose.
+%   is skipped (not processed). For ad2cp and 3dmp acoustic currentmeter data
+%   data the heading field is used for the same purpose.
 %
 % AUTHOR
 %   Russ Desiderio, desi@ceoas.oregonstate.edu
@@ -58,7 +63,11 @@ function [sss] = void_short_profiles(sss, profilesImported, fieldName, nptsMin, 
 %.. 2020-02-05: desiderio: added profilesImported to calling argument list.
 %.. 2020-02-17: desiderio: radMMP version 2.10c (OOI coastal)
 %.. 2020-04-13: desiderio: clarified screen output
-%.. 2020-05-04: desiderio: radMMP version 3.0 (OOI coastal and global)
+%.. 2020-05-04: desiderio: radMMP version 3.00 (OOI coastal and global)
+%.. 2020-05-08: desiderio: radMMP version 2.11c (OOI coastal)
+%.. 2021-02-24: desiderio: now uses profile_mask (ignores ENG backtrack markers)
+%.. 2021-05-10: desiderio: radMMP version 2.20c (OOI coastal)
+%.. 2021-05-14: desiderio: radMMP version 3.10 (OOI coastal and global)
 %=========================================================================
 %.. operate on array elements corresponding to imported profiles only
 sssImported = sss(profilesImported);
@@ -70,19 +79,27 @@ QQ = cellfun(@(x) [x {mfilename}], Q, 'uni', 0);
 [sssImported.code_history] = QQ{:};
 
 %.. process
+%.. .. use profile_mask to catch eng pressure anomalies due to repeated
+%.. .. backtracking; will not affect ctd nor aqd,acm processing.
+valCell   = {sssImported.(fieldName)};
+pMaskCell = {sssImported.profile_mask};
+dataCell  = cellfun(@(x,y)x(y), valCell, pMaskCell, 'UniformOutput', false);
 %.. .. number of data points
-%.. .. if the data in fieldName is already empty, its length gives npts=0;
-%.. .. no need to set UniformOutput to 0 and result is not a cell array.
-npts = cellfun('length', {sssImported.(fieldName)});
+%.. .. if a cell in dataCell's cells is empty, its length gives npts=0;
+%.. .. no need to set UniformOutput to 0; result is not a cell array.
+npts = cellfun('length', dataCell);
 maskNpts = npts<=nptsMin;
 %.. .. range
-valCell = {sssImported.(fieldName)};
-valCell(cellfun('isempty', valCell)) = {0};
-valCell(cellfun(@(x) any(isnan(x)), valCell)) = {0};
-maskRange = cellfun(@(x) max(x)-min(x)<=rangeMin, valCell);
-
+dataCell(cellfun('isempty', dataCell)) = {0};
+dataCell(cellfun(@(x) any(isnan(x)), dataCell)) = {0};
+%.. should not be nans in these records at this point in the processing,
+%.. but just in case
+rangeCell = cellfun(@(x) nanmax(x)-nanmin(x), dataCell);
+maskRange = rangeCell<=rangeMin;
+%.. if an entire profile has values of nan, nanmax-nanmin = nan.
+maskAllNan = isnan(rangeCell);
 %.. void short profiles by assigning the key variable fields to be empty
-mask = maskNpts | maskRange;
+mask = maskNpts | maskRange | maskAllNan;
 allFieldNames = fieldnames(sssImported);
 for ii = sssImported(1).sensor_field_indices
     %.. for flexibility in concatenating structure array fields,

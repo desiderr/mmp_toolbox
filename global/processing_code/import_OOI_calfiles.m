@@ -59,7 +59,8 @@ function meta = import_OOI_calfiles(meta, profiler_type)
 %..                        (b) changed to function format instead of script
 %.. 2020-03-30: desiderio: refactored into cal subfunctions
 %.. 2020-04-30: desiderio: added diagnostic output if calfile not found
-%.. 2020-05-04: desiderio: radMMP version 3.0 (OOI coastal and global)
+%.. 2020-05-04: desiderio: radMMP version 3.00 (OOI coastal and global)
+%.. 2021-05-14: desiderio: radMMP version 3.10 (OOI coastal and global)
 %=========================================================================
 %----------------------
 % CHECK INPUT ARGUMENTS

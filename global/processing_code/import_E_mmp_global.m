@@ -45,7 +45,14 @@ function [eng] = import_E_mmp_global(filename)
 %
 % REVISION HISTORY
 %.. 2020-03-01: desiderio: initial code
-%.. 2020-05-04: desiderio: radMMP version 3.0 (OOI coastal and global)
+%.. 2020-05-04: desiderio: radMMP version 3.00 (OOI coastal and global)
+%.. 2021-05-12: desiderio: 
+%..             (a) backtrack field initialization changed to empty charvector
+%..             (b) added detail to error message checking # of data columns
+%..             (c) added profile_date field (must init as nan), therefore (b):
+%..             (d) added 1 to values of sensor_field_indices vector
+%..             (e) calculates value for profile date field
+%.. 2021-05-14: desiderio: radMMP version 3.10 (OOI coastal and global)
 %=========================================================================
 
 %----------------------
@@ -65,12 +72,13 @@ number_of_hardcoded_data_columns = 8;  % exclusive of date-time
 
 eng.deployment_ID = '';
 eng.profile_number = []; % scalar
+eng.profile_date   = nan; % from eng timestamps even when no real data
 eng.profile_direction = '';
 eng.data_status = {''};  % 'imported' or 'no data' or 'no datafile'
 eng.code_history = {mfilename}; % the name of this program
  
 eng.header    = '';    % populated if Unpacker header option is enabled
-eng.backtrack = 'no';  % if detected re-set to 'yes'
+eng.backtrack = '';    % 'yes' if at least one backtrack episode, else 'no'
 eng.time      = [];    % [serial datenumber]
 eng.current   = [];    % [mA]
 eng.voltage   = [];    % [V]
@@ -82,7 +90,7 @@ eng.bback     = [];    % [counts]
 eng.eco_temperature    = [];  % counts
 eng.dpdt      = [];    % [dbar/s]
 eng.profile_mask         = [];     % true values denote good data
-eng.sensor_field_indices = (8:17); % these fields will be binned on pressure
+eng.sensor_field_indices = (9:18); % these fields will be binned on pressure
 eng.pressure_bin_values  = [];     % later
 eng.binning_parameters   = [];     % later: [pr_min binsize pr_max]
 eng.acquisition_rate_Hz_calculated = nan;  % derived scalar
@@ -202,9 +210,10 @@ cc(:, [3 6 11 14 17 20 end+1]) = ' ';
 [~, ncol] = sscanf(cc(1,:), '%f');
 %.. check
 if ncol~=number_of_hardcoded_data_columns + 6
-    str = num2str(number_of_hardcoded_data_columns);
-    msg = ['This code expects files with ' str ' data columns, ' ...
-           'excluding the date and time fields.'];
+    xpctd = num2str(number_of_hardcoded_data_columns);
+    found = num2str(ncol-6);
+    msg = ['The function ' mfilename ' expects files with ' xpctd ' data ' ...
+           'columns, excluding date and time fields; ' found ' were found.'];
     error(msg);
 end
 
@@ -238,8 +247,8 @@ time = datenum(data(:, [3 1 2 4 5 6]));
 data(:, 1:6) = [];
 
 %.. populate structure fields
-%.. .. eng.pressure data is not changed from what was imported. 
-%.. .. however, out of range low values are flagged in profile_mask 
+eng.profile_date = nanmedian(time);  % [serial date number]
+%.. x/0 -> Inf, 0/0 -> nan
 eng.acquisition_rate_Hz_calculated = ...
     (length(time) - 1) / (86400 * (time(end) - time(1)));
 eng.time = time;           %  [serial date number]
