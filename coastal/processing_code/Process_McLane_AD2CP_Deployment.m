@@ -223,6 +223,7 @@ function [data, outfile] = Process_McLane_AD2CP_Deployment(mode, infile, newMeta
 %.. 2020-02-17: desiderio: radMMP version 2.10c (OOI coastal)
 %.. 2020-05-08: desiderio: radMMP version 2.11c (OOI coastal)
 %.. 2021-05-08: desiderio: changed how the date of profile values are determined
+%.. 2021-05-21: desiderio: fixed case of no 'A' files found
 %.. 2021-05-10: desiderio: radMMP version 2.20c (OOI coastal)
 %=========================================================================
 %%
@@ -257,7 +258,7 @@ if contains(mode, 'import')
     %.. (*.DEC.TXT) files
     listing = cellstr(ls([meta.unpacked_data_folder '\*A0*.TXT']));
     nListing = length(listing);
-    if nListing == 0
+    if isempty(listing{1})
         error('NO A-FILES FOUND IN UNPACKED DATA FOLDER.');
     end
     nDECTXT  = sum(contains(listing, 'DEC'));
