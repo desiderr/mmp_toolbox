@@ -17,6 +17,9 @@
 % Null numerical entry is 0 with one exception (profiles_to_process)
 
 
+% PROFILER TYPE
+%   OOI profilers can be either 'coastal' or 'global'
+
 profiler_type = 'coastal'
 
 
@@ -35,8 +38,8 @@ deployment_ID = 'WFP001_'
 %   latitude: decimal degrees N (southern hemisphere values are negative)
 %   longitude: decimal degrees E (west of Greenwich values are negative)
 
-latitude  =   46.8518
-longitude = -124.9725
+latitude  =   46.8518 
+longitude = -124.9725    
 
 
 % FOLDERS
@@ -69,7 +72,7 @@ number_of_profiles = 106
 %         number_of_profiles value are processed.
 %     (b) a scalar or matlab-compatible row vector.
 
-profiles_to_process = []
+profiles_to_process      = []
 
 
 % BINNING PARAMETERS
@@ -102,11 +105,11 @@ acm_binning_parameters = [20 0.5 520]
 %
 %     to disable a discriminator enter a negative value.
 
-ctd_pressure_nptsMin      = 100
-ctd_pressure_rangeMin_db  =  -1
-eng_pressure_nptsMin      =  20
-eng_pressure_rangeMin_db  =  -1 
-acm_nptsMin               =  25
+ctd_pressure_nptsMin     = 80
+ctd_pressure_rangeMin_db = 20
+eng_pressure_nptsMin     = 10
+eng_pressure_rangeMin_db = 20
+acm_nptsMin              = 160
 
 %   engineering profile mask: 
 %     backtrack sections are signified by values of 0 in the
@@ -168,7 +171,7 @@ thermal_mass_inverse_beta = 7.0
 %       minute before 1st backtrack signalled, then bad afterwards
 %   (3) flag as bad only pressure=0 sections.
 
-backtrack_processing_flag = 1
+backtrack_processing_flag = 3
 
 
 % SENSOR DEPTH OFFSETS
@@ -231,6 +234,6 @@ magnetic_declination_deg     = 15.9
 ambiguity_velocity_m_per_sec = 1.0714
 wag_radius_m                 = 0.43
 correct_velBeam_for_phase_ambiguity = 1;
-correct_velY_for_wag                = 0;
+correct_velY_for_wag  = 0
 correct_velXYZ_for_pitch_and_roll   = 0;
-correct_velU_for_dpdt               = 0;
+correct_velU_for_dpdt = 0
