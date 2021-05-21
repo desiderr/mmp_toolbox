@@ -221,7 +221,10 @@ function [data, outfile] = Process_McLane_FSIACM_Deployment(mode, infile, newMet
 %.. 2021-03-02: desiderio: in-house version 3.05g (OOI global), not released
 %.. 2021-05-18: desiderio: changed how the date of profile values are determined
 %.. 2021-05-19: desiderio: trapped out case of no FSI-ACM (3DMP) data header
-%.. 2021-05-21: desiderio: fixed case of no 'A' files found
+%.. 2021-05-21: desiderio:
+%..             (a) fixed case of no 'A' files found
+%..             (b) added radMMP version info to structure arrays
+%..             (c) added radMMP version info to structure of arrays data product
 %.. 2021-05-21: desiderio: radMMP version 3.10g (OOI global)
 %=========================================================================
 %%
@@ -358,6 +361,8 @@ disp('Begin mainstream processing 3DMP files.');
 for ii = prof2proc; acm(ii) = fcm_beam2XYZ(acm(ii)); end
 for ii = prof2proc; acm(ii) = fcm_wag_velocity(acm(ii)); end
 for ii = prof2proc; acm(ii) = fcm_XYZ2ENU(acm(ii)); end
+
+[acm.radMMP_version] = deal(radMMPversion);
 acm_L0 = acm;
 disp('acm_L0 created.')
 
@@ -389,6 +394,7 @@ acm_L2 = acm;
 clear acm
 
 %% ********* CREATE STRUCTURE-OF-ARRAYS DATA PRODUCTS' HEADER ******************
+MP_aux.radMMP_version = radMMPversion;
 %.. calculate useful auxiliary parameters and put them into the
 %.. lead structure MP_aux. Used in L0, L1, and L2 MPacm products.
 MP_aux.Deployment_ID =  meta.deployment_ID;

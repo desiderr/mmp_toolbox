@@ -572,10 +572,9 @@ MP_binned_flr = cat_sensorfields(flr_L2, 'horz', 'binned_flr_');
 MP_binned_aux = cat_sensorfields(aux_L2, 'horz', ['binned_' auxSensor '_']);
 
 %% **** COMBINE SUBSIDIARY SCALAR STRUCTURES INTO ONE STRUCTURE MMP ****
-
+MP_doc.radMMP_version = radMMPversion;
 %.. calculate useful auxiliary parameters and put them into the
 %.. lead structure MP_doc.
-
 MP_doc.Deployment_ID = depID;
 MP_doc.Date_of_Processing = datestr(now);
 %.. assign a time for each processed profile.
@@ -610,7 +609,6 @@ MMP = amalgamate_scalar_structures( {MP_doc;          ...
 %.. add the meta structure containing the metadata used in the processing
 %.. as the next field
 MMP.META = meta;
-MMP.radMMP_version = radMMPversion;
 
 %.. remove empty L0 fields (derived products)
 MMP = rmfield(MMP, {'rawvec_eng_dpdt' 'rawvec_ctd_dpdt' 'rawvec_ctd_theta' ...
