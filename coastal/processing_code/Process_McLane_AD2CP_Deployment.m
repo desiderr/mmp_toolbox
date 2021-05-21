@@ -223,6 +223,10 @@ function [data, outfile] = Process_McLane_AD2CP_Deployment(mode, infile, newMeta
 %.. 2020-02-17: desiderio: radMMP version 2.10c (OOI coastal)
 %.. 2020-05-08: desiderio: radMMP version 2.11c (OOI coastal)
 %.. 2021-05-08: desiderio: changed how the date of profile values are determined
+%.. 2021-05-21: desiderio:
+%..             (a) fixed case of no 'A' files found
+%..             (b) added radMMP version info to structure arrays
+%..             (c) added radMMP version info to structure of arrays data product
 %.. 2021-05-10: desiderio: radMMP version 2.20c (OOI coastal)
 %=========================================================================
 %%
@@ -257,7 +261,7 @@ if contains(mode, 'import')
     %.. (*.DEC.TXT) files
     listing = cellstr(ls([meta.unpacked_data_folder '\*A0*.TXT']));
     nListing = length(listing);
-    if nListing == 0
+    if isempty(listing{1})
         error('NO A-FILES FOUND IN UNPACKED DATA FOLDER.');
     end
     nDECTXT  = sum(contains(listing, 'DEC'));
@@ -335,7 +339,9 @@ for ii = prof2proc; aqd(ii) = aqd_sync_ctd(aqd(ii), ctd_L1(ii)); end
 disp('... sync done');
 disp(' ');
 
+[aqd.radMMP_version] = deal(radMMPversion);
 acm_L0 = aqd;
+disp('acm_L0 created.')
 
 disp('Begin mainstream processing AD2CP files.');
 %.. heading is unwrapped before interpolation then wrapped afterwards
@@ -368,6 +374,7 @@ acm_L2 = aqd;
 clear aqd
 
 %% ********* CREATE STRUCTURE-OF-ARRAYS DATA PRODUCTS' HEADER ******************
+MP_aux.radMMP_version = radMMPversion;
 %.. calculate useful auxiliary parameters and put them into the
 %.. lead structure MP_aux. Used in L0, L1, and L2 MPacm products.
 MP_aux.Deployment_ID =  meta.deployment_ID;
