@@ -3,6 +3,7 @@ function [acm] = fcm_sync_ctd(acm, ctd)
 % DESCRIPTION
 %   Adds pressure and dPressure/dt records to acm profiles.
 %   Transfers ctd profile_mask and 'profile_direction' to acm.
+%   Transfers ctd profile_date and backtrack to acm.
 %
 % USAGE:  [out] = fcm_sync_ctd(acm, ctd)     (general case)
 % USAGE:  [acm] = fcm_sync_ctd(acm, ctd)

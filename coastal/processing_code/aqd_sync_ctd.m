@@ -3,6 +3,7 @@ function [aqd] = aqd_sync_ctd(aqd, ctd)
 % DESCRIPTION
 %   Adds pressure and dPressure/dt records to aqd profiles.
 %   Transfers ctd profile_mask and 'profile_direction' to aqd.
+%   Transfers ctd profile_date and backtrack to aqd.
 %
 % USAGE:  [out] = aqd_sync_ctd(aqd, ctd)     (general case)
 % USAGE:  [aqd] = aqd_sync_ctd(aqd, ctd)

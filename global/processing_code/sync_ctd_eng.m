@@ -3,6 +3,7 @@ function [ctd, eng] = sync_ctd_eng(ctd, eng)
 % DESCRIPTION
 %   Synchronizes ctd and eng profile masks
 %   Updates eng pressure and dP/dt to be consistent with the ctd values.
+%   Transfers eng profile_date and backtrack to ctd
 %
 % USAGE:  [ctd, eng] = sync_ctd_eng(ctd, eng)
 %
