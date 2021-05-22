@@ -4,7 +4,7 @@ A 1 month global demo dataset (unpacked text files, calfile, metadata file) is p
 
 ## OOI mmp_toolbox
 
-Version 4.0 of the Matlab mmp_toolbox code processes McLane Moored Profiler (MMP) data acquired at both 'coastal' and 'global' OOI surface mooring sites. 
+Version 4.0 of the Matlab mmp_toolbox code processes McLane Moored Profiler (MMP) data acquired at both 'coastal' and 'global' OOI surface mooring sites. For instructions on code usage see the respective coastal_implementation and global_implementation pages.
  
 ### Coastal OOI MMP sites
 * CE09OSPM (**C**oastal **E**ndurance)
