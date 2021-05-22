@@ -1,10 +1,10 @@
 ![Irminger_WFP005_O2_pcolor.jpg](/Irminger_WFP005_O2_pcolor.jpg "WFP Data")
 
-A 1 month global demo dataset (unpacked text files, calfile, metadata file) is provided in the version 3.10g section for downloading.
+A 1 month global demo dataset (unpacked text files, calfile, metadata file) is provided in the global_implementation section for downloading.
 
 ## OOI mmp_toolbox
 
-There are currently two versions of Matlab code available to process McLane Moored Profiler (MMP) data acquired at OOI surface mooring sites. The **coastal** folder contains version 2.20c which processes data from all of the instruments mounted on 'coastal' MMPs including its acoustic current meter (ACM), the Nortek AD2CP. The **global** folder contains version 3.10g which processes data from all of the instruments mounted on 'global' MMPs including its acoustic current meter, the Falmouth Scientific 3DMP.
+Version 4.0 of the Matlab mmp_toolbox code processes McLane Moored Profiler (MMP) data acquired at both 'coastal' and 'global' OOI surface mooring sites. 
  
 ### Coastal OOI MMP sites
 * CE09OSPM (**C**oastal **E**ndurance)
@@ -50,7 +50,7 @@ The raw McLane Profiler data must first be unpacked by [McLane Unpacker version 
 *   Add prefix to output files:  
     *   This must be **LEFT BLANK** for the code to run.  
 
-Although not extensively tested, it does appear that if coastal AD2CP processing is not required then Unpacker version 3.13.5 can be used.  
+If coastal AD2CP processing is not required then Unpacker version 3.13.5 and possibly later can be used.  
 
 ### Use  
 
