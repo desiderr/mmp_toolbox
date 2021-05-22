@@ -1,8 +1,8 @@
-![Irm_toy.jpg](/global/demo_data/plots/Irm_WFP003_degC_toy.jpg "WFP Data")
+![Irm_toy.jpg](/global_implementation/demo_data/plots/Irm_WFP003_degC_toy.jpg "WFP Data")
 
-The demo_data folder contains unpacked data text files, cal file, and demo metadata text file needed to try the version 3.10 processing code out.
+The demo_data folder contains unpacked data text files, cal file, and demo metadata text file needed to try the global processing code out.
 
-## OOI mmp_toolbox ver 3.10g  
+## OOI mmp_toolbox: global processing  
 
 
 ### Documentation  
@@ -10,13 +10,15 @@ Besides this readme file, there are 3 main sources of documentation for this ver
   
 *   at the beginning of function Process_OOI_McLane_CTDENG_Deployment.m  
 *   at the beginning of function Process_McLane_FSIACM_Deployment.m  
-*   throughout any one of the sample metadata_**global**_*.txt files included in the metadata_files folder.  
+*   throughout any one of the sample metadata_global_*.txt files included in the metadata_files folder.  
 
 Process_OOI_McLane_CTDENG_Deployment.m processes CTD and ENG files. Its documentation includes usage, dependencies, instrumentation, and references. It requires installation of the TEOS-10 Gibbs Sea Water Oceanographic Toolbox.
 
 Process_McLane_FSIACM_Deployment.m processes the Falmmouth Scientific 3DMP ACM data. Its documentation includes usage, dependencies, and references. The CTD-ENG processing must be done first because the CTD pressure record is used in the ACM processing.
 
 The metadata text files contain and document all the processing parameters required for both of the functions above. The user can edit these for their own use. The ACM processing parameters are not required if only the CTD-ENG processing function is executed. 
+
+The metadata text files must contain the line: profiler_type = 'global'
 
 There is also supplemental documentation at the beginning of each subroutine.  
 
