@@ -5,12 +5,12 @@ tags:
   - Wire Following Profiler Mooring
   - McLane Moored Profiler
 authors:
-  - name: Russell A. Desiderio
+  - name: Russell A. Desiderio^[corresponding author]
     orcid: 0000-0001-7786-9140
-    affiliation: 1
+    affiliation: "1"
   - name: Craig M. Risien
     orcid: 0000-0002-2826-9488
-    affiliation: 1
+    affiliation: "1"
 affiliations:
  - name: Oregon State University, College of Earth, Ocean, and Atmospheric Sciences, Corvallis, Oregon, 97331
    index: 1
