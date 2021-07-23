@@ -30,22 +30,22 @@ profiler_type = 'coastal'
 %   yyyymmdd_HHMMSS denotes the processing date and time. if 
 %   no deployment ID is desired, use ''.
 
-deployment_ID = 'WFP008_'
+deployment_ID = 'WFP013_'
 
-
+ 
 % GPS
 %   required by TEOS-10 to calculate potential temperature and density
 %   latitude: decimal degrees N (southern hemisphere values are negative)
 %   longitude: decimal degrees E (west of Greenwich values are negative)
 
-latitude  =   46.8518 
-longitude = -124.9725    
+latitude  =   46.85300 
+longitude = -124.98072    
 
 
 % FOLDERS
 
-unpacked_data_folder = K:\Data\CE09OSPM\R00008\unpacked
-calibration_folder   = K:\Data\CE09OSPM\R00008\cals
+unpacked_data_folder = K:\Data\CE09OSPM\R00013\unpacked
+calibration_folder   = K:\Data\CE09OSPM\R00013\cals
 
 
 % CALFILENAMES
@@ -53,9 +53,9 @@ calibration_folder   = K:\Data\CE09OSPM\R00008\cals
 %   must be located in calibration_folder.
 %   if instrument not deployed use ''
 
-fluorometer_calfilename = CGINS-FLORTK-01602__20170706.csv
-oxygen_calfilename      = CGINS-DOFSTK-03535__20170617.csv
-par_calfilename         = CGINS-PARADK-20555__20170616.csv
+fluorometer_calfilename  = CGINS-FLORTK-01707__20191210.csv
+oxygen_calfilename       = CGINS-DOFSTK-02496__20200219.csv
+par_calfilename          = CGINS-PARADK-20438__20191203.csv
 
 
 % PROFILES
@@ -65,7 +65,7 @@ par_calfilename         = CGINS-PARADK-20555__20170616.csv
 % the value entered should be the highest numbered profile,
 % or, the highest numbered good profile, if desired.
 
-number_of_profiles = 1399
+number_of_profiles = 1588
 
 %   the profiles_to_process entry can either be:
 %     (a) [], in which case profile numbers 1 to the
@@ -150,7 +150,7 @@ temperature_filter_time_constant_sec  = 0.5
 %   there is no provision to shift the temperature record.
 
 conductivity_shift_sec =  0.5
-oxygen_shift_sec       = -4
+oxygen_shift_sec       =  -4
 pressure_shift_sec     = -1.0
 
 
@@ -178,7 +178,7 @@ backtrack_processing_flag = 3
 %   for pressure binning non-ctd sensors:
 %     there are 2 sizes of mclane profiler body, the original
 %     and the longer, newer one to accommodate a battery refit.
-%   CE09OSPM deployments:
+%   CE09OSPM deployments only:
 %     Spring 2017 and earlier used the shorter body.
 %     Fall   2017 and later   used the longer body.
 %
