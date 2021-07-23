@@ -83,12 +83,12 @@ profiles_to_process = []
 %    determined from the entire deployment's minimum
 %    and maximum pressure values.
 
-ctd_binning_parameters = 1
-eng_binning_parameters = 5
-acm_binning_parameters = 1
-%ctd_binning_parameters = [20 0.5 520]
-%eng_binning_parameters = [20 2.0 520]
-%acm_binning_parameters = [20 0.5 520]
+%ctd_binning_parameters = 1
+%eng_binning_parameters = 5
+%acm_binning_parameters = 1
+ctd_binning_parameters = [0 1 2200]
+eng_binning_parameters = [0 5 2200]
+acm_binning_parameters = [0 2 2200]
 
 
 % PROFILE QUALITY DISCRIMINATORS
@@ -102,11 +102,11 @@ acm_binning_parameters = 1
 %
 %     to disable a discriminator enter a negative value.
 
-ctd_pressure_nptsMin      = 100
-ctd_pressure_rangeMin_db  =  -1
-eng_pressure_nptsMin      =  20
-eng_pressure_rangeMin_db  =  -1 
-acm_nptsMin               =  25
+ctd_pressure_nptsMin     = 80
+ctd_pressure_rangeMin_db = 50
+eng_pressure_nptsMin     = 10
+eng_pressure_rangeMin_db = 50
+acm_nptsMin              = 200
 
 %   engineering profile mask: 
 %     backtrack sections are signified by values of 0 in the
@@ -132,10 +132,11 @@ ctd_speedMin_db_per_sec  =  0.02
 %   control by comparing it to the nominal value 
 %   to be entered below (used for filtering and
 %   shifting operations).
+%
+%   time constants of 0 result in no smoothing.
 
 ctd_acquisition_rate_Hz               = 1.0
 conductivity_filter_time_constant_sec = 0.5
-oxygen_filter_time_constant_sec       = 0.0
 pressure_filter_time_constant_sec     = 0.5
 temperature_filter_time_constant_sec  = 0.5
 
@@ -147,7 +148,6 @@ temperature_filter_time_constant_sec  = 0.5
 %   there is no provision to shift the temperature record.
 
 conductivity_shift_sec =  0.5
-oxygen_shift_sec       =  0.0
 pressure_shift_sec     = -1.0
 
 
@@ -168,7 +168,7 @@ thermal_mass_inverse_beta = 7.0
 %       minute before 1st backtrack signalled, then bad afterwards
 %   (3) flag as bad only pressure=0 sections.
 
-backtrack_processing_flag = 2
+backtrack_processing_flag = 3
 
 
 % SENSOR DEPTH OFFSETS
@@ -178,6 +178,54 @@ backtrack_processing_flag = 2
 %     located closer to the surface than the pressure sensor.
 %     estimated distance offsets (meters) follow:
  
-currentmeter_depth_offset_m = -0.46
+currentmeter_depth_offset_m = -0.45
 fluorometer_depth_offset_m  = -0.34
-optode_depth_offset_m       = -0.02
+optode_depth_offset_m       = -0.13
+
+
+% CURRENT METER: 3DMP
+%   magnetic declination [degrees] is positive when 
+%   magnetic north is east of geographic north.
+%     Value used is IGRF2020 at 1000m depth.
+%
+%   periodic oscillations about the wire result in a "wag" signal
+%   affecting the validity of the velY, and therefore velENU,
+%   measurements. Typical wag signals can be eliminated by applying a 
+%   12 second filter (Toole 1999) and is here implemented by setting
+%   acm_filter_time_constant_sec = 12.
+%
+%   wag radius [m] is used to calculate the theoretical wag signal.
+%     0.43m is the value calculated from measurements taken from the
+%     CAD drawing.
+%   wag signal is always calculated and included as a data product.
+%
+%   correct velY for wag signal = wagRadius * d(heading)/dt:
+%     a value of 0 results in no correction.
+%     a value of 1 enables correction.
+%   It is recommended that wag velocity not be corrected because
+%   (a) typically it is removed by filtering
+%   (b) often the calculated signal must be phase shifted and scaled
+%        to give an accurate correction. 
+%      
+%   correct upwards velocity for profiler motion (dP/dt):
+%     a value of 0 results in no correction.
+%     a value of 1 enables correction.
+%   It is sometimes observed (global profilers) that ascending profiles 
+%   correct to positive velU values, descending to negative. The dP/dt 
+%   signal is calculated and included as a data product for comparison
+%   regardless of the switch setting.
+%
+%   correct velocities for pitch and roll:
+%     there is currently no provision to correct global McLane
+%     profiler data for pitch and roll because it was expected that
+%     these tilt angles would be very small because of the wire-following
+%     constraint. The tilt data is included in the L0 and L1 data products
+%     for diagnostic puroposes and in the L2 data product as an indicator
+%     of the occurrence of mesoscale profiler "blowdown" events.
+%
+
+magnetic_declination_deg     =  16.6
+acm_filter_time_constant_sec =  12.0
+wag_radius_m                 =   0.43
+correct_velY_for_wag  = 0
+correct_velU_for_dpdt = 0
