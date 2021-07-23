@@ -4,7 +4,7 @@
 %   (recommended), the beginning and ending text rows for each
 %   profile are written to text fields in the array of structures
 %   containing the processed data.
-% 
+%
 % Rows starting with % are ignored and can be used as comments
 %   to insert supplemental information concerning the deployment
 %   or processing.
@@ -12,7 +12,7 @@
 % Rows specifying metadata values needed for processing should
 %   be of the form: variablename=value. spaces can be freely
 %   used for readability.
-% 
+%
 % Null text entry value is '' (two single quotes).
 % Null numerical entry is 0 with one exception (profiles_to_process)
 
@@ -24,13 +24,13 @@ profiler_type = 'coastal'
 
 
 % DEPLOYMENT ID:
-%   this must be a character vector enclosed by single quotes; 
-%   it will be prepended to the name of the matfile saved by 
+%   this must be a character vector enclosed by single quotes;
+%   it will be prepended to the name of the matfile saved by
 %   the processing code, which is 'MMP__yyyymmdd_HHMMSS' where
-%   yyyymmdd_HHMMSS denotes the processing date and time. if 
+%   yyyymmdd_HHMMSS denotes the processing date and time. if
 %   no deployment ID is desired, use ''.
 
-deployment_ID = 'WFP005_'
+deployment_ID = 'WFP007_'
 
 
 % GPS
@@ -38,24 +38,24 @@ deployment_ID = 'WFP005_'
 %   latitude: decimal degrees N (southern hemisphere values are negative)
 %   longitude: decimal degrees E (west of Greenwich values are negative)
 
-latitude  =   46.8518 
-longitude = -124.9725    
+latitude  =  39.9435
+longitude = -70.8862
 
 
 % FOLDERS
 
-unpacked_data_folder = K:\Data\CE09OSPM\R00005\unpacked
-calibration_folder   = K:\Data\CE09OSPM\R00005\cals
+unpacked_data_folder = K:\Data\CP04OSPM\R00007\unpacked
+calibration_folder   = K:\Data\CP04OSPM\R00007\cals
 
 
 % CALFILENAMES
-%   OOI-style comma,separated,variable text files 
+%   OOI-style comma,separated,variable text files
 %   must be located in calibration_folder.
 %   if instrument not deployed use ''
 
-fluorometer_calfilename = CGINS-FLORTK-01030__20151216.csv
-oxygen_calfilename      = CGINS-DOFSTK-02496__20151221.csv
-par_calfilename         = CGINS-PARADK-20438__20160111.csv
+fluorometer_calfilename = CGINS-FLORTK-01118__20161212.csv
+oxygen_calfilename      = CGINS-DOFSTK-02725__20161124.csv
+par_calfilename         = CGINS-PARADK-20468__20161123.csv
 
 
 % PROFILES
@@ -65,14 +65,14 @@ par_calfilename         = CGINS-PARADK-20438__20160111.csv
 % the value entered should be the highest numbered profile,
 % or, the highest numbered good profile, if desired.
 
-number_of_profiles = 798
+number_of_profiles = 1265
 
 %   the profiles_to_process entry can either be:
 %     (a) [], in which case profile numbers 1 to the
 %         number_of_profiles value are processed.
 %     (b) a scalar or matlab-compatible row vector.
 
-profiles_to_process      = []
+profiles_to_process = []
 
 
 % BINNING PARAMETERS
@@ -89,14 +89,14 @@ profiles_to_process      = []
 %ctd_binning_parameters = 0.5
 %eng_binning_parameters = 2
 %acm_binning_parameters = 1
-ctd_binning_parameters = [20 0.5 520]
-eng_binning_parameters = [20 2.0 520]
-acm_binning_parameters = [20 0.5 520]
+ctd_binning_parameters = [20 0.5 420]
+eng_binning_parameters = [20 2.0 420]
+acm_binning_parameters = [20 0.5 420]
 
 
 % PROFILE QUALITY DISCRIMINATORS
-%   void_short_profile.m calling arguments: 
-%     do not process profiles that do not exceed a Minimum 
+%   void_short_profile.m calling arguments:
+%     do not process profiles that do not exceed a Minimum
 %     number of points nptsMin or do not exceed a Minimum
 %     range of values rangeMin.
 %
@@ -105,13 +105,13 @@ acm_binning_parameters = [20 0.5 520]
 %
 %     to disable a discriminator enter a negative value.
 
-ctd_pressure_nptsMin     = 80
-ctd_pressure_rangeMin_db = 20
-eng_pressure_nptsMin     = 10
-eng_pressure_rangeMin_db = 20
-acm_nptsMin              = 160
+ctd_pressure_nptsMin      = 100
+ctd_pressure_rangeMin_db  =  -1
+eng_pressure_nptsMin      =  20
+eng_pressure_rangeMin_db  =  -1
+acm_nptsMin               =  25
 
-%   engineering profile mask: 
+%   engineering profile mask:
 %     backtrack sections are signified by values of 0 in the
 %     engineering pressure record. sometimes there are small
 %     negative and small positive values instead. set an
@@ -119,22 +119,24 @@ acm_nptsMin              = 160
 %     flagged as bad data in the profile mask. to disable this
 %     feature enter a large negative value (-99).
 %   ctd profile mask:
-%     flag a data point as bad when any profiler speed value 
-%     within a centered window dips below the minimum speed 
+%     flag a data point as bad when any profiler speed value
+%     within a centered window dips below the minimum speed
 %     setting. to disable this feature set the speed to a
 %     large negative number (-99).
 
-eng_pressure_valueMin_db = 10
-ctd_speedWindow_npts     =  7
-ctd_speedMin_db_per_sec  =  0.02
+eng_pressure_valueMin_db  =  10
+ctd_speedWindow_npts      =   7
+ctd_speedMin_db_per_sec   =  0.02
 
 
 % SENSOR FILTER TIME CONSTANTS
 %   ctd acquisition rate is also calculated for each
 %   profile; possibly it could be used for quality
-%   control by comparing it to the nominal value 
+%   control by comparing it to the nominal value
 %   to be entered below (used for filtering and
 %   shifting operations).
+%
+%   time constants of 0 result in no smoothing.
 
 ctd_acquisition_rate_Hz               = 1.0
 conductivity_filter_time_constant_sec = 0.5
@@ -149,7 +151,7 @@ temperature_filter_time_constant_sec  = 0.5
 %   as per Seabird processing guidelines for SBE52 CTDs,
 %   there is no provision to shift the temperature record.
 
-conductivity_shift_sec =  0.5
+conductivity_shift_sec = 0.5
 oxygen_shift_sec       = -4
 pressure_shift_sec     = -1.0
 
@@ -178,18 +180,16 @@ backtrack_processing_flag = 3
 %   for pressure binning non-ctd sensors:
 %     there are 2 sizes of mclane profiler body, the original
 %     and the longer, newer one to accommodate a battery refit.
-%   CE09OSPM deployments:
-%     Spring 2017 and earlier used the shorter body.
-%     Fall   2017 and later   used the longer body.
+%   All Pioneer (CP) deployments all use the shorter body.
 %
 %   negative values denote that the sensor in question is
 %     located closer to the surface than the pressure sensor.
 %     the measured distance offsets (meters) follow:
 %
-%       older smaller body;   newer longer body.
-%     aquadoppII  :  -0.34;          -0.46
-%     fluorometer :  -0.22;          -0.34
-%     par         :  -0.84;          -0.96
+%       older shorter body;
+%     aquadoppII  :  -0.34;
+%     fluorometer :  -0.22;
+%     par         :  -0.84;
 
 currentmeter_depth_offset_m = -0.34
 fluorometer_depth_offset_m  = -0.22
@@ -197,12 +197,10 @@ par_depth_offset_m          = -0.84
 
 
 % CURRENT METER: AD2CP
-%   magnetic declination [degrees] is positive when magnetic 
+%   magnetic declination [degrees] is positive when magnetic
 %   north is east of geographic north.
-%     WMM2015, 2/22/2019, 46.8518 lat, -124.9725 lon: 
-%     magnetic declination = 15.9
 %
-%   ambiguity velocity [m/s] is used to correct raw beam 
+%   ambiguity velocity [m/s] is used to correct raw beam
 %   intensities for phase ambiguity.
 %     1.0714 m/s is the AD2CP value as specified by Nortek.
 %     (full wrap, ie [-pi pi]).
@@ -214,8 +212,8 @@ par_depth_offset_m          = -0.84
 %   Wag signal is always calculated and included as a data product.
 %   Whether it is used to correct velY is determined by the value
 %   of correct_velY_for_wag. It is likely that a higher empirically
-%   derived effective radius should be used. 
-%      
+%   derived effective radius should be used.
+%
 %   correct velocities for pitch and roll:
 %     a value of 0 results in no correction.
 %     a value of 1 enables correction.
@@ -225,15 +223,15 @@ par_depth_offset_m          = -0.84
 %   correct upwards velocity for profiler motion (dP/dt):
 %     a value of 0 results in no correction.
 %     a value of 1 enables correction.
-%   It is observed that sometimes there are time and shape shifts 
-%   between the velU and dP/dt signals. The dP/dt signal is 
+%   It is observed that sometimes there are time and shape shifts
+%   between the velU and dP/dt signals. The dP/dt signal is
 %   calculated and included as a data product for comparison
 %   regardless of the switch setting.
 
-magnetic_declination_deg     = 15.9
-ambiguity_velocity_m_per_sec = 1.0714
-wag_radius_m                 = 0.43
-correct_velBeam_for_phase_ambiguity = 1;
-correct_velY_for_wag  = 0
-correct_velXYZ_for_pitch_and_roll   = 0;
-correct_velU_for_dpdt = 0
+magnetic_declination_deg            = -14.0
+ambiguity_velocity_m_per_sec        = 1.0714
+wag_radius_m                        = 0.43
+correct_velBeam_for_phase_ambiguity = 1
+correct_velY_for_wag                = 0
+correct_velXYZ_for_pitch_and_roll   = 0
+correct_velU_for_dpdt               = 0
