@@ -17,14 +17,6 @@ radMMP is a code suite written to process profile data from McLane profilers dep
 - Matlab version 2019b for Windows or later, plus the Statistics and Machine Learning Toolbox
 - The Gibbs SeaWater (GSW) Oceanographic TEOS-10 toolbox for Matlab, version 3.06, which also uses the Statistics and Machine Learning Toolbox
 
-<style type="text/css">
-    ol ol { list-style-type: lower-alpha; }
-</style>
-
-<style type="text/css">
-    ol ol ol { list-style-type: lower-alpha; font-family: Helvetica;  font-size: 16pt;}
-</style>
-
 ## Installation, Demonstration, and Test
 1. Install Matlab 2019b or later and the Statistics and Machine Learning Toolbox for Windows.
 >
