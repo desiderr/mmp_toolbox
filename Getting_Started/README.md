@@ -55,20 +55,19 @@ radMMP is a code suite written to process profile data from McLane profilers dep
 7. If desired change the local Matlab working directory. The next utility in this demonstration will create a folder tree underneath this initial working directory for file organization and path \highlight2 standardization based on the sitecode and deployment number so that this demonstration sequence can be run as often as desired without having to deal with ambiguous folder names. An added feature is that the first subfolder created, under the working directory, will contain all the created folders so that the entire tree can be moved as a unit to another location.
 
 8. Run the setUpFolderStructure.m utility to construct a folder tree to organize files. The names of the folders created can be seen by typing info (return) after running the utility.  
-> info = setUpFolderStructure(info);
+    * info = setUpFolderStructure(info);
 
 9. Retrieve the appropriate calibration files for the instruments that require them:  
-> info = getWFPcalfiles(info);
+    * info = getWFPcalfiles(info);
 
 10. Construct the command strings to retrieve binary profiler data from the OOI Raw Data Archive:  
-> info = formWgetCmdStrings(info);
+    * info = formWgetCmdStrings(info);
 
 11. Downloading data considerations. OOI data are delivered via 3 different streams - (i) telemetered from the profiler during deployment (coastal profilers only), (ii) recovered from the mooring data logger after deployment, and (iii) recovered from the profiler also after deployment. All streams, if available, contain identical CTD and Engineering data; the Currentmeter data in the first 2 streams are decimated, whereas these files are unabridged in the 3rd stream. It is preferred to use stream 3 to get the entire dataset. If a coastal profiler was deployed and not recovered, then the telemetered stream can be used. Therefore the wget command lines for the 1st and 3rd streams are contained in the structure fields of info.  
 To download the test/demo dataset, execute from the Matlab command line:  
-> system(info.wget_cmd_recovered_wfp, '-echo');  
+    * system(info.wget_cmd_recovered_wfp, '-echo');  
 
     This will automatically download the raw data into a local folder named 'binary' underneath the current Matlab working directory.  
-    >
 
 12. Unpack the data using the McLane Unpacker installed in step 5 after noting the source and destination folders above (type info, return, in the command window to view folder names).
     * (a) system('unpacker'); The unpacker screen will be spawned. Settings:
@@ -81,26 +80,25 @@ To download the test/demo dataset, execute from the Matlab command line:
     * (h) When Unpacking is complete, view files or log to note missing file or error messages if desired then close the progress window. Dismiss unpacker GUI (click on 'X' in upper right hand corner of its window) so that control will be returned to the Matlab command window.
     
 13. Run the utility:  
-> info = getNumberOfProfiles(info);
+    * info = getNumberOfProfiles(info);
 
 14. Run the xferMetadataToFile.m utility to write the info metadata into a metadata.txt file. The output file will reside in the deployment folder:  
-> [info, metafilename] = xferMetadataToFile(info, identifyingText);
+    * [info, metafilename] = xferMetadataToFile(info, identifyingText);
 
 15. Change the working directory to the deployment folder by executing:  
-> cd(info.deployment_folder_path)  
+    * cd(info.deployment_folder_path)  
 
     The processing output files will reside in this directory.  
-    >
     
 16. Run CTD-ENG MAIN:  
-> [MMP, mmpMatFilename] = Process_OOI_McLane_CTDENG_Deployment(metafilename);  
+    * [MMP, mmpMatFilename] = Process_OOI_McLane_CTDENG_Deployment(metafilename);  
 
 17. Load the supplementary data products into the workspace:  
-> load(mmpMatFilename)
+    * load(mmpMatFilename)
 
 18. Run ACM MAIN:  
-> [ACM, acmMatFilename] = Process_McLane_AD2CP_Deployment('import_and_process', mmpMatFilename);
+    * [ACM, acmMatFilename] = Process_McLane_AD2CP_Deployment('import_and_process', mmpMatFilename);
 
 19. Load the supplementary data products into the workspace:  
-> load ('acmMatFilename')
+    * load ('acmMatFilename')
 
