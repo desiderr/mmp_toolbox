@@ -68,17 +68,17 @@ mmp_toolbox (informally radMMP) is a code suite written to process profile data 
 To download the test/demo dataset, execute from the Matlab command line:  
 - `system(info.wget_cmd_recovered_wfp, '-echo');`
 
-    This will automatically download the raw data into a local folder named 'binary' underneath the current Matlab working directory.  
+    This will automatically download the raw data into a local folder named 'binary' underneath folders codenamed according to the site and deployment.  
 
-12. Unpack the data using the McLane Unpacker installed in step 5 after noting the source and destination folders above (type `info, return`, in the command window to view folder names).
-- (a) `system('unpacker');` The unpacker screen will be spawned. Change the settings to:
-- (b) Source Folder: browse to the folder specified by info.binary_data_folder, highlight it and click OK.
-- (c) Destination Folder: browse to the folder specified by info.unpacked_data_folder, highlight it and click OK.
-- (d) No Unpack Options need be set.
-- (e) Output Options: select either comma separated or space padded columns; Do include header and date/time text; do **not** add a prefix to output files.
-- (f) Files to Unpack: make sure the Engineering, CTD, and ACM file boxes are checked. If checked, uncheck Motion Pack and Wetlabs C-Star.
-- (g) Click on Unpack; a progress window will be spawned.
-- (h) When Unpacking is complete, view files or log to note missing file or error messages if desired then close the progress window. Dismiss unpacker GUI (click on 'X' in upper right hand corner of its window) so that control will be returned to the Matlab command window.
+12. Unpack the data using the McLane Unpacker installed in step 5 after noting the source and destination folders above (type `info, return`, in the command window to view folder names).  
+- (a) `system('unpacker');` The unpacker screen will be spawned. Change the settings to:  
+- (b) Source Folder: browse to the folder specified by info.binary_data_folder, highlight it and click OK.  
+- (c) Destination Folder: browse to the folder specified by info.unpacked_data_folder, highlight it and click OK.  
+- (d) No Unpack Options need be set.  
+- (e) Output Options: select either comma separated or space padded columns; Do include header and date/time text; do **not** add a prefix to output files.  
+- (f) Files to Unpack: make sure the Engineering, CTD, and ACM file boxes are checked. If checked, uncheck Motion Pack and Wetlabs C-Star.  
+- (g) Click on Unpack; a progress window will be spawned.  
+- (h) When Unpacking is complete, view files or log to note missing file or error messages if desired then close the progress window. Dismiss unpacker GUI (click on 'X' in upper right hand corner of its window) so that control will be returned to the Matlab command window.  
     
 13. Run the utility:  
 - `info = getNumberOfProfiles(info);`
