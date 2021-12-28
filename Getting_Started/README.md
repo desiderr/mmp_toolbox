@@ -10,7 +10,7 @@ mmp_toolbox (informally radMMP) is a code suite written to process profile data 
 - [wget.exe, version 1.19.2, 32-bit:]( http://wget.addictivecode.org/FrequentlyAskedQuestions.html#download) or equivalent for use in Windows 10. Note that this wget version for Windows seems to be the most recent that successfully downloads all the raw profiler data without skipping files when used to request data from the [OOI Raw Data Archive]( https://oceanobservatories.org/data/raw-data-archive). This version can be downloaded as the binary wget.exe courtesy of Jernej Simončič and renamed to wget_1_19_2_32bit.exe to differentiate it from other versions.
 
 ### Converting the binary OOI data into text for import into the radMMPP toolbox
-- [McLane Unpacker ver 3.10-3.12](https://mclanelabs.com/profile-unpacker). The binary 'C*.DAT' (CTD), 'E*.DAT' (engineering plus auxiliary sensors), and 'A*.DAT' (currentmeter) data files downloaded in the wget call must be unpacked into text files for import into mmp_toolbox. Later Unpacker versions use a different output format when converting coastal 'A' files to text which are incompatible with the toolbox.
+- [McLane Unpacker ver 3.10-3.12](https://mclanelabs.com/profile-unpacker). The binary 'C\*.DAT' (CTD), 'E\*.DAT' (engineering plus auxiliary sensors), and 'A\*.DAT' (currentmeter) data files downloaded in the wget call must be unpacked into text files for import into mmp_toolbox. Later Unpacker versions use a different output format when converting coastal 'A' files to text which are incompatible with the toolbox.
 
 ### Processing the OOI data
 - [Matlab](https://www.mathworks.com/) version 2019b for Windows or later, plus the Statistics and Machine Learning Toolbox
@@ -20,34 +20,34 @@ mmp_toolbox (informally radMMP) is a code suite written to process profile data 
 
 1. Install Matlab 2019b or later and the Statistics and Machine Learning Toolbox for Windows.
 
-2. Install the GSW TEOS-10 toolbox for Matlab and follow its instructions which will:
-* (a) add its folder to the Matlab PATH
+2. Install the GSW TEOS-10 toolbox for Matlab and follow its instructions which will:  
+* (a) add its folder to the Matlab PATH  
 * (b) run the GSW check function test
     
-3. Download mmp_toolbox from the Bitbucket repo:
-* (a) mmp_toolbox + subfolders
+3. Download mmp_toolbox from the Bitbucket repo:  
+* (a) mmp_toolbox + subfolders  
 * (b) set the Matlab PATH to include mmp_toolbox and its subfolders
 
-4. Install [wget_1_19_2_32bit.exe](https://eternallybored.org/misc/wget/):
-* (a) set the operating system PATH to include the folder containing it
-* (b) check OS path by running `wget_1_19_2_32bit.exe -h` at a Windows command prompt
+4. Install [wget_1_19_2_32bit.exe](https://eternallybored.org/misc/wget/):  
+* (a) set the operating system PATH to include the folder containing it  
+* (b) check OS path by running `wget_1_19_2_32bit.exe -h` at a Windows command prompt  
 * (c) check by running in Matlab the system command: `system('wget_1_19_2_32bit.exe -h')`;
     
-5. Install McLane Unpacker ver 3.10-3.12:
-* (a) set the operating system PATH to include the folder containing unpacker.exe
-* (b) check OS PATH by running `unpacker.exe` at a Windows command prompt. Verify version.
-* (c) check by running in Matlab the system command: `system('unpacker')`; Verify version.
+5. Install McLane Unpacker ver 3.10-3.12:  
+* (a) set the operating system PATH to include the folder containing unpacker.exe  
+* (b) check OS PATH by running `unpacker.exe` at a Windows command prompt. Verify version.  
+* (c) check by running in Matlab the system command: `system('unpacker')`; Verify version.  
     
 ## Demonstration
 
-6. Select the dataset to be downloaded and processed and download the corresponding metadata needed for processing. This requires knowledge of the 8-character site code name and deployment number which can be accessed on various OOI web pages, or, by running the toolbox utility getWFPmetadata.m as follows:
-* `getWFPmetadata` with no arguments outputs a table of site codes, mooring names, and site locations (latitude and longitude)
-* `getWFPmetadata` with one argument, a sitecode name, lists the temporal coverages of each deployment number at the given site
-* `getWFPmetadata` with two [or three] arguments (sitecode name, deployment number, [profiler location in water column]) will create a Matlab structure whose fields are populated with relevant metadata. At the deeper global sites (GA02HYPM, GP02HYPM, and GS02HYPM) two profilers are deployed to sample the 'upper' and 'lower' parts of the water column, thereby requiring the third input.  
+6. Select the dataset to be downloaded and processed and download the corresponding metadata needed for processing. This requires knowledge of the 8-character site code name and deployment number which can be accessed on various OOI web pages, or, by running the toolbox utility getWFPmetadata.m as follows:  
+* `getWFPmetadata` with no arguments outputs a table of site codes, mooring names, and site locations (latitude and longitude)  
+* `getWFPmetadata` with one argument, a sitecode name, lists the temporal coverages of each deployment number at the given site  
+* `getWFPmetadata` with two [or three] arguments (sitecode name, deployment number, [profiler location in water column]) will create a Matlab structure whose fields are populated with relevant metadata. At the deeper global sites (GA02HYPM, GP02HYPM, and GS02HYPM) two profilers are deployed to sample the 'upper' and 'lower' parts of the water column, thereby requiring the third input.    
       
     To continue the demonstration, run from the Matlab command line:
     
-* `getWFPmetadata;`   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  % to see (all) OOI WFP sites and locations
+* (a) `getWFPmetadata;`   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  % to see (all) OOI WFP sites and locations
 * (b) `getWFPmetadata('CE09OSPM');`&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;% to see the time coverage of each deployment at the coastal WA site  
 * (c) `info = getWFPmetadata('CE09OSPM', 4);` &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  % after run type `info `(return) to see structure's field values  
     
