@@ -9,7 +9,7 @@ mmp_toolbox (informally radMMP) is a code suite written to process profile data 
 ### Getting the binary OOI data
 - [wget.exe, version 1.19.2, 32-bit:]( http://wget.addictivecode.org/FrequentlyAskedQuestions.html#download) or equivalent for use in Windows 10. Note that this wget version for Windows seems to be the most recent that successfully downloads all the raw profiler data without skipping files when used to request data from the [OOI Raw Data Archive]( https://oceanobservatories.org/data/raw-data-archive). This version can be downloaded as the binary wget.exe courtesy of Jernej Simončič and renamed to wget_1_19_2_32bit.exe to differentiate it from other versions.
 
-### Converting the binary OOI data into text for import into the radMMPP toolbox
+### Converting the binary OOI data into text for import into the mmp_toolbox
 - [McLane Unpacker ver 3.10-3.12](https://mclanelabs.com/profile-unpacker). The binary 'C\*.DAT' (CTD), 'E\*.DAT' (engineering plus auxiliary sensors), and 'A\*.DAT' (currentmeter) data files downloaded in the wget call must be unpacked into text files for import into mmp_toolbox. Later Unpacker versions use a different output format when converting coastal 'A' files to text which are incompatible with the toolbox.
 
 ### Processing the OOI data
@@ -49,9 +49,9 @@ mmp_toolbox (informally radMMP) is a code suite written to process profile data 
     
 - (a) `getWFPmetadata;`   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  % to see (all) OOI WFP sites and locations
 - (b) `getWFPmetadata('CE09OSPM');`&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;% to see the time coverage of each deployment at the coastal WA site  
-- (c) `info = getWFPmetadata('CE09OSPM', 4);` &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  % after run type `info `(return) to see structure's field values  
+- (c) `info = getWFPmetadata('CE09OSPM', 4);` &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  % after execution type `info `(return) to see structure's field values  
     
-    In this sequence the data from the 4th deployment at the coastal WA site has been selected. The field values of info are required for further processing. Note that the mmp_toolbox code uses a hard-coded structure named 'meta', so that to avoid confusion 'meta' should not be used in the getWFPmetadata utility call.
+    In this sequence the data from the 4th deployment at the coastal WA site has been selected. The field values of info are required for further processing. Note that the mmp_toolbox code uses a hard-coded structure variable named 'meta', so that to avoid confusion 'meta' should not be used in the getWFPmetadata utility call.
     
 7. If desired change the local Matlab working directory. The next utility in this demonstration will create a folder named 'OOI_WFP' underneath the working directory for file organization and path standardization based on the sitecode and deployment number so that this demonstration sequence can be run as often as desired with all OOI datasets without having to deal with ambiguous folder names. An added feature is that the OOI_WFP folder  will contain all the dataset folders so that the entire folder tree can be moved as a unit to another location.
 
@@ -70,15 +70,16 @@ To download the test/demo dataset, execute from the Matlab command line:
 
     This will automatically download the raw data into a local folder named 'binary' underneath folders codenamed according to the site and deployment.  
 
-12. Unpack the data using the McLane Unpacker installed in step 5 after noting the source and destination folders above (type `info, return`, in the command window to view folder names).  
-- (a) `system('unpacker');` The unpacker screen will be spawned. Change the settings to:  
-- (b) Source Folder: browse to the folder specified by info.binary_data_folder, highlight it and click OK.  
-- (c) Destination Folder: browse to the folder specified by info.unpacked_data_folder, highlight it and click OK.  
-- (d) No Unpack Options need be set.  
-- (e) Output Options: select either comma separated or space padded columns; Do include header and date/time text; do **not** add a prefix to output files.  
-- (f) Files to Unpack: make sure the Engineering, CTD, and ACM file boxes are checked. If checked, uncheck Motion Pack and Wetlabs C-Star.  
-- (g) Click on Unpack; a progress window will be spawned.  
-- (h) When Unpacking is complete, view files or log to note missing file or error messages if desired then close the progress window. Dismiss unpacker GUI (click on 'X' in upper right hand corner of its window) so that control will be returned to the Matlab command window.  
+12. To unpack the data using the McLane Unpacker installed in step 5:   
+- (a) type `info, return` in the command window to display the info fields containing the names of the binary and unpacked data folders.   
+- (b) `system('unpacker');` The unpacker screen will be spawned. Change the settings to:  
+- (c) Source Folder: browse to the folder specified by info.binary_data_folder, highlight it and click OK.  
+- (d) Destination Folder: browse to the folder specified by info.unpacked_data_folder, highlight it and click OK.  
+- (e) No Unpack Options need be set.  
+- (f) Output Options: select either comma separated or space padded columns; Do include header and date/time text; do **not** add a prefix to output files.  
+- (g) Files to Unpack: make sure the Engineering, CTD, and ACM file boxes are checked. If checked, uncheck Motion Pack and Wetlabs C-Star.  
+- (h) Click on Unpack; a progress window will be spawned.  
+- (i) When Unpacking is complete, view files or log to note missing file or error messages if desired then close the progress window. Dismiss unpacker GUI (click on 'X' in upper right hand corner of its window) so that control will be returned to the Matlab command window.  
     
 13. Run the utility:  
 - `info = getNumberOfProfiles(info);`
@@ -91,23 +92,24 @@ To download the test/demo dataset, execute from the Matlab command line:
 
     The processing output files will reside in this directory.  
     
-16. Run CTD-ENG MAIN:  
+16. Process the CTD and ENG profiler data:  
 - `[MMP, mmpMatFilename] = Process_OOI_McLane_CTDENG_Deployment(metafilename);`
 
-17. Load the supplementary CTD-ENG data products into the workspace:  
-- `load(mmpMatFilename)`
+17. Run plotting routines 
+- `bbplot_MMP_L2_data(MMP, 'time');`  
+- `bbplot_MMP_L1_data(MMP, 'time');`  
+- `bbplot_MMP_L0_data(MMP, 'time');`  
 
-18. Run ACM MAIN:  
-    For coastal deployments:
-- `[ACM, acmMatFilename] = Process_McLane_AD2CP_Deployment('import_and_process', mmpMatFilename);`
-    For global deployments:
+18. Process the ACM profiler data:  
+    For coastal deployments (for example, the demo):  
+- `[ACM, acmMatFilename] = Process_McLane_AD2CP_Deployment('import_and_process', mmpMatFilename);`  
+    For global deployments:  
 - `[ACM, acmMatFilename] = Process_McLane_FSIACM_Deployment('import_and_process', mmpMatFilename);`
 
-19. Load the supplementary ACM data products into the workspace:  
-- `load (acmMatFilename)`
-
-20. Plot
-- `bbplot_MMP_L2_data(MMP);`
+19. Load the supplementary data products into the workspace:  
+- `load(mmpMatFilename)`  
+- `load(acmMatFilename)`
+- `who`
 
 ## Tests
 
