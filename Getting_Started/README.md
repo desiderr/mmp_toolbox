@@ -84,8 +84,8 @@ To download the test/demo dataset, execute from the Matlab command line:
 13. Run the utility:  
 - `info = getNumberOfProfiles(info);`
 
-14. Run the xferMetadataToFile.m utility to write the info metadata into a metadata.txt file (to be used by the mmp_toolbox code). The output file will reside in the deployment folder. 
-- `[info, metafilename] = xferMetadataToFile(info, identifyingText)`;
+14. Run the xferMetadataToFile.m utility to write the info metadata into a metadata.txt file (to be used by the mmp_toolbox code). The output file will reside in the deployment folder.  
+- `[info, metafilename] = xferMetadataToFile(info)`;
 
 15. Change the working directory to the deployment folder by executing:  
 - `cd(info.deployment_folder_path)`
@@ -95,7 +95,7 @@ To download the test/demo dataset, execute from the Matlab command line:
 16. Process the CTD and ENG profiler data:  
 - `[MMP, mmpMatFilename] = Process_OOI_McLane_CTDENG_Deployment(metafilename);`
 
-17. Run plotting routines 
+17. Run plotting routines  
 - `bbplot_MMP_L2_data(MMP, 'time');`  
 - `bbplot_MMP_L1_data(MMP, 'time');`  
 - `bbplot_MMP_L0_data(MMP, 'time');`  
@@ -108,7 +108,7 @@ To download the test/demo dataset, execute from the Matlab command line:
 
 19. Load the supplementary data products into the workspace:  
 - `load(mmpMatFilename)`  
-- `load(acmMatFilename)`
+- `load(acmMatFilename)`  
 - `who`
 
 ## Tests
