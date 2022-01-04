@@ -1,4 +1,4 @@
-![O2_shift_demo.bmp](/Getting_Started\O2_shift_demo.bmp)
+![O2_shift_demo.bmp](/Getting_Started/O2_shift_demo.bmp)
 # Getting Started
 
 ## Introduction
