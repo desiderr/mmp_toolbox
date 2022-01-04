@@ -1,3 +1,4 @@
+![O2_shift_demo](/O2_shift_demo.bmp)
 # Getting Started
 
 ## Introduction
@@ -92,10 +93,10 @@ To download the test/demo dataset, execute from the Matlab command line:
 
     The processing output files will reside in this directory.  
     
-16. Process the CTD and ENG profiler data:  
+16. Use mmp_toolbox to: Process the CTD and ENG profiler data  
 - `[MMP, mmpMatFilename] = Process_OOI_McLane_CTDENG_Deployment(metafilename);`
 
-17. Run plotting routines  
+17. Use mmp_toolbox utilities to: Run plotting routines to visualize the data  
 - `bbplot_MMP_L2_data(MMP, 'time');`  
 - `bbplot_MMP_L1_data(MMP, 'time');`  
 - `bbplot_MMP_L0_data(MMP, 'time');`  
@@ -113,4 +114,18 @@ To download the test/demo dataset, execute from the Matlab command line:
 
 ## Tests
 
-(1) Compare the pseudocolor plots created in the previous section with that at the top of this page.
+(1) The values calculated in the MMP demonstration can be verified by checking against reference values by running:  
+- bbcheck_MMP_L2_data(MMP)
+- bbcheck_MMP_L1_data(MMP)
+- bbcheck_MMP_L0_data(MMP)
+
+The values to be checked are plotted as blue 'x' characters, the check values are over-plotted as red circles.
+
+## Documentation
+
+## Support / Bug Report
+
+## Contribute
+
+## To Cite
+
