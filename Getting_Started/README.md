@@ -45,19 +45,20 @@ mmp_toolbox is a code suite written to process profile data from McLane profiler
 ## Demonstration
 
 6. Select the dataset to be downloaded and processed, and, download the corresponding metadata needed for processing it. This requires knowledge of the 8-character site code name and deployment number which can be accessed on various OOI web pages, or, by running the toolbox utility getWFPmetadata.m as follows:  
-* `getWFPmetadata` with no arguments outputs a table of site codes, mooring names, and site locations (latitude and longitude)  
+  
+* (a)  `getWFPmetadata` with no arguments outputs a table of site codes, mooring names, and site locations (latitude and longitude):  
 
-![sitecodeScreenshot.png](/Getting_Started/sitecodeScreenshot.png)  
+![sitecodeScreenshotA.png](/Getting_Started/sitecodeScreenshotA.png)  
 
-* `getWFPmetadata` with one argument, a sitecode name, lists the temporal coverages of each deployment number at the given site  
-* `getWFPmetadata` with two [or three] arguments (sitecode name, deployment number, [profiler location in water column]) will create a Matlab structure whose fields are populated with relevant metadata. At the deeper global sites (GA02HYPM, GP02HYPM, and GS02HYPM) two profilers are deployed to sample the 'upper' and 'lower' parts of the water column, thereby requiring the third input.    
-      
-    To continue the demonstration, run from the Matlab command line:
-    
-* (a) `getWFPmetadata;`   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  % to see (all) OOI WFP sites and locations
-* (b) `getWFPmetadata('CE09OSPM');`&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;% to see the time coverage of each deployment at the coastal WA site  
-* (c) `info = getWFPmetadata('CE09OSPM', 4);` &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  % after execution type `info `(return) to see structure's field values  
-    
+* (b)  `getWFPmetadata` with one argument, a sitecode name, lists the temporal coverages of each deployment number at the given site. Selecting the CE09OSPM site gives: 
+
+![sitecodeScreenshotB.png](/Getting_Started/sitecodeScreenshotB.png)
+
+* (c)  `getWFPmetadata` with two [or three] arguments (sitecode name, deployment number, [profiler location in water column]) will create a Matlab structure whose fields are populated with relevant metadata. At the deeper global sites (GA02HYPM, GP02HYPM, and GS02HYPM) two profilers are deployed to sample the 'upper' and 'lower' parts of the water column, thereby requiring the third input. To continue the demonstration, run from the Matlab command line:
+
+![sitecodeScreenshotC.png](/Getting_Started/sitecodeScreenshotC.png)
+
+     
     In this sequence the data from the 4th deployment at the coastal WA site has been selected. The field values of info are required for further processing. Note that the mmp_toolbox code uses a hard-coded structure variable named 'meta', so that to avoid confusion 'meta' should not be used in the getWFPmetadata utility call.
     
 7. If desired change the local Matlab working directory. The next utility in this demonstration will create a folder named 'OOI_WFP' underneath the working directory for file organization and path standardization based on the sitecode and deployment number so that this demonstration sequence can be run as often as desired with all OOI datasets without having to deal with ambiguous folder names. An added feature is that the OOI_WFP folder  will contain all the dataset folders so that the entire folder tree can be moved as a unit to another location.
