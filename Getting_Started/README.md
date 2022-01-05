@@ -54,12 +54,11 @@ mmp_toolbox is a code suite written to process profile data from McLane profiler
 
 ![sitecodeScreenshotB.png](/Getting_Started/sitecodeScreenshotB.png)
 
-* (c)  `getWFPmetadata` with two [or three] arguments (sitecode name, deployment number, [profiler location in water column]) will create a Matlab structure whose fields are populated with relevant metadata. At the deeper global sites (GA02HYPM, GP02HYPM, and GS02HYPM) two profilers are deployed to sample the 'upper' and 'lower' parts of the water column, thereby requiring the third input. To continue the demonstration, run from the Matlab command line:
+* (c)  `getWFPmetadata` with two [or three] arguments (sitecode name, deployment number, [profiler location in water column]) will create a Matlab structure whose fields are populated with relevant metadata. At the deeper global sites (GA02HYPM, GP02HYPM, and GS02HYPM) two profilers are deployed to sample the 'upper' and 'lower' parts of the water column, thereby requiring the third input denoting profiler_coverage. To continue the demonstration, run from the Matlab command line:
 
 ![sitecodeScreenshotC.png](/Getting_Started/sitecodeScreenshotC.png)
-
-     
-    In this sequence the data from the 4th deployment at the coastal WA site has been selected. The field values of info are required for further processing. Note that the mmp_toolbox code uses a hard-coded structure variable named 'meta', so that to avoid confusion 'meta' should not be used in the getWFPmetadata utility call.
+ 
+In this sequence the data from the 4th deployment at the coastal WA site has been selected. The field values of info are required for further processing. Note that the mmp_toolbox code uses a hard-coded structure variable named 'meta', so that to avoid confusion 'meta' should not be used in the getWFPmetadata utility call.
     
 7. If desired change the local Matlab working directory. The next utility in this demonstration will create a folder named 'OOI_WFP' underneath the working directory for file organization and path standardization based on the sitecode and deployment number so that this demonstration sequence can be run as often as desired with all OOI datasets without having to deal with ambiguous folder names. An added feature is that the OOI_WFP folder  will contain all the dataset folders so that the entire folder tree can be moved as a unit to another location.
 
