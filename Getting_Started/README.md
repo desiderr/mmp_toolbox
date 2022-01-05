@@ -1,9 +1,12 @@
-![O2_shift_demo.bmp](/Getting_Started/O2_shift_demo.bmp)
+![O2_shift_demo.bmp](/Getting_Started/O2_shift_demo.bmp)  
+
+The figure above shows one of the features of the mmp_toolbox: adjustable flow lags to remove vertical hysteresis occurring because profiling direction alternates between ascending and descending. These oxygen data were measured using a SBE43 dissolved oxygen sensor plumbed inline after the temperature and conductivity sensors. Applying a shift of 10 seconds to earlier times pulls the ascending data record down and the descending data record up, thereby bringing the dissolved oxygen gradient between about 90-120 db (meters below the surface) into registration.
+
 # Getting Started
 
 ## Introduction
 
-mmp_toolbox (informally radMMP) is a code suite written to process profile data from McLane profilers deployed in the Ocean Observatories Initiative program. While these data are provided to the research community in near real-time at [OOINet](https://ooinet.oceanobservatories.org) and also from the [OOI Data Explorer](https://ooinet.oceanobservatories.org), the OOI does not provide profile data processed into integrated datasets taking into account the different instruments' time lags and depth offsets and containing all the instrument data binned to a common depth record as would be required for fully featured physical and biogeochemical models as well as for synoptic visualization of the data in time and depth for data survey and quality assessment. Use of mmp_toolbox described here will result in easier access to the ever-increasing number of OOI MMP data sets, making them more available to a broader swath of the marine research community. For more about the OOI program, see the [Ocean Observatories](https://oceanobservatories.org) website. For mooring sites and instrumentation see https://bitbucket.org/ooicgsn/mmp_toolbox/src/master/.
+mmp_toolbox is a code suite written to process profile data from McLane profilers deployed in the Ocean Observatories Initiative program. While these data are provided to the research community in near real-time at [OOINet](https://ooinet.oceanobservatories.org) and also from the [OOI Data Explorer](https://ooinet.oceanobservatories.org), the OOI does not provide profile data processed into integrated datasets taking into account the different instruments' time lags and depth offsets as would be required for fully featured physical and biogeochemical models as well as for synoptic visualization of the data in time and depth for data survey and quality assessment. Use of mmp_toolbox (informally radMMP) described here will result in easier access to the ever-increasing number of OOI MMP data sets, making them more available to a broader swath of the marine research community. For more about the OOI program, see the [Ocean Observatories](https://oceanobservatories.org) website. For mooring sites and instrumentation see https://bitbucket.org/ooicgsn/mmp_toolbox/src/master/.
 
 ## Dependencies
 
@@ -96,7 +99,7 @@ To download the test/demo dataset, execute from the Matlab command line:
 16. Use mmp_toolbox to: Process the CTD and ENG profiler data  
 - `[MMP, mmpMatFilename] = Process_OOI_McLane_CTDENG_Deployment(metafilename);`
 
-17. Use mmp_toolbox utilities to: Run plotting routines to visualize the data  
+17. Use mmp_toolbox utilities to: Run plotting routines to visualize the data. 
 - `bbplot_MMP_L2_data(MMP, 'time');`  
 - `bbplot_MMP_L1_data(MMP, 'time');`  
 - `bbplot_MMP_L0_data(MMP, 'time');`  
@@ -115,17 +118,26 @@ To download the test/demo dataset, execute from the Matlab command line:
 ## Tests
 
 (1) The values calculated in the MMP demonstration can be verified by checking against reference values by running:  
-- bbcheck_MMP_L2_data(MMP)
-- bbcheck_MMP_L1_data(MMP)
-- bbcheck_MMP_L0_data(MMP)
+- bbcheck_MMP_L2_data(MMP)  
+- bbcheck_MMP_L1_data(MMP)  
+- bbcheck_MMP_L0_data(MMP)  
 
-The values to be checked are plotted as blue 'x' characters, the check values are over-plotted as red circles.
+The values to be checked are plotted as blue 'x' characters, the check values are over-plotted as red circles, for example:
+
+![chlflrCheck.bmp](/Getting_Started/chlflrCheck.bmp)
 
 ## Documentation
 
+Listing of what is documented, where.
+
 ## Support / Bug Report
+
+TBD
 
 ## Contribute
 
+TBD
+
 ## To Cite
 
+TBD
