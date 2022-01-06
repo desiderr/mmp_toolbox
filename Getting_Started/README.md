@@ -24,7 +24,7 @@ mmp_toolbox is a code suite written to process profile data from McLane profiler
 
 1. Install Matlab 2019b or later and the Statistics and Machine Learning Toolbox for Windows.
 
-2. Install the GSW TEOS-10 toolbox for Matlab and follow its instructions which will:    
+2. Install the GSW TEOS-10 toolbox for Matlab and follow its instructions which will:
 *   (a) add its folder to the Matlab PATH  
 *   (b) run the GSW check function test
     
