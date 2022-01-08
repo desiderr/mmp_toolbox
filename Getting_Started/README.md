@@ -63,23 +63,24 @@ In this sequence the data from the 4th deployment at the offshore WA site has be
 7. If desired change the local Matlab working directory. The next utility in this demonstration will create a folder named 'OOI_WFP' underneath the working directory for file organization and path standardization based on the sitecode and deployment number so that this demonstration sequence can be run as often as desired with all OOI datasets without having to deal with ambiguous folder names. An added feature is that the OOI_WFP folder  will contain all the dataset folders so that the entire folder tree can be moved as a unit to another location.
 
 8. Run the setUpFolderStructure.m utility to construct a folder tree to organize files. The names of the folders created can be seen by typing `info` (return) after running the utility.  
-* `info = setUpFolderStructure(info);`
+    * `info = setUpFolderStructure(info);`
 
 9. Retrieve the appropriate calibration files for the instruments that require them:  
-* `info = getWFPcalfiles(info);`
+    * `info = getWFPcalfiles(info);`
 
 10. Construct the command strings to retrieve binary profiler data from the OOI Raw Data Archive:  
-* `info = formWgetCmdStrings(info)`;
+    * `info = formWgetCmdStrings(info)`;
 
 11. Downloading data considerations. OOI data are delivered via 3 different streams
-* (i) telemetered from the profiler during deployment (coastal profilers only),  
-* (ii) recovered from the mooring data logger after deployment, and  
-* (iii) recovered from the profiler also after deployment.  
+    * (i) telemetered from the profiler during deployment (coastal profilers only),  
+    * (ii) recovered from the mooring data logger after deployment, and  
+    * (iii) recovered from the profiler also after deployment.  
 
 All streams, if available, contain identical CTD and Engineering data; the Currentmeter data in the first 2 streams are decimated, whereas these files are unabridged in the 3rd stream. It is preferred to use stream 3 to get the entire dataset. If a coastal profiler was deployed and not recovered, then the telemetered stream can be used. Therefore the wget command lines for the 1st and 3rd streams are contained in the structure fields of info.  
 
 To download the test/demo dataset, execute from the Matlab command line:  
-* `system(info.wget_cmd_recovered_wfp, '-echo');`
+  
+  * `system(info.wget_cmd_recovered_wfp, '-echo');`
 
 This will automatically download the raw data into a local folder named 'binary' underneath folders codenamed according to the site and deployment.  
 
