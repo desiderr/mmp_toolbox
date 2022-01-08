@@ -28,19 +28,19 @@ mmp_toolbox is a code suite written to process profile data from McLane profiler
     * (a) add its folder to the Matlab PATH
     * (b) run the GSW check function test
     
-3. Download mmp_toolbox from the Bitbucket repo:  
-* (a) mmp_toolbox + subfolders  
-* (b) set the Matlab PATH to include mmp_toolbox and its subfolders
-
-4. Install [wget_1_19_2_32bit.exe](https://eternallybored.org/misc/wget/):  
-* (a) set the operating system PATH to include the folder containing it  
-* (b) check OS path by running `wget_1_19_2_32bit.exe -h` at a Windows command prompt  
-* (c) check by running in Matlab the system command: `system('wget_1_19_2_32bit.exe -h')`;
+3. Download mmp_toolbox from the Bitbucket repo:
+    * (a) mmp_toolbox + subfolders
+    * (b) set the Matlab PATH to include mmp_toolbox and its subfolders
     
-5. Install McLane Unpacker ver 3.10-3.12:  
-* (a) set the operating system PATH to include the folder containing unpacker.exe  
-* (b) check OS PATH by running `unpacker.exe` at a Windows command prompt. Verify version.  
-* (c) check by running in Matlab the system command: `system('unpacker')`; Verify version.  
+4. Install [wget_1_19_2_32bit.exe](https://eternallybored.org/misc/wget/):
+    * (a) set the operating system PATH to include the folder containing it  
+    * (b) check OS path by running `wget_1_19_2_32bit.exe -h` at a Windows command prompt  
+    * (c) check by running in Matlab the system command: `system('wget_1_19_2_32bit.exe -h')`;
+    
+5. Install [McLane Unpacker ver 3.10-3.12](https://mclanelabs.com/profile-unpacker):
+    * (a) set the operating system PATH to include the folder containing unpacker.exe
+    * (b) check OS PATH by running `unpacker.exe` at a Windows command prompt. Verify version.
+    * (c) check by running in Matlab the system command: `system('unpacker')`; Verify version.
     
 ## Demonstration
 
@@ -58,7 +58,7 @@ mmp_toolbox is a code suite written to process profile data from McLane profiler
 
 ![sitecodeScreenshotC.png](/Getting_Started/sitecodeScreenshotC.png)
  
-In this sequence the data from the 4th deployment at the coastal WA site has been selected. The field values of info are required for further processing. Note that the mmp_toolbox code uses a hard-coded structure variable named 'meta', so that to avoid confusion 'meta' should not be used in the getWFPmetadata utility call.
+In this sequence the data from the 4th deployment at the offshore WA site has been selected. The field values of structure info are required for further processing. Note that the mmp_toolbox code uses a hard-coded structure variable named 'meta', so that to avoid confusion 'meta' should not be used in the getWFPmetadata utility call.
     
 7. If desired change the local Matlab working directory. The next utility in this demonstration will create a folder named 'OOI_WFP' underneath the working directory for file organization and path standardization based on the sitecode and deployment number so that this demonstration sequence can be run as often as desired with all OOI datasets without having to deal with ambiguous folder names. An added feature is that the OOI_WFP folder  will contain all the dataset folders so that the entire folder tree can be moved as a unit to another location.
 
@@ -71,9 +71,9 @@ In this sequence the data from the 4th deployment at the coastal WA site has bee
 10. Construct the command strings to retrieve binary profiler data from the OOI Raw Data Archive:  
 * `info = formWgetCmdStrings(info)`;
 
-11. Downloading data considerations. OOI data are delivered via 3 different streams  
+11. Downloading data considerations. OOI data are delivered via 3 different streams
 * (i) telemetered from the profiler during deployment (coastal profilers only),  
-* (ii) recovered from the mooring data logger after deployment, and 
+* (ii) recovered from the mooring data logger after deployment, and  
 * (iii) recovered from the profiler also after deployment.  
 
 All streams, if available, contain identical CTD and Engineering data; the Currentmeter data in the first 2 streams are decimated, whereas these files are unabridged in the 3rd stream. It is preferred to use stream 3 to get the entire dataset. If a coastal profiler was deployed and not recovered, then the telemetered stream can be used. Therefore the wget command lines for the 1st and 3rd streams are contained in the structure fields of info.  
@@ -81,55 +81,55 @@ All streams, if available, contain identical CTD and Engineering data; the Curre
 To download the test/demo dataset, execute from the Matlab command line:  
 * `system(info.wget_cmd_recovered_wfp, '-echo');`
 
-    This will automatically download the raw data into a local folder named 'binary' underneath folders codenamed according to the site and deployment.  
+This will automatically download the raw data into a local folder named 'binary' underneath folders codenamed according to the site and deployment.  
 
-12. To unpack the data using the McLane Unpacker installed in step 5:   
-* (a) type `info, return` in the command window to display the info fields containing the names of the binary and unpacked data folders.   
-* (b) `system('unpacker');` The unpacker screen will be spawned. Change the settings to:  
-* (c) Source Folder: browse to the folder specified by info.binary_data_folder, highlight it and click OK.  
-* (d) Destination Folder: browse to the folder specified by info.unpacked_data_folder, highlight it and click OK.  
-* (e) No Unpack Options need be set.  
-* (f) Output Options: select either comma separated or space padded columns; Do include header and date/time text; do **not** add a prefix to output files.  
-* (g) Files to Unpack: make sure the Engineering, CTD, and ACM file boxes are checked. If checked, uncheck Motion Pack and Wetlabs C-Star.  
-* (h) Click on Unpack; a progress window will be spawned.  
-* (i) When Unpacking is complete, view files or log to note missing file or error messages if desired then close the progress window. Dismiss unpacker GUI (click on 'X' in upper right hand corner of its window) so that control will be returned to the Matlab command window.  
+12. To unpack the data using the McLane Unpacker installed in step 5:
+    * (a) type `info, return` in the command window to display the info fields containing the names of the binary and unpacked data folders.
+    * (b) `system('unpacker');` The unpacker screen will be spawned. Change the settings to:
+    * (c) Source Folder: browse to the folder specified by info.binary_data_folder, highlight it and click OK.
+    * (d) Destination Folder: browse to the folder specified by info.unpacked_data_folder, highlight it and click OK.
+    * (e) No Unpack Options need be set.
+    * (f) Output Options: select either comma separated or space padded columns; Do include header and date/time text; do **not** add a prefix to output files.
+    * (g) Files to Unpack: make sure the Engineering, CTD, and ACM file boxes are checked. If checked, uncheck Motion Pack and Wetlabs C-Star.
+    * (h) Click on Unpack; a progress window will be spawned.
+    * (i) When Unpacking is complete, view files or log to note missing files or error messages if desired then close the progress window. Dismiss unpacker GUI (click on 'X' in upper right hand corner of its window) so that control will be returned to the Matlab command window.  
     
-13. Run the utility:  
-* `info = getNumberOfProfiles(info);`
+13. Run the utility:
+    * `info = getNumberOfProfiles(info);`
 
-14. Run the xferMetadataToFile.m utility to write the info metadata into a metadata.txt file (to be used by the mmp_toolbox code). The output file will reside in the deployment folder.  
-* `[info, metafilename] = xferMetadataToFile(info)`;
+14. Run the xferMetadataToFile.m utility to write the info metadata into a metadata.txt file (to be used by the mmp_toolbox code). The output file will reside in the deployment folder.
+    * `[info, metafilename] = xferMetadataToFile(info)`;
 
-15. Change the working directory to the deployment folder by executing:  
-* `cd(info.deployment_folder_path)`
+15. Change the working directory to the deployment folder by executing:
+    * `cd(info.deployment_folder_path)`
 
-    The processing output files will reside in this directory.  
+    The processing output files will reside in this directory.
     
-16. Use mmp_toolbox to: Process the CTD and ENG profiler data  
-* `[MMP, mmpMatFilename] = Process_OOI_McLane_CTDENG_Deployment(metafilename);`
+16. Use mmp_toolbox to: Process the CTD and ENG profiler data
+    * `[MMP, mmpMatFilename] = Process_OOI_McLane_CTDENG_Deployment(metafilename);`
 
-17. Use mmp_toolbox utilities to: Run plotting routines to visualize the data. 
-* `bbplot_MMP_L2_data(MMP, 'time');`  
-* `bbplot_MMP_L1_data(MMP, 'time');`  
-* `bbplot_MMP_L0_data(MMP, 'time');`  
+17. Use mmp_toolbox utilities to: Run plotting routines to visualize the data.
+    * `bbplot_MMP_L2_data(MMP, 'time');`  
+    * `bbplot_MMP_L1_data(MMP, 'time');`  
+    * `bbplot_MMP_L0_data(MMP, 'time');`  
 
-18. Process the ACM profiler data:  
+18. Process the ACM profiler data:
     For coastal deployments (for example, the demo):  
-* `[ACM, acmMatFilename] = Process_McLane_AD2CP_Deployment('import_and_process', mmpMatFilename);`  
+    * `[ACM, acmMatFilename] = Process_McLane_AD2CP_Deployment('import_and_process', mmpMatFilename);`  
     For global deployments:  
-* `[ACM, acmMatFilename] = Process_McLane_FSIACM_Deployment('import_and_process', mmpMatFilename);`
+    * `[ACM, acmMatFilename] = Process_McLane_FSIACM_Deployment('import_and_process', mmpMatFilename);`
 
 19. Load the supplementary data products into the workspace:  
-* `load(mmpMatFilename)`  
-* `load(acmMatFilename)`  
-* `who`
+    * `load(mmpMatFilename)`  
+    * `load(acmMatFilename)`  
+    * `who`
 
 ## Tests
 
-(1) The values calculated in the MMP demonstration can be verified by checking against reference values by running:  
-* bbcheck_MMP_L2_data(MMP)  
-* bbcheck_MMP_L1_data(MMP)  
-* bbcheck_MMP_L0_data(MMP)  
+20. The values calculated in the MMP demonstration can be verified by checking against reference values by running:
+    * bbcheck_MMP_L2_data(MMP)
+    * bbcheck_MMP_L1_data(MMP)
+    * bbcheck_MMP_L0_data(MMP)
 
 The values to be checked are plotted as blue 'x' characters, the check values are over-plotted as red circles, for example:
 
