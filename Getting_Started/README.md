@@ -18,13 +18,13 @@ mmp_toolbox is a code suite written to process profile data from McLane profiler
 
 ### Using mmp_toolbox to process the OOI data
 * [Matlab](https://www.mathworks.com/) version 2019b for Windows or later, plus the Statistics and Machine Learning Toolbox
-* The Gibbs SeaWater (GSW) Oceanographic [TEOS-10 toolbox](https://www.teos-10.org/software.htm) for Matlab, version 3.06, which also uses the Statistics and Machine Learning Toolbox
+* The Gibbs SeaWater (GSW) Oceanographic [TEOS-10 toolbox](https://www.teos-10.org/software.htm) for Matlab, version 3.06, which also uses the Statistics and Machine Learning Toolbox. It is not necessary to install an optimization solver; see the installation instructions in the [GSW Getting_Started document](https://www.teos-10.org/pubs/Getting_Started.pdf).
 
 ## Installation
 
 1. Install Matlab 2019b or later and the Statistics and Machine Learning Toolbox for Windows.
 
-2. Install the GSW TEOS-10 toolbox for Matlab and follow its instructions which will:
+2. Install the GSW TEOS-10 toolbox for Matlab (it is not necessary to install an optimization solver as noted above) and follow its instructions which will:
     * (a) add its folder to the Matlab PATH
     * (b) run the GSW check function test
     
