@@ -1,8 +1,13 @@
+title: 'mmp_toolbox: A MATLAB® toolbox for processing ocean data collected by McLane Moored Profilers'
+
+![Example figure.](figure.png)
+**Figure 1:** Washington Offshore Profiler Mooring (CE09OSPM) temperature (top left) and dissolved oxygen (bottom left) data collected during deployment 13 (July 2020 – March 2021) and processed using _mmp_toolbox_. The right panel shows a diagram of the Washington Offshore Profiler Mooring, including the McLane Moored Profiler that travels along a section of jacketed wire rope between approximately 40 and 500 meters depth.
+
 # Introduction
 
 mmp_toolbox is a code suite written to process profile data from McLane profilers deployed in the Ocean Observatories Initiative program. While these data are provided to the research community in near real-time at [OOINet](https://ooinet.oceanobservatories.org) and also from the [OOI Data Explorer](https://ooinet.oceanobservatories.org), the OOI does not provide profile data processed into integrated datasets taking into account the different instruments' time lags and depth offsets as would be required for fully featured physical and biogeochemical models as well as for synoptic visualization of the data in time and depth for data survey and quality assessment. Use of mmp_toolbox (informally radMMP) described here will result in easier access to the ever-increasing number of OOI MMP data sets, making them more available to a broader swath of the marine research community. For more about the OOI program, see the [Ocean Observatories](https://oceanobservatories.org) website. For mooring sites and instrumentation see https://bitbucket.org/ooicgsn/mmp_toolbox/src/master/.
 
-mmp_toolbox imports text data unpacked from binary files downloaded from the OOI Raw Data Archive. Utilities are provided for conveniently downloading the raw data files, instrumentation calibration files, and metadata  from OOI required for operatiopn of the mmp_toolbox itself.
+mmp_toolbox imports text data unpacked from binary files downloaded from the OOI Raw Data Archive. Utilities are provided for conveniently downloading the raw data files, instrumentation calibration files, and metadata  from OOI required for operation of the mmp_toolbox itself.
 
 # Dependencies
 
