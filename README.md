@@ -1,26 +1,22 @@
-![O2_shift_demo.bmp](/Getting_Started/O2_shift_demo.bmp)  
-
-The figure above shows one of the features of the mmp_toolbox: adjustable flow lags to remove vertical hysteresis occurring because profiling direction alternates between ascending and descending. These 18 profiles of oxygen data were measured using a SBE43 dissolved oxygen sensor plumbed inline after the temperature and conductivity sensors. Applying a shift of 10 seconds to earlier times pulls the ascending data records down and the descending data records up, thereby bringing the dissolved oxygen gradient between about 90-120 db (meters below the surface) into registration.
-
-# Getting Started
-
-## Introduction
+# Introduction
 
 mmp_toolbox is a code suite written to process profile data from McLane profilers deployed in the Ocean Observatories Initiative program. While these data are provided to the research community in near real-time at [OOINet](https://ooinet.oceanobservatories.org) and also from the [OOI Data Explorer](https://ooinet.oceanobservatories.org), the OOI does not provide profile data processed into integrated datasets taking into account the different instruments' time lags and depth offsets as would be required for fully featured physical and biogeochemical models as well as for synoptic visualization of the data in time and depth for data survey and quality assessment. Use of mmp_toolbox (informally radMMP) described here will result in easier access to the ever-increasing number of OOI MMP data sets, making them more available to a broader swath of the marine research community. For more about the OOI program, see the [Ocean Observatories](https://oceanobservatories.org) website. For mooring sites and instrumentation see https://bitbucket.org/ooicgsn/mmp_toolbox/src/master/.
 
-## Dependencies
+mmp_toolbox imports text data unpacked from binary files downloaded from the OOI Raw Data Archive. Utilities are provided for conveniently downloading the raw data files, instrumentation calibration files, and metadata  from OOI required for operatiopn of the mmp_toolbox itself.
 
-### Getting the binary OOI data
+# Dependencies
+
+## Getting the binary OOI data
 * [wget.exe, version 1.19.2, 32-bit:]( http://wget.addictivecode.org/FrequentlyAskedQuestions.html#download) or equivalent for use in Windows 10. Note that this wget version for Windows seems to be the most recent that successfully downloads all the raw profiler data without skipping files when used to request data from the [OOI Raw Data Archive]( https://oceanobservatories.org/data/raw-data-archive). This version can be downloaded as the binary wget.exe courtesy of Jernej Simončič and renamed to wget_1_19_2_32bit.exe to differentiate it from other versions.
 
-### Converting the binary OOI data into text for import into the mmp_toolbox
+## Converting the binary OOI data into text for import into the mmp_toolbox
 * [McLane Unpacker ver 3.10-3.12](https://mclanelabs.com/profile-unpacker). The binary 'C\*.DAT' (CTD), 'E\*.DAT' (engineering plus auxiliary sensors), and 'A\*.DAT' (currentmeter) data files downloaded in the wget call must be unpacked into text files for import into mmp_toolbox. Later Unpacker versions use a different output format when converting coastal 'A' files to text which are incompatible with the toolbox.
 
-### Using mmp_toolbox to process the OOI data
+## Using mmp_toolbox to process the OOI data
 * [Matlab](https://www.mathworks.com/) version 2019b for Windows or later, plus the Statistics and Machine Learning Toolbox
 * The Gibbs SeaWater (GSW) Oceanographic [TEOS-10 toolbox](https://www.teos-10.org/software.htm) for Matlab, version 3.06, which also uses the Statistics and Machine Learning Toolbox. It is not necessary to install an optimization solver; see the installation instructions in the [GSW Getting_Started document](https://www.teos-10.org/pubs/Getting_Started.pdf).
 
-## Installation
+# Installation
 
 1. Install Matlab 2019b or later and the Statistics and Machine Learning Toolbox for Windows.
 
@@ -42,21 +38,21 @@ mmp_toolbox is a code suite written to process profile data from McLane profiler
     * (b) check OS PATH by running `unpacker.exe` at a Windows command prompt. Verify version.
     * (c) check by running in Matlab the system command: `system('unpacker')`; Verify version.
     
-## Demonstration
+# Demonstration
 
 6. Select the dataset to be downloaded and processed, and, download the corresponding metadata needed for processing it. This requires knowledge of the 8-character site code name and deployment number which can be accessed on various OOI web pages, or, by running the toolbox utility getWFPmetadata.m as follows:  
   
 * (a)  `getWFPmetadata` with no arguments outputs a table of site codes, mooring names, and site locations (latitude and longitude):  
 
-![sitecodeScreenshotA.png](/Getting_Started/sitecodeScreenshotA.png)  
+![sitecodeScreenshotA.png](/sitecodeScreenshotA.png)  
 
 * (b)  `getWFPmetadata` with one argument, a sitecode name, lists the temporal coverages of each deployment number at the given site. Selecting the CE09OSPM site gives: 
 
-![sitecodeScreenshotB.png](/Getting_Started/sitecodeScreenshotB.png)
+![sitecodeScreenshotB.png](/sitecodeScreenshotB.png)
 
 * (c)  `getWFPmetadata` with two [or three] arguments (sitecode name, deployment number, [profiler location in water column]) will create a Matlab structure whose fields are populated with relevant metadata. At the deeper global sites (GA02HYPM, GP02HYPM, and GS02HYPM) two profilers are deployed to sample the 'upper' and 'lower' parts of the water column, thereby requiring the third input denoting profiler_coverage. To continue the demonstration, run from the Matlab command line:
 
-![sitecodeScreenshotC.png](/Getting_Started/sitecodeScreenshotC.png)
+![sitecodeScreenshotC.png](/sitecodeScreenshotC.png)
  
 In this sequence the data from the 4th deployment at the offshore WA site has been selected. The field values of structure info are required for further processing. Note that the mmp_toolbox code uses a hard-coded structure variable named 'meta', so that to avoid confusion 'meta' should not be used in the getWFPmetadata utility call.
     
@@ -125,7 +121,7 @@ This will automatically download the raw data into a local folder named 'binary'
     * `load(acmMatFilename)`  
     * `who`
 
-## Tests
+# Tests
 
 20. The values calculated in the MMP demonstration can be verified by checking against reference values by running:
     * bbcheck_MMP_L2_data(MMP)
@@ -134,20 +130,29 @@ This will automatically download the raw data into a local folder named 'binary'
 
 The values to be checked are plotted as blue 'x' characters, the check values are over-plotted as red circles, for example:
 
-![chlflrCheck.bmp](/Getting_Started/chlflrCheck.bmp)
+![chlflrCheck.bmp](/chlflrCheck.bmp)
 
-## Documentation
+# Features 
+
+![O2_shift_demo.bmp](/O2_shift_demo.bmp)  
+
+The figure above shows one of the features of the mmp_toolbox: adjustable flow lags to remove vertical hysteresis occurring because profiling direction alternates between ascending and descending. These 18 profiles of oxygen data were measured using a SBE43 dissolved oxygen sensor plumbed inline after the temperature and conductivity sensors. Applying a shift of 10 seconds to earlier times pulls the ascending data records down and the descending data records up, thereby bringing the dissolved oxygen gradient between about 90-120 db (meters below the surface) into registration.
+
+
+
+
+# Documentation
 
 Listing of what is documented, where.
 
-## Support / Bug Report
+# Support / Bug Report
 
 TBD
 
-## Contribute
+# Contribute
 
 TBD
 
-## To Cite
+# To Cite
 
 TBD
