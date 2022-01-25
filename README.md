@@ -32,14 +32,12 @@ mmp_toolbox is a code suite written to process raw profile data obtained from Mc
 | Inshore Profiler Mooring (CP03ISPM)   | 40.36202°N, 70.8785°W        | 90      | Nov 2017 - Present   |
 | Offshore Profiler Mooring (CP04OSPM)      | 39.9365°N, 70.8802°W       | 453   | Apr 2014 - Present      |
 
-**Table 1:** OOI Wire-Following Profiler names, site codes, mooring locations, water depths, and temporal coverage.<br>
-<br>
-<br>
- 
- ## Instrumentation
- 
+**Table 1:** OOI Wire-Following Profiler names, site codes, mooring locations, water depths, and temporal coverage.
+
+## Instrumentation
+
 ![MclaneProfilers.](McLaneProfilers.jpg)
-<br>
+
 **Figure 2:** Disposition of instruments on the global (left) and coastal (right) variants of the OOI McLane profilers.
 
 
