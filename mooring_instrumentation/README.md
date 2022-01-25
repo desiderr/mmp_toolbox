@@ -7,17 +7,17 @@ Since 2013 the National Science Foundation funded Ocean Observatories Initiative
 
 
 | **OOI Mooring Name<br>(Site Code)** | **Site Location** | **Water Depth<br>(meters)**     | **Temporal Coverage**      |
-| :---        | :----       | :---          | :---        | :----       |
+| :---        | :----       | :---          | :---        |
 | **Global Arrays**         |
 | Argentine Basin Profiler Mooring (GA02HYPM)   | 42.9781°S, 42.4957°W        | 5,200      | Mar 2015 – Jan 2018   |
 | Southern Ocean Profiler Mooring (GS02HYPM)      | 54.4693°S, 89.3191°W       | 4,800   | Feb 2015 - Dec 2017      |
 | Irminger Sea Profiler Mooring (GI02HYPM)   | 59.9695°N, 39.4886°W        | 2,800      | Sep 2014 - Present   |
 | Station Papa Profiler Mooring (GP02HYPM)      | 50.0796°N, 144.806°W       | 4,219   | Jul 2013 - Present      |
-|    |         |       |    |         |
-| **Coastal Endurance Array**      |        |    |       |        |
+|    |         |       |    |
+| **Coastal Endurance Array**      |        |    |       |
 | Washington Offshore Profiler Mooring (CE09OSPM)   | 46.8517°N, 124.982°W        | 540      | Apr 2014 - Present   |
-|       |        |  |       |        |
-| **Coastal Pioneer Array**   |         |       |    |         |
+|       |        |  |       |
+| **Coastal Pioneer Array**   |         |       |    |
 | Central Profiler Mooring (CP01CNPM)      | 40.1340°N, 70.7708°W       | 130   | Nov 2017 - Present      |
 | Central Inshore Profiler Mooring (CP02PMCI)   | 40.2267°N, 70.8782°W        | 127      | Apr 2014 - Present   |
 | Central Offshore Profiler Mooring (CP02PMCO)      | 40.0963°N, 70.8789°W       | 148   | Apr 2014 - Present      |
