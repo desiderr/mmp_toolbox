@@ -2,9 +2,10 @@
 ![Example figure.](figure.png)
 **Figure 1:** Washington Offshore Profiler Mooring (CE09OSPM) temperature (top left) and dissolved oxygen (bottom left) data collected during deployment 13 (July 2020 – March 2021) and processed using _mmp_toolbox_. The right panel shows a diagram of the Washington Offshore Profiler Mooring, including the McLane Moored Profiler that travels along a section of jacketed wire rope between approximately 40 and 500 meters depth.
 
-
-Since 2013 the National Science Foundation funded Ocean Observatories Initiative (OOI) has operated and maintained a vast, integrated network of oceanographic platforms and sensors that measure biological, chemical, geological, and physical properties across a range of spatial and temporal scales [@Trowbridge:2019]. This network includes four high-latitude, “global scale” arrays deployed southwest of Chile at 55oS, in the Argentine Basin, central north Pacific at Station Papa, and the Irminger Sea off Greenland. The “coastal scale” Endurance and Pioneer arrays are situated in the northeast Pacific off Oregon and Washington, and off the coast of New England about 140 km south of Martha’s Vineyard, respectively. All coastal and global arrays include moorings, mobile platforms (gliders or autonomous underwater vehicles), and profilers. Wire-Following Profiler (WFP) moorings (Table 1) include at least one McLane® Moored Profiler (MMP) [@Morrison:2000]. Traveling vertically along a section of jacketed wire rope at approximately 25 cm/s, MMPs carry low-power instrumentation that measures physical, chemical, biochemical, and optical ocean properties. To date, the OOI has deployed more than thirty global WFP moorings, about 100 coastal WFP moorings, and collected over 150,000 profiles. While these data are provided to investigators and research communities in near real-time at https://ooinet.oceanobservatories.org, the OOI does not provide post-processed profile data that have, for example, been adjusted for thermal-lag, flow, and sensor time constant effects and binned to a common depth record.
-
+<br>
+<br>
+Since 2013 the National Science Foundation funded Ocean Observatories Initiative (OOI) has operated and maintained a vast, integrated network of oceanographic platforms and sensors that measure biological, chemical, geological, and physical properties across a range of spatial and temporal scales [@Trowbridge:2019]. This network includes four high-latitude, “global scale” arrays deployed southwest of Chile at 55oS, in the Argentine Basin, central north Pacific at Station Papa, and the Irminger Sea off Greenland. The “coastal scale” Endurance and Pioneer arrays are situated in the northeast Pacific off Oregon and Washington, and off the coast of New England about 140 km south of Martha’s Vineyard, respectively. All coastal and global arrays include moorings, mobile platforms (gliders or autonomous underwater vehicles), and profilers. Wire-Following Profiler (WFP) moorings (Table 1) include at least one McLane® Moored Profiler (MMP) [@Morrison:2000]. Traveling vertically along a section of jacketed wire rope at approximately 25 cm/s, MMPs carry low-power instrumentation that measures physical, chemical, biochemical, and optical ocean properties. To date, the OOI has deployed more than thirty global WFP moorings, about 100 coastal WFP moorings, and collected over 150,000 profiles. While these data are provided to investigators and research communities in near real-time at https://ooinet.oceanobservatories.org, the OOI does not provide post-processed profile data that have, for example, been adjusted for thermal-lag, flow, and sensor time constant effects.
+<br>
 
 | **OOI Mooring Name<br>(Site Code)** | **Site Location** | **Water Depth<br>(meters)**     | **Temporal Coverage**      |
 | :---        | :----       | :---          | :---        |
@@ -27,17 +28,13 @@ Since 2013 the National Science Foundation funded Ocean Observatories Initiative
 | Offshore Profiler Mooring (CP04OSPM)      | 39.9365°N, 70.8802°W       | 453   | Apr 2014 - Present      |
 
 **Table 1:** OOI Wire-Following Profiler names, site codes, mooring locations, water depths, and temporal coverage.<br>
-
+<br>
+<br>
  
 ![MclaneProfilers.](McLaneProfilers.jpg)
 <br>
 **Figure 2:** Disposition of instruments on the global (left) and coastal (right) variants of the OOI McLane profilers.
 
-### Global OOI MMP sites
-* GA02HYPM (**G**lobal **A**rgentine Basin)
-* GI02HYPM (**G**lobal **I**rminger)
-* GP02HYPM (**G**lobal Station **P**apa)
-* GS02HYPM (**G**lobal **S**outhern Ocean)
 
 ### Global OOI MMP Instrumentation
 * Seabird SBE52MP CTD (CTDPF-L)
@@ -45,16 +42,6 @@ Since 2013 the National Science Foundation funded Ocean Observatories Initiative
 * Seabird\WETLabs FLBBRTD backscatter\fluorometer (FLORD-L)
 * Falmouth Scientific profiling acoustic current meter (VEL3D-L)
 
-
-### Coastal OOI MMP sites
-* CE09OSPM (**C**oastal **E**ndurance)
-* CP01CNPM (**C**oastal **P**ioneer)
-* CP02PMCI 
-* CP02PMCO
-* CP02PMUI 
-* CP02PMUO 
-* CP03ISPM 
-* CP04OSPM 
 
 ### Coastal OOI MMP Instrumentation
 * Seabird SBE52MP CTD (CTDPF-K)
