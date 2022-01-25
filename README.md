@@ -5,12 +5,13 @@
 
 # Introduction
 
-mmp_toolbox is a code suite written to process profile data from McLane profilers deployed in the Ocean Observatories Initiative program. While these data are provided to the research community in near real-time at [OOINet](https://ooinet.oceanobservatories.org) and also from the [OOI Data Explorer](https://ooinet.oceanobservatories.org), the OOI does not provide profile data processed into integrated datasets taking into account the different instruments' time lags and depth offsets as would be required for fully featured physical and biogeochemical models as well as for synoptic visualization of the data in time and depth for data survey and quality assessment. Use of mmp_toolbox (informally radMMP) described here will result in easier access to the ever-increasing number of OOI MMP data sets, making them more available to a broader swath of the marine research community. For more about the OOI program in general, see the [Ocean Observatories](https://oceanobservatories.org) website.
+Since 2013 the National Science Foundation funded [Ocean Observatories Initiative (OOI)](https://oceanobservatories.org) has operated and maintained a vast, integrated network of oceanographic platforms and sensors that measure biological, chemical, geological, and physical properties across a range of spatial and temporal scales [@Trowbridge:2019]. This network includes four high-latitude, “global scale” arrays deployed southwest of Chile at 55oS, in the Argentine Basin, central north Pacific at Station Papa, and the Irminger Sea off Greenland. The “coastal scale” Endurance and Pioneer arrays are situated in the northeast Pacific off Oregon and Washington, and off the coast of New England about 140 km south of Martha’s Vineyard, respectively. All coastal and global arrays include moorings, mobile platforms (gliders or autonomous underwater vehicles), and profilers. Wire-Following Profiler (WFP) moorings (Table 1) include at least one McLane® Moored Profiler (MMP) [@Morrison:2000]. Traveling vertically along a section of jacketed wire rope at approximately 25 cm/s, MMPs carry low-power instruments that measure physical, chemical, biochemical, and optical ocean properties. To date, the OOI has deployed more than thirty global WFP moorings, about 100 coastal WFP moorings, and collected over 150,000 profiles. While these data are provided to investigators and research communities in near real-time at [OOINet](https://ooinet.oceanobservatories.org) and also more recently from the [OOI Data Explorer](https://dataexplorer.oceanobservatories.org), the OOI does not provide post-processed profile data that have, for example, been adjusted for thermal-lag, flow, sensor time constant effects, and mounting posistions of the instruments to take into account the full vertical profiling resolution of the profiler (0.25 m/s at a data acquisition rate of 1 Hz).
 
-<br>
-Since 2013 the National Science Foundation funded Ocean Observatories Initiative (OOI) has operated and maintained a vast, integrated network of oceanographic platforms and sensors that measure biological, chemical, geological, and physical properties across a range of spatial and temporal scales [@Trowbridge:2019]. This network includes four high-latitude, “global scale” arrays deployed southwest of Chile at 55oS, in the Argentine Basin, central north Pacific at Station Papa, and the Irminger Sea off Greenland. The “coastal scale” Endurance and Pioneer arrays are situated in the northeast Pacific off Oregon and Washington, and off the coast of New England about 140 km south of Martha’s Vineyard, respectively. All coastal and global arrays include moorings, mobile platforms (gliders or autonomous underwater vehicles), and profilers. Wire-Following Profiler (WFP) moorings (Table 1) include at least one McLane® Moored Profiler (MMP) [@Morrison:2000]. Traveling vertically along a section of jacketed wire rope at approximately 25 cm/s, MMPs carry low-power instrumentation that measures physical, chemical, biochemical, and optical ocean properties. To date, the OOI has deployed more than thirty global WFP moorings, about 100 coastal WFP moorings, and collected over 150,000 profiles. While these data are provided to investigators and research communities in near real-time at https://ooinet.oceanobservatories.org, the OOI does not provide post-processed profile data that have, for example, been adjusted for thermal-lag, flow, and sensor time constant effects.
-<br>
+mmp_toolbox is a code suite written to process raw profile data obtained from McLane profilers and does allow the user to make the adjustments listed above. Use of mmp_toolbox (informally radMMP) described here will result in easier access to the ever-increasing number of OOI MMP data sets, making them more available to a broader swath of the marine research community.
 
+
+## Moorings
+<br>
 | **OOI Mooring Name<br>(Site Code)** | **Site Location** | **Water Depth<br>(meters)**     | **Temporal Coverage**      |
 | :---        | :----       | :---          | :---        |
 | **Global Arrays**         |
@@ -35,6 +36,8 @@ Since 2013 the National Science Foundation funded Ocean Observatories Initiative
 <br>
 <br>
  
+ ## Instrumentation
+ 
 ![MclaneProfilers.](McLaneProfilers.jpg)
 <br>
 **Figure 2:** Disposition of instruments on the global (left) and coastal (right) variants of the OOI McLane profilers.
@@ -54,7 +57,7 @@ Since 2013 the National Science Foundation funded Ocean Observatories Initiative
 * Biospherical QSP-2200 PAR sensor (PARAD-K)
 * Nortek AD2CP acoustic current meter (custom) (VEL3D-K)
 
-**mmp_toolbox imports text data unpacked from binary files downloaded from the OOI Raw Data Archive. Utilities are provided to conveniently download the raw data files, instrumentation calibration files, and metadata from OOI required for operation of the mmp_toolbox itself.**
+**mmp_toolbox imports text data unpacked from binary files downloaded from the OOI Raw Data Archive. The toolbox contains utilities to make it easy to download these raw data files, instrumentation calibration files, and metadata from OOI required by the profile data processing routines of the toolbox.*
 
 # Dependencies
 
