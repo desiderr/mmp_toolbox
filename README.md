@@ -157,7 +157,9 @@ This will automatically download the raw data into a local folder named 'binary'
     The processing output files will reside in this directory.
     
 16. Use mmp_toolbox to: Process the CTD and ENG profiler data
-    * `[MMP, mmpMatFilename] = Process_OOI_McLane_CTDENG_Deployment(metafilename);`
+    * `[MMP, mmpMatFilename] = Process_OOI_McLane_CTDENG_Deployment(metafilename);`  
+	  
+	*  The output variable MMP is a scalar structure containing pressure binned processed data (L2), unbinned processed data (L1) in nan-padded arrays, and flattened unprocessed data (L0) in column vectors, all of which can be plotted in pseudocolor plots against time and pressure.  
 
 17. Use mmp_toolbox utilities to: Run plotting routines to visualize the data.
     * `bbplot_MMP_L2_data(MMP, 'time');`  
@@ -168,11 +170,15 @@ This will automatically download the raw data into a local folder named 'binary'
     For coastal deployments (for example, the demo):  
     * `[ACM, acmMatFilename] = Process_McLane_AD2CP_Deployment('import_and_process', mmpMatFilename);`  
     For global deployments:  
-    * `[ACM, acmMatFilename] = Process_McLane_FSIACM_Deployment('import_and_process', mmpMatFilename);`
+    * `[ACM, acmMatFilename] = Process_McLane_FSIACM_Deployment('import_and_process', mmpMatFilename);`  
+	  
+	ACM is a scalar structure containing binned processed velocity data (L2) which can be plotted in pseudocolor plots against time and pressure.  
 
 19. Load the supplementary data products into the workspace:  
     * `load(mmpMatFilename)`  
+	This saved matfile will contain MMP and additional data products: structure arrays for each instrument and for each level of processing indexed by profile number, containing code history and code actions.
     * `load(acmMatFilename)`  
+	This saved matfile will contain 3 scalar data structures (L2: binned processed data (ACM); L1: nan-padded arrays of processed data; L0: nan-padded arrays of unprocessed data) and data structure arrays indexed by profile number for 3 levels of processing containing code history and code actions.  
     * `who`
 
 # Tests
