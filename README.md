@@ -192,19 +192,19 @@ The values to be checked are plotted as blue 'x' characters, the check values ar
 
 The figure above shows one of the features of the mmp_toolbox: adjustable flow lags to remove vertical hysteresis occurring because profiling direction alternates between ascending and descending. These 18 profiles of oxygen data were measured using a SBE43 dissolved oxygen sensor plumbed inline after the temperature and conductivity sensors. Applying a shift of 10 seconds to earlier times pulls the ascending data records down and the descending data records up, thereby bringing the dissolved oxygen gradient between about 90-120 db (meters below the surface) into registration.
 
-  * (a) processing starts at level of raw data
+  * (a) processing starts at level of raw data  
   * (b) any set of profiles expressible as a matlab vector can be specified to be processed  
   * (c) profile quality discriminators are adjustable (too few points or not large enough profiling range)  
   * (d) processing is done in parallel, so that at any intermediate step in the processing the entire dataset can easily made to be available for inspection through the instrument structure array variables.  
   * (e) the instrument structure array variables contain their processing history  
   * (f) processing parameters can be easily changed by editing the plain text metadata file.  
-        * depth offsets due to mounting distance from pressure sensor  
-		* smoothing constants  
-		* flow lags  
-		* depth binning parameters  
-		* magnetic declination (currentmeter)
-  * (g) backtrack processing options (for when the profiler gets stuck and yo-yos)..
-  * (h) because the ACM processing is divorced from the CTD-ENG processing, this toobox can process non-OOI McLane data using the OOI choice for CTD as long as the calibration files are put into the OOI format. 
+          * depth offsets due to mounting distance from pressure sensor  
+          * smoothing constants  
+          * flow lags  
+          * depth binning parameters  
+          * magnetic declination (currentmeter)  
+  * (g) backtrack processing options (for when the profiler gets stuck and yo-yos)  
+  * (h) because the ACM processing is divorced from the CTD-ENG processing, this toobox can process non-OOI McLane data using the OOI choice for CTD as long as the calibration files are put into the OOI format.  
 
 # Documentation
 
