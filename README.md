@@ -157,7 +157,9 @@ This will automatically download the raw data into a local folder named 'binary'
     The processing output files will reside in this directory.
     
 16. Use mmp_toolbox to: Process the CTD and ENG profiler data
-    * `[MMP, mmpMatFilename] = Process_OOI_McLane_CTDENG_Deployment(metafilename);`
+    * `[MMP, mmpMatFilename] = Process_OOI_McLane_CTDENG_Deployment(metafilename);`  
+	  
+	The output variable MMP is a scalar structure containing pressure binned processed data (L2), unbinned processed data (L1) in nan-padded arrays, and flattened unprocessed data (L0) in column vectors, all of which can be plotted in pseudocolor plots against time and pressure.  
 
 17. Use mmp_toolbox utilities to: Run plotting routines to visualize the data.
     * `bbplot_MMP_L2_data(MMP, 'time');`  
@@ -168,11 +170,15 @@ This will automatically download the raw data into a local folder named 'binary'
     For coastal deployments (for example, the demo):  
     * `[ACM, acmMatFilename] = Process_McLane_AD2CP_Deployment('import_and_process', mmpMatFilename);`  
     For global deployments:  
-    * `[ACM, acmMatFilename] = Process_McLane_FSIACM_Deployment('import_and_process', mmpMatFilename);`
+    * `[ACM, acmMatFilename] = Process_McLane_FSIACM_Deployment('import_and_process', mmpMatFilename);`  
+	  
+	ACM is a scalar structure containing binned processed velocity data (L2) which can be plotted in pseudocolor plots against time and pressure.  
 
 19. Load the supplementary data products into the workspace:  
     * `load(mmpMatFilename)`  
+	This saved matfile will contain MMP and additional data products: structure arrays for each instrument and for each level of processing indexed by profile number, containing code history and code actions.  
     * `load(acmMatFilename)`  
+	This saved matfile will contain 3 scalar data structures (L2: binned processed data (ACM); L1: nan-padded arrays of processed data; L0: nan-padded arrays of unprocessed data) and data structure arrays indexed by profile number for 3 levels of processing containing code history and code actions.  
     * `who`
 
 # Tests
@@ -188,23 +194,28 @@ The values to be checked are plotted as blue 'x' characters, the check values ar
 
 # Features 
 
+  * (a) processing flow starts at raw data so that there are no hidden steps  
+  * (b) toolbox will import files regardless of unpacker selection of delimiter or headers
+  * (c) any set of profiles expressible as a matlab vector can be specified to be processed  
+  * (d) profile quality discriminators are adjustable (if a profile has too few time points or too small of a depth range it will be Nan'd out)  
+  * (e) processing is done in parallel, so that at any intermediate step in the processing the entire dataset can easily made to be available for inspection through the instrument structure array variables.  
+  * (f) the instrument structure array variables contain their processing history  
+  * (g) processing parameters can be easily changed by editing the plain text metadata file:  
+          * (1) depth offsets due to mounting distance from pressure sensor  
+          * (2) smoothing filter time constants  
+          * (3) flow lags  
+          * (4) depth binning parameters  
+          * (5) magnetic declination (for currentmeter data analysis)  
+  * (h) backtrack processing options (for when the profiler gets stuck and yo-yos during a profile)  
+          * (1) flag entire profile as bad  
+          * (2) flag as bad from 1 minute before 1st backtrack is detected to end of profile  
+		  * (3) flag as bad only those sections where backtrack is signalled
+  * (i) because the CTD-ENG processing is separated from ACM processing, CTD-ENG data can be processed without specifying ACM processing settings  
+
+
 ![O2_shift_demo.bmp](/O2_shift_demo.bmp)  
 
-The figure above shows one of the features of the mmp_toolbox: adjustable flow lags to remove vertical hysteresis occurring because profiling direction alternates between ascending and descending. These 18 profiles of oxygen data were measured using a SBE43 dissolved oxygen sensor plumbed inline after the temperature and conductivity sensors. Applying a shift of 10 seconds to earlier times pulls the ascending data records down and the descending data records up, thereby bringing the dissolved oxygen gradient between about 90-120 db (meters below the surface) into registration.
-
-  * (a) processing starts at level of raw data  
-  * (b) any set of profiles expressible as a matlab vector can be specified to be processed  
-  * (c) profile quality discriminators are adjustable (too few points or not large enough profiling range)  
-  * (d) processing is done in parallel, so that at any intermediate step in the processing the entire dataset can easily made to be available for inspection through the instrument structure array variables.  
-  * (e) the instrument structure array variables contain their processing history  
-  * (f) processing parameters can be easily changed by editing the plain text metadata file.  
-          * depth offsets due to mounting distance from pressure sensor  
-          * smoothing constants  
-          * flow lags  
-          * depth binning parameters  
-          * magnetic declination (currentmeter)  
-  * (g) backtrack processing options (for when the profiler gets stuck and yo-yos)  
-  * (h) because the ACM processing is divorced from the CTD-ENG processing, this toobox can process non-OOI McLane data using the OOI choice for CTD as long as the calibration files are put into the OOI format.  
+The figure above shows one of the features of the mmp_toolbox: adjustable flow lags to remove vertical hysteresis occurring because profiling direction alternates between ascending and descending. These 18 profiles of oxygen data were measured using a SBE43 dissolved oxygen sensor plumbed inline after the temperature and conductivity sensors. Applying a shift of 10 seconds to earlier times pulls the ascending data records down and the descending data records up, thereby bringing the dissolved oxygen gradient between about 90-120 db (meters below the surface) into registration.  
 
 # Documentation
 
