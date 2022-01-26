@@ -188,26 +188,28 @@ The values to be checked are plotted as blue 'x' characters, the check values ar
 
 # Features 
 
-![O2_shift_demo.bmp](/O2_shift_demo.bmp)  
-
-The figure above shows one of the features of the mmp_toolbox: adjustable flow lags to remove vertical hysteresis occurring because profiling direction alternates between ascending and descending. These 18 profiles of oxygen data were measured using a SBE43 dissolved oxygen sensor plumbed inline after the temperature and conductivity sensors. Applying a shift of 10 seconds to earlier times pulls the ascending data records down and the descending data records up, thereby bringing the dissolved oxygen gradient between about 90-120 db (meters below the surface) into registration.
-
-  * (a) processing starts at raw data so that there are no hidden steps  
-  * (b) any set of profiles expressible as a matlab vector can be specified to be processed  
-  * (c) profile quality discriminators are adjustable (if a profile has too few time points or too small of a depth range it will be Nan'd out)  
-  * (d) processing is done in parallel, so that at any intermediate step in the processing the entire dataset can easily made to be available for inspection through the instrument structure array variables.  
-  * (e) the instrument structure array variables contain their processing history  
-  * (f) processing parameters can be easily changed by editing the plain text metadata file:  
-          * depth offsets due to mounting distance from pressure sensor  
-          * smoothing filter time constants  
-          * flow lags  
-          * depth binning parameters  
-          * magnetic declination (for currentmeter data analysis)  
-  * (g) backtrack processing options (for when the profiler gets stuck and yo-yos during a profile)  
+  * (a) processing flow starts at raw data so that there are no hidden steps  
+  * (b) toolbox will import files regardless of unpacker selection of delimiter or headers
+  * (c) any set of profiles expressible as a matlab vector can be specified to be processed  
+  * (d) profile quality discriminators are adjustable (if a profile has too few time points or too small of a depth range it will be Nan'd out)  
+  * (e) processing is done in parallel, so that at any intermediate step in the processing the entire dataset can easily made to be available for inspection through the instrument structure array variables.  
+  * (f) the instrument structure array variables contain their processing history  
+  * (g) processing parameters can be easily changed by editing the plain text metadata file:  
+          * (1) depth offsets due to mounting distance from pressure sensor  
+          * (2) smoothing filter time constants  
+          * (3) flow lags  
+          * (4) depth binning parameters  
+          * (5) magnetic declination (for currentmeter data analysis)  
+  * (h) backtrack processing options (for when the profiler gets stuck and yo-yos during a profile)  
           * (1) flag entire profile as bad  
           * (2) flag as bad from 1 minute before 1st backtrack is detected to end of profile  
 		  * (3) flag as bad only those sections where backtrack is signalled
-  * (h) because the CTD-ENG processing is separated from ACM processing, CTD-ENG data can be processed without specifying ACM processing settings  
+  * (i) because the CTD-ENG processing is separated from ACM processing, CTD-ENG data can be processed without specifying ACM processing settings  
+
+
+![O2_shift_demo.bmp](/O2_shift_demo.bmp)  
+
+The figure above shows one of the features of the mmp_toolbox: adjustable flow lags to remove vertical hysteresis occurring because profiling direction alternates between ascending and descending. These 18 profiles of oxygen data were measured using a SBE43 dissolved oxygen sensor plumbed inline after the temperature and conductivity sensors. Applying a shift of 10 seconds to earlier times pulls the ascending data records down and the descending data records up, thereby bringing the dissolved oxygen gradient between about 90-120 db (meters below the surface) into registration.  
 
 # Documentation
 
