@@ -84,17 +84,17 @@ mmp_toolbox is a code suite written to process raw profile data obtained from Mc
     
 4. Install [wget_1_19_2_32bit.exe](https://eternallybored.org/misc/wget/):
     * (a) set the operating system PATH to include the folder containing it  
-    * (b) check OS path by running `wget_1_19_2_32bit.exe -h` at a Windows command prompt  
-    * (c) check by running in Matlab the system command: `system('wget_1_19_2_32bit.exe -h')`;
+    * (b) check OS path by running `wget_1_19_2_32bit.exe -h` at a **Windows** command prompt  
+    * (c) check by running in the **Matlab** command window the command: `system('wget_1_19_2_32bit.exe -h')`;
     
 5. Install [McLane Unpacker ver 3.10-3.12](https://mclanelabs.com/profile-unpacker):
     * (a) set the operating system PATH to include the folder containing unpacker.exe
-    * (b) check OS PATH by running `unpacker.exe` at a Windows command prompt. Verify version.
-    * (c) check by running in Matlab the system command: `system('unpacker')`; Verify version.
+    * (b) check OS PATH by running `unpacker.exe` at a **Windows** command prompt. Verify version.
+    * (c) check by running in the **Matlab** command window the command: `system('unpacker')`; Verify version.
     
 # Demonstration
 
-6. Select the dataset to be downloaded and processed, and, download the corresponding metadata needed for processing it. This requires knowledge of the 8-character site code name and deployment number which can be accessed on various OOI web pages, or, by running the toolbox utility getWFPmetadata.m as follows:  
+6. Select the dataset to be downloaded and processed, and, download the corresponding metadata needed for processing it. This requires knowledge of the 8-character site code name and deployment number which can be accessed on various OOI web pages, or, by running the toolbox utility getWFPmetadata.m as described below. For demonstration purposes and for data checks deployment 4 of CE09OSPM is selected:  
   
 * (a)  `getWFPmetadata` with no arguments outputs a table of site codes, mooring names, and site locations (latitude and longitude):  
 
@@ -110,9 +110,9 @@ mmp_toolbox is a code suite written to process raw profile data obtained from Mc
  
 In this sequence the data from the 4th deployment at the offshore WA site has been selected. The field values of structure info are required for further processing. Note that the mmp_toolbox code uses a hard-coded structure variable named 'meta', so that to avoid confusion 'meta' should not be used in the getWFPmetadata utility call.
     
-7. If desired change the local Matlab working directory. The next utility in this demonstration will create a folder named 'OOI_WFP' underneath the working directory for file organization and path standardization based on the sitecode and deployment number so that this demonstration sequence can be run as often as desired with all OOI datasets without having to deal with ambiguous folder names. An added feature is that the OOI_WFP folder  will contain all the dataset folders so that the entire folder tree can be moved as a unit to another location.
+7. If desired change the local Matlab working directory. The next utility in this demonstration will create a folder named 'OOI_WFP' underneath the working directory for file organization and path standardization based on the sitecode and deployment number so that this demonstration sequence can be run as often as desired with any and all OOI datasets, each of which will be associated with unique folder paths. An added feature is that the OOI_WFP folder will contain all the dataset folders so that the entire folder tree can be moved as a unit to another location.
 
-8. Run the setUpFolderStructure.m utility to construct a folder tree to organize files. The names of the folders created can be seen by typing `info` (return) after running the utility.  
+8. Run the setUpFolderStructure.m utility to construct a folder tree to organize files. The names of the folders created can be seen by typing `info <CR>` after running the utility.  
     * `info = setUpFolderStructure(info);`
 
 9. Retrieve the appropriate calibration files for the instruments that require them:  
@@ -135,7 +135,7 @@ To download the test/demo dataset, execute from the Matlab command line:
 This will automatically download the raw data into a local folder named 'binary' underneath folders codenamed according to the site and deployment.  
 
 12. To unpack the data using the McLane Unpacker installed in step 5:
-    * (a) type `info, return` in the command window to display the info fields containing the names of the binary and unpacked data folders.
+    * (a) type `info <CR>` in the command window to display the info fields containing the names of the binary and unpacked data folders.
     * (b) `system('unpacker');` The unpacker screen will be spawned. Change the settings to:
     * (c) Source Folder: browse to the folder specified by info.binary_data_folder, highlight it and click OK.
     * (d) Destination Folder: browse to the folder specified by info.unpacked_data_folder, highlight it and click OK.
@@ -178,9 +178,9 @@ This will automatically download the raw data into a local folder named 'binary'
 # Tests
 
 20. The values calculated in the MMP demonstration can be verified by checking against reference values by running:
-    * bbcheck_MMP_L2_data(MMP)
-    * bbcheck_MMP_L1_data(MMP)
-    * bbcheck_MMP_L0_data(MMP)
+    * `bbcheck_MMP_L2_data(MMP)`
+    * `bbcheck_MMP_L1_data(MMP)`
+    * `bbcheck_MMP_L0_data(MMP)`
 
 The values to be checked are plotted as blue 'x' characters, the check values are over-plotted as red circles, for example:
 
@@ -192,12 +192,31 @@ The values to be checked are plotted as blue 'x' characters, the check values ar
 
 The figure above shows one of the features of the mmp_toolbox: adjustable flow lags to remove vertical hysteresis occurring because profiling direction alternates between ascending and descending. These 18 profiles of oxygen data were measured using a SBE43 dissolved oxygen sensor plumbed inline after the temperature and conductivity sensors. Applying a shift of 10 seconds to earlier times pulls the ascending data records down and the descending data records up, thereby bringing the dissolved oxygen gradient between about 90-120 db (meters below the surface) into registration.
 
-
-
+  * (a) processing starts at level of raw data
+  * (b) any set of profiles expressible as a matlab vector can be specified to be processed  
+  * (c) profile quality discriminators are adjustable (too few points or not large enough profiling range)  
+  * (d) processing is done in parallel, so that at any intermediate step in the processing the entire dataset can easily made to be available for inspection through the instrument structure array variables.  
+  * (e) the instrument structure array variables contain their processing history  
+  * (f) processing parameters can be easily changed by editing the plain text metadata file.  
+        * depth offsets due to mounting distance from pressure sensor  
+		* smoothing constants  
+		* flow lags  
+		* depth binning parameters  
+		* magnetic declination (currentmeter)
+  * (g) backtrack processing options (for when the profiler gets stuck and yo-yos)..
+  * (h) because the ACM processing is divorced from the CTD-ENG processing, this toobox can process non-OOI McLane data using the OOI choice for CTD as long as the calibration files are put into the OOI format. 
 
 # Documentation
 
-Listing of what is documented, where.
+need a How It Works section:  
+  * CTD(time) from E, ACM(pr) from CTD(time)  
+  * QA/QC procedure:  
+        * 1st run is as demo using meta data template  
+		* for subsequent runs edit metadata text file created by demo 
+		
+Need readmes for individual folders eg metatext templates
+
+Function documentation can be found by executing  `doc function_name`  in the Matlab command window. Feature documentation can be found by executing  `type metadata_template_XXXXXXXX.txt`  in the Matlab command window, where XXXXXXXX represents any sitecode designation (upper case).
 
 # Support / Bug Report
 
