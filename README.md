@@ -235,7 +235,7 @@ There are (at least) 3 levels of extensibility to the toolbox.
 
   * (1) Operation on non-OOI datasets; see the **Extensibility** folder Readme.  
   * (2) Addition of primary processing functions to the toolbox (same class as smoothing operations).  
-  *.(3) Adding utilities and plotting routines.
+  * (3) Adding utilities and plotting routines.
 
 # Support / Bug Report
 
