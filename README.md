@@ -110,7 +110,7 @@ mmp_toolbox is a code suite written to process raw profile data obtained from Mc
  
 In this sequence the data from the 4th deployment at the offshore WA site has been selected. The field values of structure info are required for further processing. Note that the mmp_toolbox code uses a hard-coded structure variable named 'meta', so that to avoid confusion 'meta' should not be used in the getWFPmetadata utility call.
     
-7. If desired change the local Matlab working directory. The next utility in this demonstration will create a folder named 'OOI_WFP' underneath the working directory for file organization and path standardization based on the sitecode and deployment number so that this demonstration sequence can be run as often as desired with any and all OOI datasets, each of which will be associated with unique folder paths. An added feature is that the OOI_WFP folder will contain all the dataset folders so that the entire folder tree can be moved as a unit to another location.
+7. If desired change the local Matlab working directory. The next utility in this demonstration will create a folder named 'OOI_WFP' underneath the working directory for file organization and path standardization based on the sitecode and deployment number so that this demonstration sequence can be run as often as desired with any and all OOI datasets, each of which will be associated with unique folder paths, as long as the the local working directory is always the same. An added feature is that the OOI_WFP folder will contain all the dataset folders so that the entire folder tree can be moved as a unit to another location.
 
 8. Run the setUpFolderStructure.m utility to construct a folder tree to organize files. The names of the folders created can be seen by typing `info <CR>` after running the utility.  
     * `info = setUpFolderStructure(info);`
@@ -211,6 +211,10 @@ The values to be checked are plotted as blue 'x' characters, the check values ar
           * (2) flag as bad from 1 minute before 1st backtrack is detected to end of profile  
 		  * (3) flag as bad only those sections where backtrack is signalled
   * (i) because the CTD-ENG processing is decoupled from ACM processing, CTD-ENG data can be processed without specifying ACM processing settings  
+  * (j) the coastal ACM data is (normally) acquired at 2 Hz, but the corresponding heading values update at 1 Hz; toolbox processing interpolates heading to 2 Hz.  
+  * (k) the global ACM data is (normally) acquired at 2 Hz, but the corresponding timestamps update at 1 Hz; toolbox processing assigns fractional seconds to the ACM time record.  
+  * (l) "wag" and profiler velocity corrections to the ACM velocity records are calculated.  
+  
 
 The figure below demonstrates one of the features of the mmp_toolbox: adjustable flow lags to remove vertical hysteresis occurring because profiling direction alternates between ascending and descending. These 18 profiles of oxygen data were measured using a SBE43 dissolved oxygen sensor plumbed inline after the temperature and conductivity sensors. Applying a shift of 10 seconds to earlier times pulls the ascending data records down and the descending data records up, thereby bringing the dissolved oxygen gradient between about 90-120 db (meters below the surface) into registration.  
 
@@ -219,15 +223,19 @@ The figure below demonstrates one of the features of the mmp_toolbox: adjustable
 
 # Documentation
 
-need a How It Works section:  
-  * CTD(time) from E, ACM(pr) from CTD(time)  
-  * QA/QC procedure:  
-        * 1st run is as demo using meta data template  
-		* for subsequent runs edit metadata text file created by demo 
-		
-Need readmes for individual folders eg metatext templates
+The complete process of downloading raw data all the way to plotting processed data has been detailed in this readme.md file. To process a different dataset make the appropriate selection in step 6. To change the processing parameters for a given dataset, edit the corresponding metadata.txt file created in step 14; see the readme in folder **metadata_file_templates** for more details.  
 
-Function documentation can be found by executing  `doc function_name`  in the Matlab command window. Feature documentation can be found by executing  `type metadata_template_XXXXXXXX.txt`  in the Matlab command window, where XXXXXXXX represents any sitecode designation (upper case).
+Documentation as to how the toolbox works is given in the readme to the **code** folder and its subfolders.  
+
+Documentation to any toolbox function can be accessed in the Matlab command window by executing `doc [functionName]`.
+
+# Extensibility (or name this Contribute?)
+
+There are (at least) 3 levels of extensibility to the toolbox.
+
+  * (1) Operation on non-OOI datasets; see the **Extensibility** folder Readme.  
+  * (2) Addition of primary processing functions to the toolbox (same class as smoothing operations).  
+  *.(3) Adding utilities and plotting routines.
 
 # Support / Bug Report
 
