@@ -1,0 +1,34 @@
+Unpacker Version 3.10
+  Source Folder = R:\global_filetypes\binary
+  Destination Folder = R:\global_filetypes\unpacked
+  Unpacking Profiler Firmware Version 5.00 & above
+  Unpacking Options:
+  Unpacking Smart EFile for Profiler V4.40+Files (expecting 2 files containing 2 profiles)
+  Unpacking SEABIRD 52MP CTDFiles (expecting 2 files containing 2 profiles)
+  Unpacking FSI 3D ACMFiles (expecting 2 files containing 2 profiles)
+    Note - actually detected 4 FSI 3D ACM files -- more than expected!
+  No Inductive Charger in configuration - skipping files
+  No Satlantic SUNA in configuration - skipping any SUNA files
+  No BioSuite in configuration - skipping any BioSuite files
+  No Motion Pack in configuration - skipping any Motion Pack files
+  No Wetlabs Cstar in configuration - skipping any Cstar files
+  Skipping any FluoroProbe Files
+  Skipping any ProOceanus CO2 Files
+  Skipping any ProOceanus Methane Files
+  Output file is space padded
+
+
+Unpack started at 1/27/2022 3:33:54 PM
+
+  Unpacking E0000001.DAT
+  Unpacking E0000002.DAT
+  Unpacking C0000001.DAT
+  Unpacking C0000002.DAT
+  Unpacking A0000001.DAT
+  Unpacking A0000001.DEC
+  Unpacking A0000002.DAT
+  Unpacking A0000002.DEC
+
+Unpack completed at 1/27/2022 3:33:55 PM
+There were 8 files unpacked
+There were no errors during unpacking
