@@ -43,12 +43,17 @@ mmp_toolbox is a code suite written to process raw profile data obtained from Mc
 
 **Figure 2:** Disposition of instruments on the global (left) and coastal (right) variants of the OOI McLane profilers.
 
+** note: data products either in table, or after; try both**
 
 ### Global OOI MMP Instrumentation
-* Seabird SBE52MP CTD (CTDPF-L)
-* Aanderaa 4330 oxygen optode (DOSTA-L)
-* Seabird\WETLabs FLBBRTD backscatter\fluorometer (FLORD-L)
-* Falmouth Scientific profiling acoustic current meter (VEL3D-L)
+* Seabird SBE52MP CTD (CTDPF-L)  
+    * pressure, temperature, conductivity, salinity, density  
+* Aanderaa 4330 oxygen optode (DOSTA-L)  
+    * dissolved oxygen concentration  
+* Seabird\WETLabs FLBBRTD backscatter\fluorometer (FLORD-L)  
+    * optical backscatter at 700nm, chlorophyll fluorescence  
+* Falmouth Scientific 3DMP profiling acoustic current meter (VEL3D-L)  
+    * current velocity
 
 
 ### Coastal OOI MMP Instrumentation
@@ -56,27 +61,38 @@ mmp_toolbox is a code suite written to process raw profile data obtained from Mc
 * Seabird SBE43F oxygen sensor (DOFST-K)
 * Seabird\WETLabs eco-Triplet backscatter\fluorometer (FLORT-K)
 * Biospherical QSP-2200 PAR sensor (PARAD-K)
-* Nortek AD2CP acoustic current meter (custom) (VEL3D-K)
+* Nortek AD2CP acoustic current meter (custom) (VEL3D-K)  
+
+The OOI instrument class-series designation (e.g., CTDPF-L) is also given:  
+
+CTDPF: pressure, temperature, conductivity, salinity, density  
+DOSTA, DOFST: dissolved oxygen concentration  
+FLORD: optical backscatter at 700nm, chlorophyll fluorescence  
+FLORT: optical backscatter at 700nm, chlorophyll fluorescence, CDOM fluorescence  
+PARAD: PAR (Photosynthetically Active Radiation)  
+VEL3D: current velocity  
+
 
 # Dependencies
 
 ## Getting the binary OOI data
-* [wget.exe, version 1.19.2, 32-bit:]( http://wget.addictivecode.org/FrequentlyAskedQuestions.html#download) or equivalent for use in Windows 10. Note that this wget version for Windows seems to be the most recent that successfully downloads all the raw profiler data without skipping files when used to request data from the [OOI Raw Data Archive]( https://oceanobservatories.org/data/raw-data-archive). This version can be downloaded as the binary wget.exe courtesy of Jernej Simončič and renamed to wget_1_19_2_32bit.exe to differentiate it from other versions.
+* [wget.exe, version 1.19.2, 32-bit:]( http://wget.addictivecode.org/FrequentlyAskedQuestions.html#download) or equivalent for use in Windows 10. Note that this wget version for Windows seems to be the most recent that successfully downloads all the raw profiler data without skipping files when used to request data from the [OOI Raw Data Archive]( https://oceanobservatories.org/data/raw-data-archive). This version can be downloaded as the binary wget.exe courtesy of Jernej Simončič and renamed and referred to as wget_1_19_2_32bit.exe to differentiate it from other versions in the processing demonstration following.
 
 ## Converting the binary OOI data into text for import into the mmp_toolbox
 * [McLane Unpacker ver 3.10-3.12](https://mclanelabs.com/profile-unpacker). The binary 'C\*.DAT' (CTD), 'E\*.DAT' (engineering plus auxiliary sensors), and 'A\*.DAT' (currentmeter) data files downloaded in the wget call must be unpacked into text files for import into mmp_toolbox. Later Unpacker versions use a different output format when converting coastal 'A' files to text which are incompatible with the toolbox.
 
 ## Using mmp_toolbox to process the OOI data
-* [Matlab](https://www.mathworks.com/) version 2019b for Windows or later, plus the Statistics and Machine Learning Toolbox
+* [Matlab](https://www.mathworks.com/) version 2019b for Windows or later, plus the Statistics and Machine Learning Toolbox. As a rule of thumb 4 GB should be enough storage for processing one deployment of CTD-ENG profile data, and more than double that if ACM processing is included.  
+
 * The Gibbs SeaWater (GSW) Oceanographic [TEOS-10 toolbox](https://www.teos-10.org/software.htm) for Matlab, version 3.06, which also uses the Statistics and Machine Learning Toolbox. It is not necessary to install an optimization solver; see the installation instructions in the [GSW Getting_Started document](https://www.teos-10.org/pubs/Getting_Started.pdf).
 
 # Installation
 
-1. Install Matlab 2019b or later and the Statistics and Machine Learning Toolbox for Windows.
+1. Install Matlab 2019b or later and the Statistics and Machine Learning Toolbox for Windows. Java Heap Memory should be set to the maximum value in Preferences > General.  
 
 2. Install the GSW TEOS-10 toolbox for Matlab (it is not necessary to install an optimization solver as noted above) and follow its instructions which will:
     * (a) add its folder to the Matlab PATH
-    * (b) run the GSW check function test
+    * (b) run the GSW check function test (does not require an optimization solver)
     
 3. Download mmp_toolbox from the Bitbucket repo:
     * (a) mmp_toolbox + subfolders
@@ -94,7 +110,9 @@ mmp_toolbox is a code suite written to process raw profile data obtained from Mc
     
 # Demonstration
 
-6. Select the dataset to be downloaded and processed, and, download the corresponding metadata needed for processing it. This requires knowledge of the 8-character site code name and deployment number which can be accessed on various OOI web pages, or, by running the toolbox utility getWFPmetadata.m as described below. For demonstration purposes and for data checks deployment 4 of CE09OSPM is selected:  
+6. Select the dataset to be downloaded and processed, and, download the corresponding metadata needed for processing it. This requires knowledge of the 8-character site code name and deployment number which can be accessed on various OOI web pages, or, by running the toolbox utility getWFPmetadata.m as described below.  
+
+**For demonstration purposes and for data checks deployment 4 of CE09OSPM is selected:**  
   
 * (a)  `getWFPmetadata` with no arguments outputs a table of site codes, mooring names, and site locations (latitude and longitude):  
 
@@ -233,9 +251,9 @@ Documentation to any toolbox function can be accessed in the Matlab command wind
 
 There are (at least) 3 levels of extensibility to the toolbox.
 
-  * (1) Operation on non-OOI datasets; see the **Extensibility** folder Readme.  
-  * (2) Addition of primary processing functions to the toolbox (same class as smoothing operations).  
-  * (3) Adding utilities and plotting routines.
+  * (1) Operation on non-OOI datasets; see the **Extensibility** folder [README](/Extensibility).  
+  * (2) Addition of profile data processing functions to the toolbox.  
+  * (3) Adding utilities and plotting routines.  
 
 # Support / Bug Report
 
