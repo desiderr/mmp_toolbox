@@ -1,0 +1,7 @@
+serial,name,value,notes
+43-2498,CC_frequency_offset,-8.716050e+002,date in filename comes from Soc-adjusted caldate; source_file DOFST-K_SBE43F_SN_2498_Calibration_2015-06-13.zip > SBE 43F O2498 SOCAdjusted.pdf and 2498.cal
+43-2498,CC_oxygen_signal_slope,0.00032804,use adjusted Soc
+43-2498,CC_residual_temperature_correction_factor_a,-3.857639e-003,
+43-2498,CC_residual_temperature_correction_factor_b,1.379554e-004,
+43-2498,CC_residual_temperature_correction_factor_c,-2.231839e-006,
+43-2498,CC_residual_temperature_correction_factor_e,0.036,
