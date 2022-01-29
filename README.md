@@ -67,7 +67,7 @@ The OOI instrument class-series designations (e.g., CTDPF-L) are also given:
 * Biospherical QSP-2200 PAR sensor (PARAD-K)
     * PAR (Photosynthetically Active Radiation)  
 * Nortek AD2CP acoustic current meter (custom) (VEL3D-K)  
-    * ocean current velocity (East, North, Up)..
+    * ocean current velocity (East, North, Up)  
 
 # Dependencies
 
@@ -237,9 +237,9 @@ The figure below demonstrates one of the features of the mmp_toolbox: adjustable
 
 # Documentation
 
-The complete process of downloading raw data all the way to plotting processed data has been detailed in this readme.md file. To process a different dataset make the appropriate selection in step 6. To change the processing parameters for a given dataset, edit the corresponding metadata.txt file created in step 14; see the readme in folder **metadata_file_templates** for more details.  
+The complete process of downloading raw data all the way to plotting processed data has been detailed in this readme.md file. To process a different dataset make the appropriate selection in step 6. To change the processing parameters for a given dataset, edit the corresponding metadata.txt file created in step 14; do not edit the template files. See the [README](/metadata_file_templates) in folder **metadata_file_templates** for more details.  
 
-Documentation as to how the toolbox works is given in the readme to the **code** folder and its subfolders.  
+Documentation as to how the toolbox works is given in the [README](/code) to the **code** folder and its subfolders.  
 
 Documentation to any toolbox function can be accessed in the Matlab command window by executing `doc [functionName]`.
 
