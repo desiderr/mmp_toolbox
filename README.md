@@ -5,9 +5,9 @@
 
 # Introduction
 
-Since 2013 the National Science Foundation funded [Ocean Observatories Initiative (OOI)](https://oceanobservatories.org) has operated and maintained a vast, integrated network of oceanographic platforms and sensors that measure biological, chemical, geological, and physical properties across a range of spatial and temporal scales [@Trowbridge:2019]. This network includes four high-latitude, “global scale” arrays deployed southwest of Chile at 55&deg;S, in the Argentine Basin, central north Pacific at Station Papa, and the Irminger Sea off Greenland. The “coastal scale” Endurance and Pioneer arrays are situated in the northeast Pacific off Oregon and Washington, and off the coast of New England about 140 km south of Martha’s Vineyard, respectively. All coastal and global arrays include moorings, mobile platforms (gliders or autonomous underwater vehicles), and profilers. Wire-Following Profiler (WFP) moorings (Table 1) include at least one McLane® Moored Profiler (MMP) [@Morrison:2000]. Traveling vertically along a section of jacketed wire rope at approximately 25 cm/s, MMPs carry low-power instruments that measure physical, chemical, biochemical, and optical ocean properties. To date, the OOI has deployed more than thirty global WFP moorings, about 100 coastal WFP moorings, and collected over 150,000 profiles. While these data are provided to investigators and research communities in near real-time at [OOINet](https://ooinet.oceanobservatories.org) and also more recently from the [OOI Data Explorer](https://dataexplorer.oceanobservatories.org), the OOI does not provide post-processed profile data that have, for example, been adjusted for thermal-lag, flow, sensor time constant effects, and mounting posistions of the instruments to take into account the full vertical profiling resolution of the profiler (0.25 m/s at a data acquisition rate of 1 Hz).
+Since 2013 the National Science Foundation funded [Ocean Observatories Initiative (OOI)](https://oceanobservatories.org) has operated and maintained a vast, integrated network of oceanographic platforms and sensors that measure biological, chemical, geological, and physical properties across a range of spatial and temporal scales [@Trowbridge:2019]. This network includes four high-latitude, “global scale” arrays deployed southwest of Chile at 55&deg;S, in the Argentine Basin, central north Pacific at Station Papa, and the Irminger Sea off Greenland. The “coastal scale” Endurance and Pioneer arrays are situated in the northeast Pacific off Oregon and Washington, and off the coast of New England about 140 km south of Martha’s Vineyard, respectively. All coastal and global arrays include moorings, mobile platforms (gliders or autonomous underwater vehicles), and profilers. Wire-Following Profiler (WFP) moorings (Table 1) include at least one [McLane® Moored Profiler](https://mclanelabs.com/mclane-moored-profiler/) (MMP). Traveling vertically along a section of jacketed wire rope at approximately 25 cm/s, MMPs carry low-power instruments that measure physical, chemical, biochemical, and optical ocean properties. To date, the OOI has deployed more than thirty global WFP moorings, about 100 coastal WFP moorings, and collected over 150,000 profiles. While these data are provided to investigators and research communities in near real-time at [OOINet](https://ooinet.oceanobservatories.org) and also more recently from the [OOI Data Explorer](https://dataexplorer.oceanobservatories.org), the OOI does not provide post-processed profile data that have, for example, been adjusted for thermal-lag, flow, sensor time constant effects, and mounting posistions of the instruments to take into account the full vertical profiling resolution of the profiler (0.25 m/s at a data acquisition rate of 1 Hz).
 
-mmp_toolbox is a code suite written to process raw profile data obtained from McLane profilers and does allow the user to make the adjustments listed above. Use of mmp_toolbox (informally radMMP) described here will result in easier access to the ever-increasing number of OOI MMP data sets, making them more available to a broader swath of the marine research community.
+mmp_toolbox is a code suite written to process profile data obtained from McLane profilers and does allow the user to make the adjustments listed above. Use of mmp_toolbox (informally radMMP) described here will result in easier access to the ever-increasing number of OOI MMP data sets, making them more available to a broader swath of the marine research community.
 
 **mmp_toolbox imports text data unpacked from binary files downloaded from the OOI Raw Data Archive. The toolbox contains utilities to make it easy to download these raw data files, instrumentation calibration files, and metadata from OOI required by the profile data processing routines of the toolbox.**
 
@@ -41,9 +41,10 @@ mmp_toolbox is a code suite written to process raw profile data obtained from Mc
 
 ![MclaneProfilers.](McLaneProfilers.jpg)
 
-**Figure 2:** Disposition of instruments on the global (left) and coastal (right) variants of the OOI McLane profilers.
+**Figure 2:** Disposition of instruments on the global (left) and coastal (right) variants of the OOI McLane profilers.  
 
-** note: data products either in table, or after; try both**
+The OOI instrument class-series designations (e.g., CTDPF-L) are also given:  
+
 
 ### Global OOI MMP Instrumentation
 * Seabird SBE52MP CTD (CTDPF-L)  
@@ -53,30 +54,25 @@ mmp_toolbox is a code suite written to process raw profile data obtained from Mc
 * Seabird\WETLabs FLBBRTD backscatter\fluorometer (FLORD-L)  
     * optical backscatter at 700nm, chlorophyll fluorescence  
 * Falmouth Scientific 3DMP profiling acoustic current meter (VEL3D-L)  
-    * current velocity
+    * ocean current velocity (East, North, Up)..
 
 
 ### Coastal OOI MMP Instrumentation
 * Seabird SBE52MP CTD (CTDPF-K)
+    * pressure, temperature, conductivity, salinity, density  
 * Seabird SBE43F oxygen sensor (DOFST-K)
+    * dissolved oxygen concentration  
 * Seabird\WETLabs eco-Triplet backscatter\fluorometer (FLORT-K)
+    * optical backscatter at 700nm, chlorophyll fluorescence, CDOM fluoresence  
 * Biospherical QSP-2200 PAR sensor (PARAD-K)
+    * PAR (Photosynthetically Active Radiation)  
 * Nortek AD2CP acoustic current meter (custom) (VEL3D-K)  
-
-The OOI instrument class-series designation (e.g., CTDPF-L) is also given:  
-
-CTDPF: pressure, temperature, conductivity, salinity, density  
-DOSTA, DOFST: dissolved oxygen concentration  
-FLORD: optical backscatter at 700nm, chlorophyll fluorescence  
-FLORT: optical backscatter at 700nm, chlorophyll fluorescence, CDOM fluorescence  
-PARAD: PAR (Photosynthetically Active Radiation)  
-VEL3D: current velocity  
-
+    * ocean current velocity (East, North, Up)..
 
 # Dependencies
 
 ## Getting the binary OOI data
-* [wget.exe, version 1.19.2, 32-bit:]( http://wget.addictivecode.org/FrequentlyAskedQuestions.html#download) or equivalent for use in Windows 10. Note that this wget version for Windows seems to be the most recent that successfully downloads all the raw profiler data without skipping files when used to request data from the [OOI Raw Data Archive]( https://oceanobservatories.org/data/raw-data-archive). This version can be downloaded as the binary wget.exe courtesy of Jernej Simončič and renamed and referred to as wget_1_19_2_32bit.exe to differentiate it from other versions in the processing demonstration following.
+* [wget.exe, version 1.19.2, 32-bit:]( http://wget.addictivecode.org/FrequentlyAskedQuestions.html#download) or equivalent for use in Windows 10. Note that this wget version for Windows seems to be the most recent that successfully downloads all the raw profiler data without skipping files when used to request data from the [OOI Raw Data Archive]( https://oceanobservatories.org/data/raw-data-archive). This version can be downloaded as the binary wget.exe courtesy of Jernej Simončič and renamed and is referred to as wget_1_19_2_32bit.exe in the processing demonstration following to differentiate it from other versions.
 
 ## Converting the binary OOI data into text for import into the mmp_toolbox
 * [McLane Unpacker ver 3.10-3.12](https://mclanelabs.com/profile-unpacker). The binary 'C\*.DAT' (CTD), 'E\*.DAT' (engineering plus auxiliary sensors), and 'A\*.DAT' (currentmeter) data files downloaded in the wget call must be unpacked into text files for import into mmp_toolbox. Later Unpacker versions use a different output format when converting coastal 'A' files to text which are incompatible with the toolbox.
@@ -166,7 +162,7 @@ This will automatically download the raw data into a local folder named 'binary'
 13. Run the utility:
     * `info = getNumberOfProfiles(info);`
 
-14. Run the xferMetadataToFile.m utility to write the info metadata into a metadata.txt file (to be used by the mmp_toolbox code). The output file will reside in the deployment folder.
+14. Run the xferMetadataToFile.m utility to write the info metadata into a metadata.txt file (to be parsed by the mmp_toolbox code). This output file will reside in the deployment folder and can be edited to change processing parameters. 
     * `[info, metafilename] = xferMetadataToFile(info)`;
 
 15. Change the working directory to the deployment folder by executing:
