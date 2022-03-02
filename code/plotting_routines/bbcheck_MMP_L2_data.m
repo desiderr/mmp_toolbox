@@ -31,7 +31,7 @@ function bbcheck_MMP_L2_data(MMP)
 %.. in a different operating system environment from which it was developed.
 %
 %   % must be in a folder on the Matlab path:
-%   filenameGOLD = 'WF9P_004_MMP__20211228_160410.mat';
+%   filenameGOLD = 'WF9P_004_MMP__20220301_151321.mat';
 %
 % AUTHOR
 %   Russ Desiderio, desi@ceoas.oregonstate.edu
@@ -39,10 +39,11 @@ function bbcheck_MMP_L2_data(MMP)
 % REVISION HISTORY
 %.. 2021-12-30: desiderio: initial code
 %.. 2022-01-12: desiderio: updated documentation
+%.. 2022-03-01: desiderio: coded and implemented testDeployment function check
 %=========================================================================
 precision = '%.8f';
 
-filenameGOLD = 'WF9P_004_MMP__20211228_160410.mat';  % must be in a folder on the Matlab path
+filenameGOLD = 'WF9P_004_MMP__20220301_151321.mat';  % must be in a folder on the Matlab path
 GOLD = load(filenameGOLD, 'MMP');
 %.. the gold standard values are contained in the MMP field of structure GOLD:
 %. GOLD.MMP.(data fields)
@@ -68,15 +69,18 @@ disp(ctd)
 
 ctdField = strcat('binned_ctd_', ctd);
 
-%.. first, reality check.
+%.. first, reality check
 %.. .. the dataset generated to be tested against the GOLD standard values *must* have been generated
 %.. .. using the same adjustable parameters as used in the GOLD set. This is guaranteed if the test
 %.. .. set was generated following the instructions in the Getting Started section of the repo EXACTLY.
-%.. to forestall obvious incompatibilities
-[sizeTest] = size(MMP.binned_ctd_time);
-[sizeGold] = size(GOLD.MMP.binned_ctd_time);
-if ~all(sizeTest==sizeGold)
-    error('Dataset to be checked against GOLD testset was not generated correctly.')
+%.. ascertain whether the deployment being tested against the GOLD standard is the same deployment,
+%.. and, whether the processing parameters were the same by comparing the entries in the META files
+%.. archived in the META fields of structure MMP.
+tf_testDeployment = testDeployment(MMP, GOLD);
+if ~tf_testDeployment
+    errmsg = ['Dataset to be checked against GOLD testset was not generated with the correct calfiles; ' ...
+        'the correct deployment is CE09OSPM R04.'];
+    error(errmsg);
 end
 
 for ii = 1:length(ctdField)
@@ -162,8 +166,18 @@ function val = maxabsdev(data1, data2)
 %.. maximum absolute value of the difference between corresponding points
 %.. in two datasets
 val = max(abs(data1(:) - data2(:)));
+end  % function val
+
+function tf = testDeployment(MMP, GOLD)
+%.. check metadata processing fields
+fields2check = [1 3 4 7:9 15:43];  % didn't include binning parms, a little trickier
+fields = fieldnames(MMP.META);
+
+for ii = fields2check
+    if ~strcmpi(strtrim(num2str(GOLD.MMP.META.(fields{ii}))), strtrim(num2str(MMP.META.(fields{ii}))))
+        tf = false;
+        return
+    end
 end
-
-
-
-
+tf = true;
+end  % function testDeployment
