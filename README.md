@@ -72,7 +72,7 @@ The OOI instrument class-series designations (e.g., CTDPF-L) are also given:
 # Dependencies
 
 ## Getting the binary OOI data
-* [wget.exe, version 1.19.2, 32-bit:]( http://wget.addictivecode.org/FrequentlyAskedQuestions.html#download) or equivalent for use in Windows 10. Note that this wget version for Windows seems to be the most recent that successfully downloads all the raw profiler data without skipping files when used to request data from the [OOI Raw Data Archive]( https://oceanobservatories.org/data/raw-data-archive). This version can be downloaded as the binary wget.exe courtesy of Jernej Simončič and renamed and is referred to as wget_1_19_2_32bit.exe in the processing demonstration following to differentiate it from other versions.
+* [wget.exe, version 1.19.2:]( http://wget.addictivecode.org/FrequentlyAskedQuestions.html#download) or equivalent for use in Windows 10. Note that this wget version for Windows seems to be the most recent that successfully downloads all the raw profiler data without skipping files when used to request data from the [OOI Raw Data Archive]( https://oceanobservatories.org/data/raw-data-archive). This version can be downloaded as the binary wget.exe courtesy of Jernej Simončič and renamed and is referred to as wget_1_19_2.exe in the processing demonstration following to differentiate it from other versions.
 
 ## Converting the binary OOI data into text for import into the mmp_toolbox
 * [McLane Unpacker ver 3.10-3.12](https://mclanelabs.com/profile-unpacker). The binary 'C\*.DAT' (CTD), 'E\*.DAT' (engineering plus auxiliary sensors), and 'A\*.DAT' (currentmeter) data files downloaded in the wget call must be unpacked into text files for import into mmp_toolbox. Later Unpacker versions use a different output format when converting coastal 'A' files to text which are incompatible with the toolbox.
@@ -90,14 +90,14 @@ The OOI instrument class-series designations (e.g., CTDPF-L) are also given:
     * (a) add its folder to the Matlab PATH
     * (b) run the GSW check function test (does not require an optimization solver)
     
-3. Download mmp_toolbox from the Bitbucket repo:
+3. Download mmp_toolbox from the repository:
     * (a) mmp_toolbox + subfolders
     * (b) set the Matlab PATH to include mmp_toolbox and its subfolders
     
-4. Install [wget_1_19_2_32bit.exe](https://eternallybored.org/misc/wget/):
+4. Install [wget_1_19_2.exe](https://eternallybored.org/misc/wget/):
     * (a) set the operating system PATH to include the folder containing it  
-    * (b) check OS path by running `wget_1_19_2_32bit.exe -h` at a **Windows** command prompt  
-    * (c) check by running in the **Matlab** command window the command: `system('wget_1_19_2_32bit.exe -h')`;
+    * (b) check OS path by running `wget_1_19_2.exe -h` at a **Windows** command prompt  
+    * (c) check by running in the **Matlab** command window the command: `system('wget_1_19_2.exe -h')`;
     
 5. Install [McLane Unpacker ver 3.10-3.12](https://mclanelabs.com/profile-unpacker):
     * (a) set the operating system PATH to include the folder containing unpacker.exe
@@ -243,7 +243,7 @@ Documentation as to how the toolbox works is given in the [README](/code) to the
 
 Documentation to any toolbox function can be accessed in the Matlab command window by executing `doc [functionName]`.
 
-# Extensibility (or name this Contribute?)
+# Extensibility
 
 There are (at least) 3 levels of extensibility to the toolbox.
 

@@ -35,6 +35,7 @@ function [sss] = formWgetCmdStrings(sss)
 % REVISION HISTORY
 %.. 2021-11-08: desiderio: initial code
 %.. 2022-01-12: desiderio: updated documentation
+%.. 2022-03-07: desiderio: renamed the wget function name to wget_1_19_2
 %=========================================================================
 
 %.. needed for RawDataArchive folder names:
@@ -43,7 +44,7 @@ sss.profiler_serial_number = getWFP_serialNumber_fromNodeUid(sss.profiler_uid);
 
 %.. the -nH and --cut switches prevent the entire rawdataarchive path 
 %.. from being downloaded to local
-cmdString  = ['wget_1_19_2_32bit --no-check-certificate -r -np -nH --cut-dirs=9 ' ...
+cmdString  = ['wget_1_19_2 --no-check-certificate -r -np -nH --cut-dirs=9 ' ...
     '-e robots=off -P ' sss.binary_data_folder ' '];
 
 depNumtxt  = num2str(sss.deployment, '%5.5u');
