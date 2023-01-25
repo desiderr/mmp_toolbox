@@ -167,7 +167,7 @@ This will automatically download the raw data into a local folder named 'binary'
 13. Run the utility:
     * `info = getNumberOfProfiles(info);`
 
-14. Run the xferMetadataToFile.m utility to create a metadata.txt file (containing processing parameters to be parsed by the mmp_toolbox code) by writing the info metadata into template file based on mooring site. This output file will reside in the deployment folder and can be edited to change processing parameters. 
+14. Run the xferMetadataToFile.m utility to create a metadata.txt file (containing processing parameters to be parsed by the mmp_toolbox code) by writing the info metadata into a file template based on mooring site . This output file will reside in the deployment folder and can be edited to change processing parameters. 
     * `[info, metafilename] = xferMetadataToFile(info)`;
 
 15. Change the working directory to the deployment folder by executing:
